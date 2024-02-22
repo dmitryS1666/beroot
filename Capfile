@@ -15,6 +15,7 @@ require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano-db-tasks'
 require 'capistrano/passenger'
+require 'capistrano/scm/git'
 
 require 'capistrano/nvm'
 # require 'whenever/capistrano'
