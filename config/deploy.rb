@@ -28,7 +28,7 @@ set :ssh_options, {
 }
 
 set :rbenv_type, :user
-set :rbenv_ruby, '3.1.2'
+set :rbenv_ruby, '3.0.2'
 
 # set :ssh_options, {verify_host_key: :never}
 # set :ssh_options, { user_known_hosts_file: '/dev/null', forward_agent: false }
