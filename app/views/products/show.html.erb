@@ -1,0 +1,124 @@
+<!-- app/views/restaurants/show.html.erb -->
+<% content_for :meta_title, "Say Hi to #{@product.name} by JoanaBossa #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @product.description %>
+<%# content_for :meta_image, image_path(@product.photos.first) if @product.photos.any? %>
+
+
+<body class="custom">
+  <div class="my-page">
+    <div class="container-custom">
+        <div class="grid second-nav">
+          <div class="column-xs-12">
+            <nav>
+              <ol class="breadcrumb-list">
+                <%# <li class="breadcrumb-item"><a href="/about">About</a></li> %>
+                <li class="breadcrumb-item"><a href="/products">Products</a></li>
+                <li class="breadcrumb-item active"><%= @product.name %></li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="grid product">
+          <div class="column-xs-12 column-md-7">
+            <div class="product-gallery">
+              <div class="product-image-show">
+              <% count = 0 %>
+              <% @product.photos.each do |photo| %>
+              <%= image_tag photo, class: "active" %>
+              <% count += 1 %>
+              <% break if count == 1 %>
+              <% end %>
+              </div>
+              <ul class="image-list">
+              <% @product.photos.each do |photo| %>
+                <li class="image-item"><%= image_tag photo, id:"other-picture" %></li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="column-xs-12 column-md-5">
+            <h1><%= @product.name %></h1>
+            <h2>€ <%=@product.price.round(0)%></h2>
+            <div class="description">
+              <p><%= @product.description %></p>
+            </div>
+          <div id="<%= dom_id @product %>">
+            <%= form_with(url: cart_add_path) do |f| %>
+            <%= f.hidden_field :id, value: @product.id %>
+            <%= f.number_field :quantity, value: 1, min: 1, class: "add-number-field" %>
+            <%= f.submit "Add To Cart", class:"add-to-cart", id:"add-to-cart-button" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="grid related-products">
+          <div class="column-xs-12">
+          <nav>
+          <ol class="breadcrumb-list">
+            <%# <li class="breadcrumb-item"><a href="/about">About</a></li>
+            <li class="breadcrumb-item"><a href="/products">Products</a></li> %>
+            <li class="breadcrumb-item active">You may also like...</li>
+            <br>
+            <br>
+          </ol>
+        </nav>
+            <%# <h3>You may also like</h3> %>
+          </div>
+<div class="index-cards-container">
+  <% products = Product.where(category: @product.category).where.not(id: @product.id).first(3) %>
+  <% if products.size < 3 %>
+    <% products = Product.where.not(category: @product.category).where.not(id: @product.id).first(3) %>
+  <% end %>
+      <%products.each do |product| %>
+      <div class="card-index">
+<% count = 0 %>
+<% product.photos.each do |photo| %>
+  <%= link_to product_path(product) do %>
+    <%= image_tag photo, class: "card-index-image"%>
+  <% end %>
+  <% count += 1 %>
+  <% break if count == 1 %>
+<% end %>
+        <div class="card-index-infos">
+          <div>
+            <%= link_to product_path(product), class:"text-decoration-none" do %>
+            <h2><%=product.name%></h2>
+            <p><%= truncate(product.description, length: 56, separator: ' ', omission: '...') %></p>
+            <%# <a href="https://www.instagram.com/joanabossajewelry/"><i class="fab fa-instagram"></i></a> %>
+            <% end %>
+          </div>
+            <h2 class="card-index-pricing">€<%= product.price.round(0) %></h2>
+            <%= image_tag "logo.png", alt: "alttext", class: "card-index-user avatar-bordered"%>
+        </div>
+      </div>
+      <%end%>
+    </div>
+</div>
+<br>
+<br>
+</main>
+</body>
+    <%# <center>
+    <%= link_to 'Back to Products', products_path, class:"btn-index" %>
+    <%# <%= link_to 'Back to Collections', categories_path, class:"btn-index" %></center>
+
+<script>
+(function() {
+  const activeImage = document.querySelector(".product-image-show .active");
+  const productImages = document.querySelectorAll(".image-list img");
+
+  function changeImage(e) {
+    activeImage.src = e.target.src;
+  }
+
+  productImages.forEach(image => image.addEventListener("click", changeImage));
+})();
+</script>
+
+
+<script>
+(function() {
+  document.getElementById("add-to-cart-button").addEventListener("click", function(){
+    setTimeout(function(){ location.reload(); }, 1);
+  });
+})();
+</script>

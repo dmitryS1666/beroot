@@ -1,0 +1,65 @@
+//card-index
+.card-index {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-index-image {
+  height: 240px !important;
+  width: 100%;
+  object-fit: cover;
+  transition: transform .1s;
+}
+.card-index-image:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+-webkit-transform: scale(1.1); /* Safari 3-8 */
+transform: scale(1.1);
+}
+
+.card-index h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  color: $cardheadline;
+}
+.card-index h2:hover {
+ color:#908F8B;
+    }
+
+
+.card-index p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+  color: $paragraph;
+}
+.card-index p:hover {
+  font-weight: lighter;
+}
+
+
+.card-index .card-index-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-index-infos .card-index-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+}
+
+button[type="submit"] {
+  background: transparent;
+  border: none;
+}
+
+// .fa-shopping-cart {
+//   font-size: 20px;
+//   color: #333;
+// }

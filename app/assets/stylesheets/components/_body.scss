@@ -1,0 +1,48 @@
+body {
+  background: white;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: lighter;
+
+
+  margin: 0;
+  position: relative;
+  height: auto;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  }
+
+ h1, h2 {
+
+  font-weight: bold;
+}
+
+
+/* Media queries */
+@media(max-width: 900px) {
+  .container {
+    width: 700px;
+  }
+}
+@media(max-width: 750px) {
+  .container {
+    width: 450px;
+  }
+}
+@media(max-width: 500px) {
+  .container {
+    width: 350px;
+  }
+  .banner {
+    padding: 50px 0;
+  }
+  .banner h1 {
+    font-size: 30px;
+  }
+  .banner p {
+    font-size: 20px;
+  }
+}

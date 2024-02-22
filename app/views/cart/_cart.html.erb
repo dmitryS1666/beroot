@@ -1,0 +1,160 @@
+<%= turbo_frame_tag "cart" do %>
+<div id="shopping">
+<br>
+<h1>Shopping Cart</h1>
+
+<div class="shopping-cart">
+
+  <div class="column-labels">
+    <label class="product-image">Image</label>
+    <label class="product-details">Product</label>
+    <label class="product-price">Price</label>
+    <label class="product-quantity">Quantity</label>
+    <label class="product-removal">Remove</label>
+    <label class="product-line-price">Total</label>
+  </div>
+
+<% if @cart.orderables.count > 0 %>
+  <% @cart.orderables.each do |orderable| %>
+  <% product = orderable.product %>
+    <div id="<%= "cart-#{product.id}" %>">
+  <div class="product">
+    <div class="product-image">
+        <% count = 0 %>
+        <% product.photos.each do |photo| %>
+          <%= image_tag photo %>
+          <% count += 1 %>
+          <% break if count == 1 %>
+        <% end %>
+    </div>
+    <div class="product-details">
+      <div class="product-title"><%=product.name%></div>
+      <p class="product-description"><%= truncate(product.description, length: 140, separator: ' ', omission: '...') %></p>
+    </div>
+    <div class="product-price"><%=product.price%></div>
+    <div class="panier">
+    <div class="product-quantity">
+    <%= form_with(url: cart_add_path) do |f| %>
+        <%= f.hidden_field :id, value: product.id %>
+        <%= f.number_field :quantity, value: orderable.quantity, min: 0, id:"input" %>
+        <%= f.submit "Modify", class: "modify-product", id: "modify-button" %>
+      <% end %>
+
+
+    </div>
+    </div>
+    <div class="product-removal">
+    <%= form_with(url: cart_remove_path) do |f| %>
+        <%= f.hidden_field :id, value: orderable.id %>
+        <%= f.submit "Delete", class: "remove-product", id: "delete-button" %>
+    </div>
+    <div class="product-line-price"> <%= orderable.total %></div>
+  </div>
+
+    <% end %>
+  <% end %>
+  <% else %>
+    <p>Your cart is empty</p>
+  <% end %>
+  <% end %>
+
+  <div class="totals">
+    <div class="totals-item">
+      <label>Subtotal</label>
+      <div class="totals-value" id="cart-subtotal"><%= @cart.total %></div>
+    </div>
+    <%# <div class="totals-item">
+      <label>Tax (5%)</label>
+      <div class="totals-value" id="cart-tax">3.60</div>
+    </div> %>
+    <div class="totals-item">
+      <label>Shipping</label>
+      <div class="totals-value" id="cart-shipping">
+      <% if @cart.orderables.count == 0 %>
+      0.00
+    <% elsif @cart.orderables.count <= 3 %>
+      3.00
+    <% else %>
+      6.00
+    <% end %>
+    </div>
+    </div>
+
+      <% total_with_delivery = 0 %>
+<% if @cart.orderables.count == 0 %>
+  <% total_with_delivery = @cart.total %>
+<% elsif @cart.orderables.count <= 3 %>
+  <% total_with_delivery = @cart.total + 3 %>
+<% else %>
+  <% total_with_delivery = @cart.total + 6 %>
+<% end %>
+
+<div class="totals-item totals-item-total">
+  <label>Total</label>
+  <div class="totals-value" id="cart-total">
+    <%= total_with_delivery %>
+  </div>
+</div>
+  </div>
+    </div>
+  </div>
+<div class="buttons">
+
+  <button class="checkout" onClick="window.location.reload();">Confirm your order</button>
+  <br>
+  <div id="paypal-button-container"></div>
+</div>
+</div> <!--end div id shopping -->
+  </div>
+
+
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
+<script>
+let orderValue = <%= total_with_delivery %>;
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'horizontal',
+          label: 'paypal',
+
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"","amount":{"currency_code":"EUR","value": orderValue }}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            setTimeout(function(){
+              window.location.href = '/recap_path';
+            }, 2000);
+            // Or go to another URL:  actions.redirect('thank_you.html');
+
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>

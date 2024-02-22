@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: sample_dev
+  host: localhost
+  user: sushi
+  password: password
+
+production:
+  <<: *default
+  database: sample_prod
+  host: localhost
+  username: owen
+  password: root

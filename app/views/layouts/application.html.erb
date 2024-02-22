@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>АгроМастер</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <!-- META title -->
+  <title><%= meta_title %></title>
+  <meta name="description" content="<%= meta_description %>">
+
+  <!-- Favicon -->
+  <%= favicon_link_tag "favicon.ico", rel: "icon", type: "image/png" %>
+  <!-- Mobile content -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Partial Favicons -->
+  <%= render 'shared/ios_pwa_links' %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+
+<body>
+
+<%= render "shared/navbar" %>
+<%= render "shared/flashes" %>
+<%= render "shared/preloader" %>
+<%# <%= render partial: "cart/cart" if @render_cart %>
+
+<%= yield %>
+
+<%= render "shared/footer" %>
+
+</body>
+</html>

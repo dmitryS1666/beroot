@@ -1,0 +1,123 @@
+.cover-index {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url(https://res.cloudinary.com/dygywvyiq/image/upload/v1675807424/background_pq9ynt.png);
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    height: 55vh;
+}
+.cover-index h1 {
+  margin: 0;
+  background-position: top;
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 3px 5px 6px #000000;
+  text-align: center;
+  margin-bottom: 5px;
+  font-family: 'Great Vibes', cursive;
+
+}
+
+.cover-index p {
+  font-size: 22px;
+  color: whitesmoke;
+  // opacity: .9;
+  margin-bottom: 80px;
+  text-shadow: 1px 1px 1px #000000;
+  // font-family: 'Great Vibes', cursive;
+
+
+}
+.index-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  // margin-left: px;
+  margin-bottom: 38px;
+}
+
+@media(max-width: 992px) {
+  .index-cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cover-index {
+    height: 200px;;
+    width: 100%;
+  }
+
+}
+
+@media(max-width: 768px) {
+  .index-cards-container {
+    grid-template-columns: 1fr;
+  }
+  .cover-index {
+    height:200px;
+    width: 100%;
+  }
+
+}
+.index-title {
+  // font-family: 'Great Vibes', cursive;
+  letter-spacing: 3;
+  position: relative;
+}
+
+.index-title :hover {
+color:#908F8B;
+}
+
+@keyframes fade-in{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.box-feature {
+  animation: fade-in;
+  animation-duration: 3s;
+}
+
+#go-up-btn:hover {
+  color: $gray;
+}
+
+#go-up-btn-products:hover {
+  color: $gray;
+}
+#go-up-btn-show-collections:hover {
+  color: $gray;
+}
+
+#go-up-btn-one {
+
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: $ocean;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#go-up-btn-one:hover {
+  background-color: $sun;
+}
+@media (max-width: 768px) {
+  .cover-index {
+    height: 200px;
+  }
+  .cover-index h1 {
+    font-size: 40px;
+  }
+  .cover-index p {
+    font-size: 18px;
+  }
+}
