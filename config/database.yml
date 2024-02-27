@@ -12,6 +12,6 @@ development:
 
 production:
   <<: *default
-  database: agromaster
+  database: agro_master_dev
   username: deploy
   password: password
