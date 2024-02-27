@@ -36,6 +36,7 @@ gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
+gem 'will_paginate', '~> 4.0'
 
 group :development do
   gem "web-console"

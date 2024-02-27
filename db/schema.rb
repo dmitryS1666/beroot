@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_19_195937) do
     t.string "provider"
     t.string "description"
     t.decimal "price"
+    t.integer "sale", default: 0, null: false
     t.string "qty_type"
     t.integer "quantity"
     t.bigint "user_id", null: false

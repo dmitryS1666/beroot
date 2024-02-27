@@ -7,4 +7,6 @@ class Product < ApplicationRecord
   has_many_attached :photos
   has_many :orderables
   has_many :carts, through: :orderables
+
+  self.per_page = 10
 end

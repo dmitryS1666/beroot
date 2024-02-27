@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @product = Product.new
+    @products = @category.products.paginate(page: params[:page])
   end
 
   def edit
@@ -35,7 +35,7 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-  params.require(:category).permit(:name, :description, :photo)
+    params.require(:category).permit(:name, :description, :photo)
   end
 
   def set_category
