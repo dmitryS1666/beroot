@@ -1,18 +1,17 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: localhost
   pool: 5
 
 development:
   <<: *default
   database: sample_dev
-  host: localhost
   user: sushi
   password: password
 
 production:
   <<: *default
-  database: sample_prod
-  host: localhost
-  username: owen
-  password: root
+  database: agromaster
+  username: deploy
+  password: password

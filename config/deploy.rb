@@ -23,9 +23,11 @@ set :keep_releases, 5
 set :ssh_options, {
   keys: %w(~/.ssh/new_key),
   forward_agent: false,
-  # port: '22',
+#   port: '22',
   user_known_hosts_file: '/dev/null'
 }
+
+# set :ssh_options, forward_agent: false
 
 set :rbenv_type, :user
 set :rbenv_ruby, '3.1.2'
