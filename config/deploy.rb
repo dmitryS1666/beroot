@@ -20,12 +20,12 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-# set :ssh_options, {
-#   keys: %w(~/.ssh/new_key),
-#   forward_agent: false,
-#   port: '22'
-#   user_known_hosts_file: '/dev/null'
-# }
+set :ssh_options, {
+  keys: %w(~/.ssh/new_key),
+  forward_agent: false,
+  port: '22',
+  user_known_hosts_file: '/dev/null'
+}
 
 set :rbenv_type, :user
 set :rbenv_ruby, '3.1.2'
@@ -61,7 +61,7 @@ namespace :deploy do
       within release_path do
         # execute :bundle, :exec, 'rails', 'db:schema:load', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
         # execute :bundle, :exec, 'rails', 'db:migrate', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-        # execute :bundle, :exec, 'rails', 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+        execute :bundle, :exec, 'rails', 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
       end
     end
   end
