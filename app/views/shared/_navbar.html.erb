@@ -1,4 +1,3 @@
-`
 <header class="header__section mb-20">
   <div class="main__header header__sticky">
     <div class="container">
@@ -12,12 +11,10 @@
           </a>
         </div>
         <div class="main__logo">
-          <h1 class="main__logo--title">
-            <a class="main__logo--link" href="/">
-              <img class="main__logo--img" src="/assets/agro_logo.png" alt="logo-img" style="width: 60px; float: left;">
-              <span style="float: left; line-height: 65px; font-size: 32px; padding-left: 10px;">АгроМастер</span>
-            </a>
-          </h1>
+          <a class="main__logo--link" href="/">
+            <img class="main__logo--img" src="/assets/agro_logo.png" alt="logo-img" style="width: 55px; float: left;">
+            <span style="float: left; line-height: 60px; font-size: 28px; padding-left: 10px;">АгроМастер</span>
+          </a>
         </div>
         <div class="header__search--widget d-none d-lg-block header__sticky--none">
           <form class="d-flex header__search--form border-radius-5" action="#">
@@ -25,7 +22,11 @@
               <select class="header__select--inner">
                 <option selected value="1">Все категории</option>
                 <% @main_categories.each do |category| %>
-                  <option value="<%= category.category_id %>"><%= category.name %></option>
+                  <option value="<%= category.category_id %>">
+                    <%= link_to category_path(category) do %>
+                      <%= category.name %>
+                    <% end %>
+                  </option>
                 <% end %>
               </select>
             </div>
@@ -54,7 +55,9 @@
                 <ul class="header__sub--menu">
                   <% @main_categories.each do |category| %>
                     <li class="header__sub--menu__items">
-                      <a href="/" class="header__sub--menu__link"><%= category.name %></a>
+                      <%= link_to category_path(category), class: "header__sub--menu__link" do %>
+                        <%= category.name %>
+                      <% end %>
                     </li>
                   <% end %>
                 </ul>
@@ -170,20 +173,20 @@
               <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"/>
             </svg>
           </div>
-          <div class="dropdown__categories--menu border-radius-5 active collapse show" id="categoriesAccordion">
+          <div class="dropdown__categories--menu border-radius-5 active collapse" id="categoriesAccordion">
             <ul class="d-none d-lg-block">
               <% @main_categories.each do |category| %>
                 <% child_categories = Category.where(parent_id: category.category_id) %>
                 <li class="categories__menu--items">
-                  <a class="categories__menu--link" href="/">
-                    <!--<svg class="categories__menu--svgicon"-->
+                  <%= link_to category_path(category), class: "categories__menu--link" do %>
                     <%= category.name %>
+
                     <% if child_categories.size > 0 %>
                       <svg class="categories__menu--right__arrow--icon" xmlns="http://www.w3.org/2000/svg" width="17.007" height="16.831" viewBox="0 0 512 512">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M184 112l144 144-144 144"></path>
                       </svg>
                     <% end %>
-                  </a>
+                  <% end %>
                   <% if child_categories.size > 0 %>
                     <ul class="categories__submenu border-radius-10 d-flex justify-content-between">
                       <% child_categories.each do |sub_category| %>
@@ -291,15 +294,6 @@
                       </ul>
                     </li>
                   </ul>
-                </li>
-                <li class="categories__menu--items">
-                  <a class="categories__menu--link" href="shop.html">
-                    <svg class="categories__menu--svgicon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
-                      <polyline points="17 2 12 7 7 2"></polyline>
-                    </svg>
-                    Paintworks
-                  </a>
                 </li>
               </ul>
             </nav>
@@ -692,7 +686,7 @@
 <!--<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">-->
 <!--  <div class="container-fluid">-->
 <%#= link_to "/", class: "navbar-brand" do %>
-<%#= image_tag "agro_logo.jpg", alt: "alttext", class: "avatar" %>
+<%#= image_tag "/assets/agro_logo.jpg", alt: "alttext", class: "avatar" %>
 <%# end %>
 <!--    <div class="title"><h1><b></b></h1></div>-->
 <!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->

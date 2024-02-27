@@ -50,13 +50,14 @@ Swiper.use([Navigation])
 
 // Preloader
 const preLoader = function () {
-    let preloaderWrapper = document.getElementById("preloader");
-    if (preloaderWrapper !== null) {
-        window.onload = () => {
-            preloaderWrapper.classList.add("loaded");
-        };
-    }
+    setTimeout(hide, 1500);
 };
+
+function hide() {
+    let preloaderWrapper = document.getElementById("preloader");
+    preloaderWrapper.classList.add("loaded");
+}
+
 preLoader();
 
 // getSiblings

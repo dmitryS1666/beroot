@@ -44,12 +44,13 @@ group :development do
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'json'
+end
 
-  gem 'capistrano', '~> 3.17.1', require: false
-  gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-nvm', require: false
-  gem 'capistrano-rails'
+group :deploy do
+  gem 'capistrano', '3.4.0'
+  gem 'capistrano-db-tasks', github: 'sgruhier/capistrano-db-tasks',
+      require: false
   gem 'capistrano-passenger'
+  gem 'capistrano-rails'
   gem 'capistrano-rbenv'
 end
-gem 'capistrano-rails-collection'

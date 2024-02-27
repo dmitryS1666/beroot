@@ -20,15 +20,15 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-set :ssh_options, {
-  keys: %w(~/.ssh/new_key),
-  forward_agent: false,
-  port: '22',
-  # user_known_hosts_file: '/dev/null'
-}
+# set :ssh_options, {
+#   keys: %w(~/.ssh/new_key),
+#   forward_agent: false,
+#   port: '22'
+#   user_known_hosts_file: '/dev/null'
+# }
 
 set :rbenv_type, :user
-set :rbenv_ruby, '3.0.2'
+set :rbenv_ruby, '3.1.2'
 
 # set :ssh_options, {verify_host_key: :never}
 # set :ssh_options, { user_known_hosts_file: '/dev/null', forward_agent: false }
@@ -67,16 +67,16 @@ namespace :deploy do
   end
 end
 
-namespace :db do
-  desc 'Resets DB without create/drop'
-  task :reset do
-    on primary :db do
-      within release_path do
-        execute :rake, 'db:drop', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-        execute :rake, 'db:create', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-        execute :rake, 'db:migrate', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-        execute :rake, 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-      end
-    end
-  end
-end
+# namespace :db do
+#   desc 'Resets DB without create/drop'
+#   task :reset do
+#     on primary :db do
+#       within release_path do
+#         execute :rake, 'db:drop', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+#         execute :rake, 'db:create', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+#         execute :rake, 'db:migrate', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+#         execute :rake, 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+#       end
+#     end
+#   end
+# end

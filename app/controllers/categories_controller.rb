@@ -1,10 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, :only => [:new]
   before_action :set_category, only: [ :edit, :show, :update, :destroy ]
+  before_action :set_main_category, only: [ :index, :edit, :show, :update, :destroy ]
 
   def index
     @categories = Category.where.not(parent_id: '')
-    @main_categories = Category.where(parent_id: Category.find_by(name: 'Товар').category_id)
   end
 
   def new
@@ -40,5 +40,9 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def set_main_category
+    @main_categories = Category.where(parent_id: Category.find_by(name: 'Товар').category_id)
   end
 end
