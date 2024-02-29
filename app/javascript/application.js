@@ -63,7 +63,7 @@ let $ = window.$ = window.jQuery = jQuery
 //     preloaderWrapper.classList.add("loaded");
 // }
 
-document.addEventListener("turbolinks:click", function () {
+document.addEventListener("turbo:click", function () {
     $("#preloader").show();
 });
 
