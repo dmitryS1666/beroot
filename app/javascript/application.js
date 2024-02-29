@@ -3,6 +3,9 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
 import "./plugins/glightbox.min"
+import "jquery"
+// import "jquery_ujs"
+
 // import "./plugins/swiper-bundle.min"
 
 // import Swiper from 'swiper';
@@ -13,6 +16,8 @@ Swiper.use([Navigation])
 
 // import GLightbox from 'glightbox.min';
 
+import  jQuery  from "jquery"
+let $ = window.$ = window.jQuery = jQuery
 
 /*
   Template Name: Partsix - Auto Parts & Car Accessories Shop HTML Template
@@ -49,16 +54,23 @@ Swiper.use([Navigation])
 "use strict";
 
 // Preloader
-const preLoader = function () {
-    setTimeout(hide, 1500);
-};
+// const preLoader = function () {
+//     setTimeout(hide, 1500);
+// };
 
-function hide() {
-    let preloaderWrapper = document.getElementById("preloader");
-    preloaderWrapper.classList.add("loaded");
-}
+// function hide() {
+//     let preloaderWrapper = document.getElementById("preloader");
+//     preloaderWrapper.classList.add("loaded");
+// }
 
-preLoader();
+document.addEventListener("turbolinks:click", function () {
+    $("#preloader").show();
+});
+
+document.addEventListener("turbo:load", function () {
+    $("#preloader").hide();
+});
+
 
 // getSiblings
 let getSiblings = function (elem) {
