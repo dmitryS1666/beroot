@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
-  devise_for :users
+  # devise_for :users
 
   resources :contacts, only: [:new, :create]
 
   root to: "categories#index"
+
+  #search
+  get 'results', to: 'results#index'
 
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"

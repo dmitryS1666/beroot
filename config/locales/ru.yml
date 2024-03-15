@@ -1,0 +1,8 @@
+ru:
+  will_paginate:
+    page_gap: "&hellip;"
+    previous_label: "<"
+    next_label: ">"
+  time:
+    formats:
+      long: "%Y-%m-%d %H:%M:%S"

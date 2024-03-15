@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
+  include MainCategoryHelper
+
   before_action :authenticate_user!, :only => [:new]
   before_action :set_product, only: [ :edit, :show, :update, :destroy ]
   before_action :set_categories, only: [:new, :create, :edit]
-  # before_action :set_category, only: [ :new, :create]
 
   def index
     @products = Product.all
@@ -33,12 +34,12 @@ class ProductsController < ApplicationController
   end
 
   def show
+    set_main_category
+
     @contact = Contact.new
     @products = Product.all
     @category = Category.new
     @product = Product.find(params[:id])
-
-
   end
 
   def edit

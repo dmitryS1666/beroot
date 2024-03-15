@@ -1,5 +1,5 @@
 ru:
   will_paginate:
     page_gap: "&hellip;"
-    previous_label: "пред"
-    next_label: "след"
+    previous_label: "<"
+    next_label: ">"

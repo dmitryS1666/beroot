@@ -1,21 +1,7 @@
 <main class="main__content_wrapper">
 
   <!-- Start breadcrumb section -->
-  <section class="breadcrumb__section breadcrumb__bg">
-    <div class="container">
-      <div class="row row-cols-1">
-        <div class="col">
-          <div class="breadcrumb__content text-center">
-            <h1 class="breadcrumb__content--title"><%= @category.name %></h1>
-            <ul class="breadcrumb__content--menu d-flex justify-content-center">
-              <li class="breadcrumb__content--menu__items"><a href="index.html">Главная</a></li>
-              <li class="breadcrumb__content--menu__items"><span><%= @category.name %></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <%= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
   <!-- End breadcrumb section -->
 
   <!-- Start shop section -->
@@ -24,11 +10,9 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
           <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-            <%= render 'shared/category/category_filter' %>
+            <%= render 'shared/category/category_filter', { category: @category } %>
 
             <%= render 'shared/category/details_filter' %>
-
-            <%= render 'shared/category/category_filter' %>
 
             <%= render 'shared/category/price_filter' %>
 
@@ -55,27 +39,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-6 custom-col mb-30">
                           <article class="product__card">
                             <div class="product__card--thumbnail">
-<%#= link_to product_path(product), class: "text-decoration-none" do %>
-                              <!--                <h2><%#= product.name %></h2>-->
-                              <!--                <p><%#= truncate(product.description, length: 40, separator: ' ', omission: '...') %></p>-->
-<%# end %>
-                              <a class="product__card--thumbnail__link display-block" href="product-details.html">
+                              <%= link_to product_path(product), class: "product__card--thumbnail__link display-block" do %>
                                 <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product5.webp" alt="product-img">
                                 <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product6.webp" alt="product-img">
-                              </a>
-                              <% if product.sale %>
-                                <span class="product__badge">-14%</span>
                               <% end %>
-                              <ul class="product__card--action d-flex align-items-center justify-content-center">
-                                <li class="product__card--action__list">
-                                  <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                    <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="visually-hidden">Быстрый просмотр</span>
-                                  </a>
-                                </li>
-                              </ul>
+                              <% if product.sale > 0 %>
+                                <span class="product__badge"><%= product.sale %></span>
+                              <% end %>
                             </div>
                             <div class="product__card--content">
                               <h3 class="product__card--title">
@@ -84,6 +54,7 @@
                                 <span class="current__price">&#x20BD;<%= product.price %></span>
                                 <span class="old__price">&#x20BD;<%= product.price %></span>
                               </div>
+                              <!-- Добавить в корзину -->
                               <div class="product__card--footer">
                                 <a class="product__card--btn primary__btn" href="cart.html">
                                   <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,460 +63,11 @@
                                   Добавить в корзину
                                 </a>
                               </div>
+                              <!-- Добавить в корзину -->
                             </div>
                           </article>
                         </div>
                       <% end %>
-                    </div>
-                  </div>
-                </div>
-                <div id="product_list" class="tab_pane">
-                  <div class="product__section--inner product__section--style3__inner">
-                    <div class="row row-cols-1 mb--n30">
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product10.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product9.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-20%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title">
-                              <a href="product-details.html">Eius doloribus dicta labore magni nulla! </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$188.52</span>
-                              <span class="old__price"> $268.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product1.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product2.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-17%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title"><a href="product-details.html">Amazon Cloud Cam Security
-                              Camera </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$155.52</span>
-                              <span class="old__price"> $219.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product3.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product4.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-16%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title">
-                              <a href="product-details.html">Taboriosam asnda et itaque expcabo. </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$144.52</span>
-                              <span class="old__price"> $234.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product5.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product6.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-22%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title">
-                              <a href="product-details.html">Eius doloribus dicta labore magni nulla! </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$123.52</span>
-                              <span class="old__price"> $222.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product7.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product8.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-16%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title">
-                              <a href="product-details.html">Sequi eum saepe nisi repellat at fuga nemo. </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$150.52</span>
-                              <span class="old__price"> $240.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col mb-30">
-                        <div class="product__card product__list d-flex align-items-center">
-                          <div class="product__card--thumbnail product__list--thumbnail">
-                            <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                              <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product9.webp" alt="product-img">
-                              <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product10.webp" alt="product-img">
-                            </a>
-                            <span class="product__badge">-24%</span>
-                            <ul class="product__card--action d-flex align-items-center justify-content-center">
-                              <li class="product__card--action__list">
-                                <a class="product__card--action__btn" title="Быстрый просмотр" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
-                                  <svg class="product__card--action__btn--svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.6952 14.4991L11.7663 10.5588C12.7765 9.4008 13.33 7.94381 13.33 6.42703C13.33 2.88322 10.34 0 6.66499 0C2.98997 0 0 2.88322 0 6.42703C0 9.97085 2.98997 12.8541 6.66499 12.8541C8.04464 12.8541 9.35938 12.4528 10.4834 11.6911L14.4422 15.6613C14.6076 15.827 14.8302 15.9184 15.0687 15.9184C15.2944 15.9184 15.5086 15.8354 15.6711 15.6845C16.0166 15.364 16.0276 14.8325 15.6952 14.4991ZM6.66499 1.67662C9.38141 1.67662 11.5913 3.8076 11.5913 6.42703C11.5913 9.04647 9.38141 11.1775 6.66499 11.1775C3.94857 11.1775 1.73869 9.04647 1.73869 6.42703C1.73869 3.8076 3.94857 1.67662 6.66499 1.67662Z" fill="currentColor"></path>
-                                  </svg>
-                                  <span class="visually-hidden">Быстрый просмотр</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="product__card--content product__list--content">
-                            <h3 class="product__card--title">
-                              <a href="product-details.html">Eius doloribus dicta labore magni nulla! </a></h3>
-                            <ul class="rating product__card--rating d-flex">
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor"/>
-                                                                        </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li class="rating__list">
-                                                                    <span class="rating__icon">
-                                                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor"/>
-                                                                            </svg>
-                                                                    </span>
-                              </li>
-                              <li>
-                                <span class="rating__review--text">(106) Review</span>
-                              </li>
-                            </ul>
-                            <div class="product__list--price">
-                              <span class="current__price">$188.52</span>
-                              <span class="old__price"> $268.00</span>
-                            </div>
-                            <p class="product__card--content__desc mb-20">Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Quia voluptas dolore doloribus architecto sequi corporis deleniti
-                              officia culpa dolor esse there consectetur eligendi, natus at rem ab quae amet molestiae
-                              quod voluptates.</p>
-                            <a class="product__card--btn primary__btn" href="cart.html">+ Добавить в корзину</a>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -554,39 +76,6 @@
                 <nav class="pagination justify-content-center">
                   <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
                     <%= will_paginate @products, previous_label: t("will_paginate.previous_label"), next_label: t("will_paginate.next_label") %>
-<!--                      <li class="pagination__list">-->
-<!--                        <span class="pagination__item pagination__item--current"><%#= index %></span>-->
-<!--                      </li>-->
-                    <%# end %>
-                    <!--                    <li class="pagination__list">-->
-                    <!--                      <a href="shop.html" class="pagination__item--arrow  link ">-->
-                    <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="22.51" height="20.443" viewBox="0 0 512 512">-->
-                    <!--                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>-->
-                    <!--                        </svg>-->
-                    <!--                        <span class="visually-hidden">page left arrow</span>-->
-                    <!--                      </a>-->
-                    <!--                    </li>-->
-                    <!--                    <li class="pagination__list">-->
-                    <!--                      <a href="shop.html" class="pagination__item--arrow  link ">-->
-                    <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="22.51" height="20.443" viewBox="0 0 512 512">-->
-                    <!--                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>-->
-                    <!--                        </svg>-->
-                    <!--                        <span class="visually-hidden">page left arrow</span>-->
-                    <!--                      </a>-->
-                    <!--                    </li>-->
-                    <!--                    <li>-->
-                    <!--                    <li class="pagination__list"><span class="pagination__item pagination__item--current">1</span></li>-->
-                    <!--                    <li class="pagination__list"><a href="shop.html" class="pagination__item link">2</a></li>-->
-                    <!--                    <li class="pagination__list"><a href="shop.html" class="pagination__item link">3</a></li>-->
-                    <!--                    <li class="pagination__list"><a href="shop.html" class="pagination__item link">4</a></li>-->
-                    <!--                    <li class="pagination__list">-->
-                    <!--                      <a href="shop.html" class="pagination__item--arrow  link ">-->
-                    <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="22.51" height="20.443" viewBox="0 0 512 512">-->
-                    <!--                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M268 112l144 144-144 144M392 256H100"/>-->
-                    <!--                        </svg>-->
-                    <!--                        <span class="visually-hidden">page right arrow</span>-->
-                    <!--                      </a>-->
-                    <!--                    <li>-->
                   </ul>
                 </nav>
               </div>
@@ -599,145 +88,13 @@
   <!-- End shop section -->
 
   <!-- Start shipping section -->
-  <%= render 'shared/category/shipping' %>
+  <%= render 'shared/shipping' %>
   <!-- End shipping section -->
 
 </main>
 
 <!-- Quickview Wrapper -->
-<div class="modal fade" id="examplemodal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog quickview__main--wrapper modal-dialog-centered">
-    <div class="modal-content quickview__main__content">
-      <div class="modal-header quickview_m_header">
-        <button type="button" class="btn-close quickview__close--btn" data-bs-dismiss="modal" aria-label="Close">✕</button>
-      </div>
-      <div class="modal-body quickview__inner">
-        <div class="row row-cols-lg-2 row-cols-md-2">
-          <div class="col">
-            <div class="quickview__gallery">
-              <div class="product__media--preview  swiper">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="product__media--preview__items">
-                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/big-product/product1.webp"><img class="product__media--preview__items--img" src="/assets/product/big-product/product1.webp" alt="product-media-img"></a>
-                      <div class="product__media--view__icon">
-                        <a class="product__media--view__icon--link glightbox" href="/assets/product/big-product/product1.webp" data-gallery="product-media-preview">
-                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
-                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-                          </svg>
-                          <span class="visually-hidden">product view</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--preview__items">
-                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/big-product/product2.webp"><img class="product__media--preview__items--img" src="/assets/product/big-product/product2.webp" alt="product-media-img"></a>
-                      <div class="product__media--view__icon">
-                        <a class="product__media--view__icon--link glightbox" href="/assets/product/big-product/product2.webp" data-gallery="product-media-preview">
-                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
-                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-                          </svg>
-                          <span class="visually-hidden">product view</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--preview__items">
-                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/big-product/product3.webp"><img class="product__media--preview__items--img" src="/assets/product/big-product/product3.webp" alt="product-media-img"></a>
-                      <div class="product__media--view__icon">
-                        <a class="product__media--view__icon--link glightbox" href="/assets/product/big-product/product3.webp" data-gallery="product-media-preview">
-                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
-                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-                          </svg>
-                          <span class="visually-hidden">product view</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--preview__items">
-                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/big-product/product4.webp"><img class="product__media--preview__items--img" src="/assets/product/big-product/product4.webp" alt="product-media-img"></a>
-                      <div class="product__media--view__icon">
-                        <a class="product__media--view__icon--link glightbox" href="/assets/product/big-product/product4.webp" data-gallery="product-media-preview">
-                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
-                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-                          </svg>
-                          <span class="visually-hidden">product view</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--preview__items">
-                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/big-product/product5.webp"><img class="product__media--preview__items--img" src="/assets/product/big-product/product5.webp" alt="product-media-img"></a>
-                      <div class="product__media--view__icon">
-                        <a class="product__media--view__icon--link glightbox" href="/assets/product/big-product/product5.webp" data-gallery="product-media-preview">
-                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
-                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
-                          </svg>
-                          <span class="visually-hidden">product view</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="product__media--nav swiper">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="product__media--nav__items">
-                      <img class="product__media--nav__items--img" src="/assets/product/small-product/product1.webp" alt="product-nav-img">
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--nav__items">
-                      <img class="product__media--nav__items--img" src="/assets/product/small-product/product2.webp" alt="product-nav-img">
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--nav__items">
-                      <img class="product__media--nav__items--img" src="/assets/product/small-product/product3.webp" alt="product-nav-img">
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--nav__items">
-                      <img class="product__media--nav__items--img" src="/assets/product/small-product/product4.webp" alt="product-nav-img">
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="product__media--nav__items">
-                      <img class="product__media--nav__items--img" src="/assets/product/small-product/product5.webp" alt="product-nav-img">
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper__nav--btn swiper-button-next">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class=" -chevron-right">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </div>
-                <div class="swiper__nav--btn swiper-button-prev">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class=" -chevron-left">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <%= render 'shared/category/quick_view' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%#= render 'shared/category/quickview' %>
 <!-- Quickview Wrapper End -->
 
 <!-- Scroll top bar -->

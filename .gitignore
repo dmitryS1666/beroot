@@ -40,4 +40,5 @@
 *.swp
 .DS_Store
 .env*
-.env*
+/db/sphinx
+/config/*.sphinx.conf

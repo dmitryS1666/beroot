@@ -12,7 +12,7 @@ puts hash.size
 
 User.destroy_all
 puts 'Seed: Creating users...'
-user = User.create(email: "admin@mail.ru", password: 'password', admin: true )
+user = User.create(email: "admin@mail.ru", password: 'password', admin: true)
 puts 'Seed: Users created...'
 
 puts 'Seed: Deleting existing categories...'
@@ -30,7 +30,7 @@ puts 'Seed: Category created...'
 
 puts 'Seed: Creating products...'
 
-hash.each do |product|
+hash.each_with_index do |product, index|
   next if Category.find_by(category_id: product['categories']['category_id']).nil?
   pro = Product.new(
     product_id: product['id'],
@@ -45,7 +45,13 @@ hash.each do |product|
     category: Category.find_by(category_id: product['categories']['category_id'])
   )
 
-  # pro.photos.attach(io: file_1, filename: "into the groove", content_type: "image/jpg")
+  if index < 5
+    pro.photos.attach(
+      io: File.open(File.join(Rails.root, "app/assets/images/product_#{index + 1}.jpg")),
+      filename: "product_#{index + 1}.jpg"
+    )
+  end
+
   pro.save!
 end
 

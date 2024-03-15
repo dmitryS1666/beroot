@@ -1,6 +1,6 @@
 // Entry point for the build script in your package.json
-import "@hotwired/turbo-rails"
-import "./controllers"
+// import "@hotwired/turbo-rails"
+// import "./controllers"
 import "bootstrap"
 import "./plugins/glightbox.min"
 import "jquery"
@@ -8,7 +8,6 @@ import "jquery"
 
 // import "./plugins/swiper-bundle.min"
 
-// import Swiper from 'swiper';
 import {Swiper} from 'swiper'
 import {Navigation} from 'swiper/modules';
 

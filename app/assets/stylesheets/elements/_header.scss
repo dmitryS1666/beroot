@@ -976,7 +976,7 @@
   left: 100%;
   background-color: var(--body-background-color);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  width: 50rem;
+  width: 40rem;
   padding: 2rem;
   z-index: 9;
   transition: var(--transition);
@@ -984,12 +984,6 @@
   visibility: hidden;
   gap: 3rem;
   flex-wrap: wrap;
-  @media only screen and (min-width: 992px) {
-    width: 65rem;
-  }
-  @media only screen and (min-width: 1200px) {
-    width: 80rem;
-  }
   @media only screen and (max-width: 991px) {
     width: 100%;
     left: 0;
@@ -999,12 +993,12 @@
 
   &.style2 {
     & .categories__submenu--items {
-      width: 22%;
+      width: 45%;
     }
   }
 
   &--items {
-    width: 30%;
+    width: 45%;
     @media only screen and (max-width: 991px) {
       width: 100%;
       position: relative;

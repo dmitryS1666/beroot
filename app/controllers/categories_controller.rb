@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  include MainCategoryHelper
+
   before_action :authenticate_user!, :only => [:new]
   before_action :set_category, only: [ :edit, :show, :update, :destroy ]
   before_action :set_main_category, only: [ :index, :edit, :show, :update, :destroy ]
@@ -40,9 +42,5 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
-  end
-
-  def set_main_category
-    @main_categories = Category.where(parent_id: Category.find_by(name: 'Товар').category_id)
   end
 end

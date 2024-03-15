@@ -9,13 +9,12 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "jsbundling-rails"
 
-gem "turbo-rails"
-gem "stimulus-rails"
+# gem "turbo-rails"
+# gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'active_storage-postgresql'
 
-gem "rails_admin", "3.0"
 gem 'mail_form'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -38,6 +37,8 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem 'will_paginate', '~> 4.0'
+gem 'trestle'
+gem 'pg_search'
 
 group :development do
   gem "web-console"

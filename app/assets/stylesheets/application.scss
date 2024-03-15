@@ -12,7 +12,6 @@
 @import "components/index";
 @import "pages/index";
 
-
 @import 'global';
 @import 'elements/header';
 @import 'elements/slider';
@@ -51,3 +50,18 @@
 
 @import 'plugins/swiper-bundle.min';
 @import 'plugins/glightbox.min';
+
+.pagination {
+  a, .current, .previous_page, .next_page, .gap {
+    padding-left: 10px;
+    font-size: 14pt;
+  }
+
+  .current {
+    color: red;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+}

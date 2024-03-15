@@ -1,8 +1,8 @@
 Arguments: 
-  /root/.nvm/versions/node/v21.4.0/bin/node /usr/share/yarn/bin/yarn.js add jquery_ujs
+  /root/.nvm/versions/node/v21.4.0/bin/node /usr/share/yarn/bin/yarn.js install
 
 PATH: 
-  /root/.rbenv/shims:/root/.rbenv/bin:/root/.nvm/versions/node/v21.4.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/BellSoft/LibericaJDK-8/bin/:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Git/cmd:/Docker/host/bin:/mnt/c/Program Files/PuTTY/:/mnt/c/Ruby31-x64/bin:/mnt/c/Ruby27-x64/bin:/mnt/c/Users/dsusc/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/JetBrains/RubyMine 2022.2.1/bin:/mnt/c/Program Files/JetBrains/WebStorm 2021.3.3/bin:/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2021.3.3/bin:/mnt/c/Program Files/JetBrains/DataGrip 2022.2.2/bin:/mnt/c/Users/dsusc/Favorites/chromedriver_win32/chromedriver:/mnt/c/Users/dsusc/AppData/Roaming/npm:/mnt/c/Users/dsusc/AppData/Local/GitHubDesktop/bin:/mnt/c/Program Files/JetBrains/PhpStorm 2022.2.2/bin:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2022.2.2/bin:/mnt/c/Program Files/heroku/bin:/root/agro_master/node_modules/.bin:/root/.antigen/bundles/robbyrussell/oh-my-zsh/lib:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/git:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/command-not-found:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/docker:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/docker-compose:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/ssh-agent:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/sudo:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/direnv:/root/.antigen/bundles/zsh-users/zsh-completions:/root/.antigen/bundles/zsh-users/zsh-autosuggestions:/root/.antigen/bundles/zsh-users/zsh-syntax-highlighting:/root/.antigen/bundles/zsh-users/zsh-history-substring-search
+  /root/.rbenv/versions/3.1.2/lib/ruby/gems/3.1.0/bin:/root/.rbenv/versions/3.1.2/bin:/root/.rbenv/libexec:/root/.rbenv/plugins/ruby-build/bin:/root/.rbenv/shims:/root/.rbenv/bin:/root/.nvm/versions/node/v21.4.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/BellSoft/LibericaJDK-8/bin/:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Git/cmd:/Docker/host/bin:/mnt/c/Ruby31-x64/bin:/mnt/c/Ruby27-x64/bin:/mnt/c/Users/dsusc/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/JetBrains/RubyMine 2022.2.1/bin:/mnt/c/Program Files/JetBrains/WebStorm 2021.3.3/bin:/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2021.3.3/bin:/mnt/c/Program Files/JetBrains/DataGrip 2022.2.2/bin:/mnt/c/Users/dsusc/Favorites/chromedriver_win32/chromedriver:/mnt/c/Users/dsusc/AppData/Roaming/npm:/mnt/c/Users/dsusc/AppData/Local/GitHubDesktop/bin:/mnt/c/Program Files/JetBrains/PhpStorm 2022.2.2/bin:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2022.2.2/bin:/mnt/c/Program Files/heroku/bin:/root/agro_master/node_modules/.bin:/root/.antigen/bundles/robbyrussell/oh-my-zsh/lib:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/git:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/command-not-found:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/docker:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/docker-compose:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/ssh-agent:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/sudo:/root/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/direnv:/root/.antigen/bundles/zsh-users/zsh-completions:/root/.antigen/bundles/zsh-users/zsh-autosuggestions:/root/.antigen/bundles/zsh-users/zsh-syntax-highlighting:/root/.antigen/bundles/zsh-users/zsh-history-substring-search
 
 Yarn version: 
   1.22.19
@@ -14,25 +14,20 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/jquery_ujs: Not found
-      at params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66145:18)
-      at self.callback (/usr/share/yarn/lib/cli.js:140890:22)
-      at Request.emit (node:events:519:28)
-      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141862:10)
-      at Request.emit (node:events:519:28)
-      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141784:12)
-      at Object.onceWrapper (node:events:633:28)
-      at IncomingMessage.emit (node:events:531:35)
-      at endReadableNT (node:internal/streams/readable:1696:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  SyntaxError: /root/agro_master/package.json: Expected property name or '}' in JSON at position 60 (line 5 column 1)
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:310:30)
+      at /usr/share/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
     "name": "app",
     "private": "true",
     "dependencies": {
-      "@hotwired/stimulus": "^3.2.1",
-      "@hotwired/turbo-rails": "^7.2.4",
+  //    "@hotwired/stimulus": "^3.2.1",
+  //    "@hotwired/turbo-rails": "^7.2.4",
       "@popperjs/core": "^2.11.6",
       "bootstrap": "^5.2.3",
       "esbuild": "^0.14.54",
