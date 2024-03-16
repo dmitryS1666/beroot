@@ -8,6 +8,10 @@ class PagesController < ApplicationController
   end
 
   def contact; end
+
   def pay; end
+
   def delivery; end
+
+  def privacy_policy; end
 end

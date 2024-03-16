@@ -1,9 +1,6 @@
 class CategoriesController < ApplicationController
-  include MainCategoryHelper
-
   before_action :authenticate_user!, :only => [:new]
   before_action :set_category, only: [ :edit, :show, :update, :destroy ]
-  before_action :set_main_category, only: [ :index, :edit, :show, :update, :destroy ]
 
   def index
     @categories = Category.where.not(parent_id: '')

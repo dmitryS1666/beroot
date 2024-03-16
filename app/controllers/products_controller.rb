@@ -1,6 +1,4 @@
 class ProductsController < ApplicationController
-  include MainCategoryHelper
-
   before_action :authenticate_user!, :only => [:new]
   before_action :set_product, only: [ :edit, :show, :update, :destroy ]
   before_action :set_categories, only: [:new, :create, :edit]
@@ -34,8 +32,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    set_main_category
-
     @contact = Contact.new
     @products = Product.all
     @category = Category.new

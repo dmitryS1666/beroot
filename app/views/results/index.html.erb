@@ -10,13 +10,13 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
           <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-            <%#= render 'shared/category/category_filter', { category: @category } %>
+            <%= render 'shared/category/category_filter', { category: @category } %>
 
-            <%= render 'shared/category/details_filter' %>
+            <%#= render 'shared/category/details_filter' %>
 
-            <%= render 'shared/category/price_filter' %>
+            <%#= render 'shared/category/price_filter' %>
 
-            <%= render 'shared/category/brand_filter' %>
+            <%= render 'shared/category/brand_filter', { product: @products } %>
 
             <%= render 'shared/top_rated_product' %>
           </div>
@@ -26,7 +26,7 @@
             <!-- Start categories section -->
             <div class="categories__shop mb-50">
               <div class="section__heading border-bottom mb-30">
-                <h2 class="section__heading--maintitle">Все товары <span>раздела</span></h2>
+                <h2 class="section__heading--maintitle">Результаты <span>поиска</span></h2>
               </div>
             </div>
             <!-- End categories section -->
@@ -75,6 +75,7 @@
               <div class="pagination__area">
                 <nav class="pagination justify-content-center">
                   <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                    <%# @search_results = @search_results.paginate(page: 1, per_page: 2, total_page: 12) %>
                     <%#= will_paginate @search_results, previous_label: t("will_paginate.previous_label"), next_label: t("will_paginate.next_label") %>
                   </ul>
                 </nav>

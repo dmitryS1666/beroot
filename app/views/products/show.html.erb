@@ -1,4 +1,3 @@
-<!-- app/views/restaurants/show.html.erb -->
 <% content_for :meta_title, "#{@product.name} #{DEFAULT_META["meta_product_name"]}" %>
 <% content_for :meta_description, @product.description %>
 <%# content_for :meta_image, image_path(@product.photos.first) if @product.photos.any? %>
@@ -23,7 +22,7 @@
                     </a>
                     <div class="product__media--view__icon">
                       <%# @product.photos.each do |photo| %>
-                        <!-- <li class="image-item"><%#= image_tag photo, id: "other-picture" %></li>-->
+                      <!-- <li class="image-item"><%#= image_tag photo, id: "other-picture" %></li>-->
                       <%# end %>
                       <!-- product/main-product/product5.webp-->
                     </div>
@@ -77,7 +76,6 @@
 
         <div class="col">
           <div class="product__details--info">
-            <form action="#">
               <h2 class="product__details--info__title mb-15">
                 <%= @product.name %>
               </h2>
@@ -90,13 +88,13 @@
               </p>
               <div class="product__variant">
 
-<!--                <div id="<%#= dom_id @product %>">-->
-                  <%#= form_with(url: cart_add_path) do |f| %>
-                    <%#= f.hidden_field :id, value: @product.id %>
-                    <%#= f.number_field :quantity, value: 1, min: 1, class: "add-number-field" %>
-                    <%#= f.submit "Add To Cart", class: "add-to-cart", id: "add-to-cart-button" %>
-                  <%# end %>
-<!--                </div>-->
+                <!--                <div id="<%#= dom_id @product %>">-->
+                <%= form_for :cart, url: cart_add_path, method: :post do |f| %>
+                  <%= f.hidden_field :id, value: @product.id %>
+                  <%= f.number_field :quantity, value: 1, min: 1, class: "add-number-field" %>
+                  <%= f.submit "Add To Cart", class: "add-to-cart", id: "add-to-cart-button" %>
+                <% end %>
+                <!--                </div>-->
 
                 <div id="<%= dom_id @product %>" class="product__variant--list quantity d-flex align-items-center mb-20">
                   <%= form_with(url: cart_add_path) do |f| %>
@@ -104,7 +102,7 @@
                     <div class="quantity__box">
                       <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
                       <label>
-<!--                        <input type="number" class="quantity__number quickview__value--number" value="1" data-counter/>-->
+                        <!--                        <input type="number" class="quantity__number quickview__value--number" value="1" data-counter/>-->
                         <%= f.number_field :quantity, value: 1, min: 1, class: "quantity__number quickview__value--number" %>
                       </label>
                       <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
@@ -125,7 +123,6 @@
                   </div>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
@@ -143,19 +140,18 @@
   <%= render 'shared/shipping' %>
 </main>
 
-<script>
-    (function () {
-        const activeImage = document.querySelector(".product-image-show .active");
-        const productImages = document.querySelectorAll(".image-list img");
+<!--<script>-->
+<!--    (function () {-->
+<!--        const activeImage = document.querySelector(".product-image-show .active");-->
+<!--        const productImages = document.querySelectorAll(".image-list img");-->
 
-        function changeImage(e) {
-            activeImage.src = e.target.src;
-        }
+<!--        function changeImage(e) {-->
+<!--            activeImage.src = e.target.src;-->
+<!--        }-->
 
-        productImages.forEach(image => image.addEventListener("click", changeImage));
-    })();
-</script>
-
+<!--        productImages.forEach(image => image.addEventListener("click", changeImage));-->
+<!--    })();-->
+<!--</script>-->
 
 <script>
     (function () {

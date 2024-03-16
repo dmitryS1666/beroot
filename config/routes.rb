@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "contact", to: "pages#contact"
   get "pay", to: "pages#pay"
   get "delivery", to: "pages#delivery"
+  get "privacy_policy", to: "pages#privacy_policy"
 
   get 'contacts/sent'
 

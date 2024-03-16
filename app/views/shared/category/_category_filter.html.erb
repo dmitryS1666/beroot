@@ -1,4 +1,4 @@
-<% child_categories = Category.where(parent_id: category.category_id) %>
+<% child_categories = category ? Category.where(parent_id: category.category_id) : [] %>
 
 <% if child_categories.size > 0 %>
   <div class="single__widget widget__bg">

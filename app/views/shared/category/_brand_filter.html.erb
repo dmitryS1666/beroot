@@ -1,14 +1,13 @@
-<div class="single__widget widget__bg">
-  <h2 class="widget__title h3">Brands</h2>
-  <ul class="widget__tagcloud">
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html"> Paintworks
-    </a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Lighting</a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Gaming</a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Bumpers </a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Hoods </a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Air Boxes</a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Fog Lights</a></li>
-    <li class="widget__tagcloud--list"><a class="widget__tagcloud--link" href="shop.html">Interior </a></li>
-  </ul>
-</div>
+<% providers = @products ? @products.map(&:provider).uniq : [] %>
+<% if providers.size > 0 %>
+  <div class="single__widget widget__bg">
+    <h2 class="widget__title h3">Поставщики</h2>
+    <ul class="widget__tagcloud">
+      <% providers.each do |provider| %>
+        <li class="widget__tagcloud--list">
+          <a class="widget__tagcloud--link" href="/results"> <%= provider %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -26,8 +26,11 @@ class CartController < ApplicationController
   end
 
   def add
-    @product = Product.find_by(id: params[:id])
-    quantity = params[:quantity].to_i
+    Rails.logger.warn 'CART PARAMS'
+    Rails.logger.warn params
+    Rails.logger.warn '*********************************************'
+    @product = Product.find_by(id: params[:cart][:id])
+    quantity = params[:cart][:quantity].to_i
     current_orderable = @cart.orderables.find_by(product_id: @product.id)
     if current_orderable && quantity > 0
       current_orderable.update(quantity:)

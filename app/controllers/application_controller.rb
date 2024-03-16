@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
+  include MainCategoryHelper
+  include PopularProductsHelper
+
   before_action :authenticate_user!
   before_action :set_render_cart
   before_action :initialize_cart
+  before_action :set_main_category
+  before_action :set_popular_product
+  before_action :set_top_rated_product
 
   def set_render_cart
     @render_cart = true
