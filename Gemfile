@@ -39,6 +39,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem 'will_paginate', '~> 4.0'
 gem 'trestle'
 gem 'pg_search'
+gem 'cookies_eu'
 
 group :development do
   gem "web-console"

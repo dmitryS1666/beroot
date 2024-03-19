@@ -4,28 +4,20 @@ import "./controllers"
 import "bootstrap"
 import "./plugins/glightbox.min"
 import "jquery"
-// import "jquery_ujs"
 
-// import "./plugins/swiper-bundle.min"
+//= require turbolinks
+//= require cookies_eu
 
 import {Swiper} from 'swiper'
 import {Navigation} from 'swiper/modules';
 
 Swiper.use([Navigation])
 
-// import GLightbox from 'glightbox.min';
-
 import jQuery from "jquery"
 
 let $ = window.$ = window.jQuery = jQuery
 
 /*
-  Template Name: Partsix - Auto Parts & Car Accessories Shop HTML Template
-  Author Name: Hook theme
-  Author URL: https://themeforest.net/user/hooktheme
-  Version: 1.0.0
-
-
   1. slider swiper activation
   2. product swiper column4 activation
   3. product swiper column4 style2 activation
@@ -54,20 +46,12 @@ let $ = window.$ = window.jQuery = jQuery
 "use strict";
 
 // Preloader
-// const preLoader = function () {
-//     setTimeout(hide, 1500);
-// };
-
-// function hide() {
-//     let preloaderWrapper = document.getElementById("preloader");
-//     preloaderWrapper.classList.add("loaded");
-// }
-
 document.addEventListener("turbo:click", function () {
     $("#preloader").show();
 });
 
 document.addEventListener("turbo:load", function () {
+    // Preloader
     $("#preloader").hide();
 
 
@@ -170,17 +154,17 @@ document.addEventListener("turbo:load", function () {
       1. slider swiper activation
     */
     // document.addEventListener('DOMContentLoaded', () => {
-        new Swiper(".hero__slider--activation", {
-            slidesPerView: 1,
-            loop: true,
-            clickable: true,
-            speed: 500,
-            spaceBetween: 30,
-            navigation: {
-                nextEl: ".swiper-button-next_1",
-                prevEl: ".swiper-button-prev_1"
-            }
-        });
+    new Swiper(".hero__slider--activation", {
+        slidesPerView: 1,
+        loop: true,
+        clickable: true,
+        speed: 500,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: ".swiper-button-next_1",
+            prevEl: ".swiper-button-prev_1"
+        }
+    });
     // });
 
     /*
@@ -768,9 +752,9 @@ document.addEventListener("turbo:load", function () {
     };
 
     // window.addEventListener("load", function () {
-        if (accordion) {
-            footerWidgetAccordion();
-        }
+    if (accordion) {
+        footerWidgetAccordion();
+    }
     // });
     window.addEventListener("resize", function () {
         document.querySelectorAll(".footer__widget").forEach(function (item) {
@@ -1018,5 +1002,52 @@ document.addEventListener("turbo:load", function () {
         }
     };
     newsletterPopup();
+
+
+    // COOKIES
+
+    if (document.cookie.split(';').filter((item) => item.includes('cookie_eu_consented=true')).length) {
+        document.querySelector('#popup-cookie-inner').style.display = 'none';
+    } else {
+        document.querySelector('#popup-cookie-inner').style.display = 'block';
+    }
+
+    document.addEventListener('cookies-eu-acknowledged', function () {
+        document.cookie = 'cookie_eu_consented=true'
+        const cond = document.getElementById('popup-cookie-inner') || false
+        if (cond) {
+            document.querySelector('#popup-cookie-inner').style.display = 'none';
+        }
+    });
+
+    function cancelCookies() {
+        document.cookie = 'cookie_eu_consented=false';
+        const cond = document.getElementById('popup-cookie-inner') || false
+        if (cond) {
+            document.querySelector('#popup-cookie-inner').style.display = 'none';
+            document.querySelector('.product-buttons').style.display = 'none';
+        }
+    }
+
+    function okCookies() {
+        document.cookie = 'cookie_eu_consented=true'
+        const cond = document.getElementById('popup-cookie-inner') || false
+        if (cond) {
+            document.querySelector('#popup-cookie-inner').style.display = 'none';
+        }
+    }
+
+    let cookiesCancel = document.querySelector("#cookies-cancel");
+    if (cookiesCancel) {
+        cookiesCancel.addEventListener("click", function (e) {
+            cancelCookies();
+        })
+    }
+    let cookiesOk = document.querySelector("#cookies-ok");
+    if (cookiesOk) {
+        cookiesOk.addEventListener("click", function (e) {
+            okCookies();
+        })
+    }
 
 });

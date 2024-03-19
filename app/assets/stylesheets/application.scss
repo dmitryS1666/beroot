@@ -51,6 +51,8 @@
 @import 'plugins/swiper-bundle.min';
 @import 'plugins/glightbox.min';
 
+@import 'cookies_eu';
+
 .pagination {
   a, .current, .previous_page, .next_page, .gap {
     padding-left: 10px;
@@ -70,4 +72,75 @@
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
+}
+
+popup-cookie {
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #CCCCCC;
+  //height: 350px;
+}
+
+.popup-cookie-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.popup-cookie-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.popup-cookie-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 130%;
+  color: black;
+}
+
+.popup-cookie-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 30px;
+}
+
+.popup-cookie-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 40px;
+}
+
+.popup-cookie-item .popup-cookie-text {
+  margin-left: 20px;
+}
+
+.popup-cookie-info {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 130%;
+  color: #B41A1F;
+}
+
+.popup-cookie-buttons {
+  margin-left: 30px;
+}
+
+.popup-cookie__button {
+  width: 175px;
+  height: 45px;
+  margin-bottom: 15px;
 }
