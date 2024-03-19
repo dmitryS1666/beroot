@@ -5,9 +5,13 @@ class ResultsController < ApplicationController
   def index
     set_main_category
 
+    # simple search
     if params[:search] && params[:search][:category].blank?
       @search_results = Product.search_everywhere(params[:search][:query])
-    elsif params[:search]
+
+    # simple search + category
+    elsif params[:search] && !params[:search][:category].blank?
+      @category = Category.find(params[:search][:category])
       scope = Product.where(category_id: params[:search][:category])
       @search_results = scope.search_everywhere(params[:search][:query])
     else

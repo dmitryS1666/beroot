@@ -145,43 +145,7 @@ color: $gray;
   color: grey;
 
 }
-#add-to-cart-button {
-  position: relative;
-  display: inline-block;
-  background: $ocean;
-  color: $white;
-  border: none;
-  border-radius: 4px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  transform: translateZ(0);
-  transition: color 0.3s ease;
-  letter-spacing: 0.0625rem;
-  &:hover {
-    &::before {
-      transform: scaleX(1);
-    }
-  }
-  &::before {
-    position: absolute;
-    content: '';
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: $button-hover;
-    transform: scaleX(0);
-    transform-origin: 0 50%;
-    transition: transform 0.3s ease-out;
-  }
-}
 
-#add-to-cart-button:hover {
-  background: $sun;
-}
 .container-custom {
   margin: auto;
   padding: 0 1rem;

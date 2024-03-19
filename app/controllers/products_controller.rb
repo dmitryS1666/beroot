@@ -13,37 +13,13 @@ class ProductsController < ApplicationController
     end
   end
 
-  def new
-    @product = Product.new
-  end
-
-  def create
-    @product = Product.new(product_params)
-    @product.category = @category
-    @product.user_id = current_user.id
-
-    @product.category_id = params[:product][:category].to_i
-    if @product.save
-      redirect_to product_path, notice: 'Product has been created sucessfully!'
-    else
-      render :new, status: :unprocessable_entity
-
-    end
-  end
-
   def show
     @contact = Contact.new
     @products = Product.all
     @category = Category.new
     @product = Product.find(params[:id])
-  end
-
-  def edit
-  end
-
-  def destroy
-    @product.destroy
-    redirect_to products_path, status: :see_other
+    puts @product.inspect
+    @product
   end
 
   private

@@ -1,34 +1,22 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, :only => [:new]
-  before_action :set_category, only: [ :edit, :show, :update, :destroy ]
+  before_action :set_category, only: [:edit, :show, :update, :destroy]
 
   def index
     @categories = Category.where.not(parent_id: '')
   end
 
-  def new
-    @category = Category.new
-  end
-
-  def create
-    @category = Category.new(category_params)
-    if @category.save
-      redirect_to categories_path(@category)
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def show
-    @products = @category.products.paginate(page: params[:page])
-  end
+    @products = @category.products
 
-  def edit
-  end
+    child_categories = Category.where(parent_id: @category.category_id)
+    if child_categories.count > 0
+      child_categories.each do |cat|
+        @products = @products.merge(cat.products)
+      end
+    end
 
-  def destroy
-    @category.destroy
-    redirect_to categories_path, status: :see_other
+    @products = @products.paginate(page: params[:page])
   end
 
   private

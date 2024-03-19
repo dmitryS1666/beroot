@@ -1,13 +1,11 @@
 class Product < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search_everywhere, against: [
     :name,
-    :product_id,
     :article,
     :provider,
-    :description,
-    :category_id
-  ]
+    :description
+  ], using: { tsearch: { prefix: true } }
 
   validates :category_id, presence: true
   validates :name, presence: true

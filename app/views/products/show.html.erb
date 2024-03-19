@@ -76,53 +76,42 @@
 
         <div class="col">
           <div class="product__details--info">
-              <h2 class="product__details--info__title mb-15">
-                <%= @product.name %>
-              </h2>
-              <div class="product__details--info__price mb-12">
-                <span class="current__price">&#x20BD;<%= @product.price %></span>
-                <span class="old__price">&#x20BD;<%= @product.price %></span>
-              </div>
-              <p class="product__details--info__desc mb-15">
-                <%= @product.description %>
-              </p>
-              <div class="product__variant">
-
-                <!--                <div id="<%#= dom_id @product %>">-->
+            <h2 class="product__details--info__title mb-15">
+              <%= @product.name %>
+            </h2>
+            <div class="product__details--info__price mb-12">
+              <span class="current__price">&#x20BD;<%= @product.price %></span>
+              <span class="old__price">&#x20BD;<%= @product.price %></span>
+            </div>
+            <p class="product__details--info__desc mb-15">
+              <%= @product.description %>
+            </p>
+            <div class="product__variant">
+              <div id="<%= dom_id @product %>" class="product__variant--list quantity d-flex align-items-center mb-20">
                 <%= form_for :cart, url: cart_add_path, method: :post do |f| %>
-                  <%= f.hidden_field :id, value: @product.id %>
-                  <%= f.number_field :quantity, value: 1, min: 1, class: "add-number-field" %>
-                  <%= f.submit "Add To Cart", class: "add-to-cart", id: "add-to-cart-button" %>
-                <% end %>
-                <!--                </div>-->
-
-                <div id="<%= dom_id @product %>" class="product__variant--list quantity d-flex align-items-center mb-20">
-                  <%= form_with(url: cart_add_path) do |f| %>
-                    <%= f.hidden_field :id, value: @product.id %>
-                    <div class="quantity__box">
-                      <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                      <label>
-                        <!--                        <input type="number" class="quantity__number quickview__value--number" value="1" data-counter/>-->
-                        <%= f.number_field :quantity, value: 1, min: 1, class: "quantity__number quickview__value--number" %>
-                      </label>
-                      <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
-                    </div>
-                    <%= f.submit "Добавить в корзину", class: "primary__btn quickview__cart--btn add-to-cart", id: "add-to-cart-button" %>
-                    <!-- <button class="primary__btn quickview__cart--btn" type="submit">Добавить в корзину</button>-->
-                  <% end %>
-                </div>
-
-                <div class="product__variant--list mb-15">
-                  <div class="product__details--info__meta">
-                    <p class="product__details--info__meta--list"><strong>Артикул:</strong>
-                      <span><%= @product.article %></span></p>
-                    <p class="product__details--info__meta--list"><strong>Поставщик:</strong>
-                      <span><%= @product.provider %></span></p>
-                    <p class="product__details--info__meta--list"><strong>Кол-во на складе:</strong>
-                      <span><%= @product.quantity %></span></p>
+                  <%= f.hidden_field :product_id, value: @product.id %>
+                  <div class="quantity__box">
+                    <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
+                    <label>
+                      <input type="number" name="cart[quantity]" id="cart_quantity" class="quantity__number quickview__value--number" value="1" readonly data-counter="" max="<%= @product.quantity %>">
+                    </label>
+                    <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
+                    <button class="primary__btn quickview__cart--btn" id='add-to-cart-button' type="submit">Добавить в корзину</button>
                   </div>
+                <% end %>
+              </div>
+
+              <div class="product__variant--list mb-15">
+                <div class="product__details--info__meta">
+                  <p class="product__details--info__meta--list"><strong>Артикул:</strong>
+                    <span><%= @product.article %></span></p>
+                  <p class="product__details--info__meta--list"><strong>Поставщик:</strong>
+                    <span><%= @product.provider %></span></p>
+                  <p class="product__details--info__meta--list"><strong>Кол-во на складе:</strong>
+                    <span><%= @product.quantity %></span></p>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>

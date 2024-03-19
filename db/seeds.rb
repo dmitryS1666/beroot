@@ -31,7 +31,9 @@ puts 'Seed: Category created...'
 puts 'Seed: Creating products...'
 
 hash.each_with_index do |product, index|
-  next if Category.find_by(category_id: product['categories']['category_id']).nil?
+  category = Category.find_by(category_id: product['categories']['category_id'])
+  next if category.nil?
+
   pro = Product.new(
     product_id: product['id'],
     article: product['article'],
@@ -42,7 +44,7 @@ hash.each_with_index do |product, index|
     quantity: product['qty']['qty_type'].nil? ? 0 : product['qty']['qty_type']['value'].to_i,
     qty_type: product['qty']['qty_type']['name'],
     user: user,
-    category: Category.find_by(category_id: product['categories']['category_id'])
+    category: category
   )
 
   if index < 5
@@ -53,6 +55,8 @@ hash.each_with_index do |product, index|
   end
 
   pro.save!
+
+  break if product['product_name'] == 'Болт 16х40х1,5'
 end
 
 puts 'Seed: Finished seeding!'

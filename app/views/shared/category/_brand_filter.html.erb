@@ -5,7 +5,9 @@
     <ul class="widget__tagcloud">
       <% providers.each do |provider| %>
         <li class="widget__tagcloud--list">
-          <a class="widget__tagcloud--link" href="/results"> <%= provider %></a>
+          <% @products.map(&:category).first[:name] %>
+          <% category = @products.map(&:category).first[:id] %>
+          <a class="widget__tagcloud--link" href="/results?category=<%= category %>&provider=<%= provider %>"> <%= provider %></a>
         </li>
       <% end %>
     </ul>

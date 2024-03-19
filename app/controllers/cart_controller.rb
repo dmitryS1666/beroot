@@ -26,37 +26,57 @@ class CartController < ApplicationController
   end
 
   def add
-    Rails.logger.warn 'CART PARAMS'
-    Rails.logger.warn params
-    Rails.logger.warn '*********************************************'
-    @product = Product.find_by(id: params[:cart][:id])
-    quantity = params[:cart][:quantity].to_i
+    if params[:cart]
+      @product = Product.find_by(id: params[:cart][:product_id])
+      quantity = params[:cart][:quantity].to_i
+    else
+      @product = Product.find_by(id: params[:product_id])
+      quantity = params[:quantity].to_i
+    end
+
     current_orderable = @cart.orderables.find_by(product_id: @product.id)
+
     if current_orderable && quantity > 0
-      current_orderable.update(quantity:)
+      current_orderable.update(quantity: quantity)
     elsif quantity <= 0
       current_orderable.destroy
     else
-      @cart.orderables.create(product: @product, quantity:)
+      @cart.orderables.create(product: @product, quantity: quantity)
     end
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [turbo_stream.replace('cart',
-                                                   partial: 'cart/cart',
-                                                   locals: { cart: @cart }),
-                              turbo_stream.replace(@product)]
+    respond_to do |f|
+      f.html
+      f.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace(
+            'cart',
+            partial: 'cart/cart', locals: { cart: @cart }
+          ),
+          # turbo_stream.replace(@cart),
+          # turbo_stream.replace(@product)
+        ]
       end
     end
   end
 
   def remove
     Orderable.find_by(id: params[:id]).destroy
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('cart',
-                                                  partial: 'cart/cart',
-                                                  locals: { cart: @cart })
+
+    respond_to do |f|
+      f.html
+      f.turbo_stream do
+        render turbo_stream:
+                 turbo_stream.replace(
+                   'cart',
+                   partial: 'cart/cart', locals: { cart: @cart }
+                 )
+      end
+      f.turbo_stream do
+        render turbo_stream:
+                 turbo_stream.replace(
+                   'cart-count',
+                   @cart
+                 )
       end
     end
   end

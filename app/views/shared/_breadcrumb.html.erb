@@ -4,12 +4,12 @@
       <div class="col">
         <div class="breadcrumb__content text-center">
           <% if category_name %>
-            <h1 class="breadcrumb__content--title"><%= category.name %></h1>
+            <h1 class="breadcrumb__content--title"><%= category_name %></h1>
           <% end %>
           <ul class="breadcrumb__content--menu d-flex justify-content-center">
             <li class="breadcrumb__content--menu__items"><a href="<%= root_path %>">Главная</a></li>
             <% parent_category = Category.where(category_id: category.parent_id) %><br>
-            <% if parent_category %>
+            <% if parent_category && parent_category.first.name != 'Товар' %>
               <li class="breadcrumb__content--menu__items"><%= link_to parent_category.first.name, category_path(parent_category.first) %></li>
             <% end %>
             <li class="breadcrumb__content--menu__items"><%= link_to category.name, category_path(category) %></li>

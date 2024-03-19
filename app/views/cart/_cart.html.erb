@@ -1,0 +1,258 @@
+<!-- cart section start -->
+<section class="cart__section section--padding">
+  <div class="container">
+    <div class="cart__section--inner">
+      <div class="row">
+        <div class="col-lg-12">
+          <% if @cart.orderables.count > 0 %>
+            <%= turbo_frame_tag "cart" do %>
+              <div class="cart__table">
+                <table class="cart__table--inner">
+                  <thead class="cart__table--header">
+                  <tr class="cart__table--header__items">
+                    <th class="cart__table--header__list">Товар</th>
+                    <th class="cart__table--header__list">Цена</th>
+                    <th class="cart__table--header__list">Кол-во</th>
+                    <th class="cart__table--header__list">Всего</th>
+                  </tr>
+                  </thead>
+                  <tbody class="cart__table--body">
+                  <% @cart.orderables.each do |orderable| %>
+                    <% product = orderable.product %>
+                    <tr class="cart__table--body__items" id="<%= "cart-#{product.id}" %>">
+                      <td class="cart__table--body__list">
+                        <div class="cart__product d-flex align-items-center">
+                          <div class="product-removal">
+                            <%= form_with(url: cart_remove_path) do |f| %>
+                              <%= f.hidden_field :id, value: orderable.id %>
+                              <%#= f.submit "Delete", class: "remove-product", id: "delete-button" %>
+                              <button class="cart__remove--btn" aria-label="search button" id="delete-button" type="submit">
+                                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 24 24" width="16px" height="16px">
+                                  <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/>
+                                </svg>
+                              </button>
+                            <% end %>
+                          </div>
+                          <div class="cart__thumbnail">
+                            <a href="<%= product_path(product) %>">
+                              <%#= image_tag product.photos.first %>
+                              <img class="border-radius-5" src="/assets/product/small-product/product9.webp" alt="cart-product">
+                            </a>
+                          </div>
+                          <div class="cart__content">
+                            <h3 class="cart__content--title h4">
+                              <a href="<%= product_path(product) %>"><%= product.name %></a>
+                            </h3>
+                            <span class="cart__content--variant">ПОСТАВЩИК: <%= product.provider %></span>
+                            <!-- <span class="cart__content--variant">ВЕС: <%#= product.weight %></span>-->
+                          </div>
+                        </div>
+                      </td>
+                      <td class="cart__table--body__list">
+                        <span class="cart__price"><%= product.price %></span>
+                      </td>
+                      <td class="cart__table--body__list">
+                        <div class="quantity__box">
+                          <%= form_with(url: cart_add_path) do |f| %>
+                            <%= f.hidden_field :product_id, value: product.id %>
+                            <%= f.number_field :quantity, value: orderable.quantity, min: 0, id: "input" %>
+                            <%= f.submit "Modify", class: "modify-product", id: "modify-button" %>
+                          <% end %>
+                          <button type="button"
+                                  class="quantity__value quickview__value--quantity decrease"
+                                  aria-label="quantity value" value="Decrease Value">-
+                          </button>
+                          <label>
+                            <input type="number"
+                                   class="quantity__number quickview__value--number" value="<%= product.quantity %>"
+                                   data-counter/>
+                          </label>
+                          <button type="button"
+                                  class="quantity__value quickview__value--quantity increase"
+                                  aria-label="quantity value" value="Increase Value">+
+                          </button>
+                        </div>
+                      </td>
+                      <td class="cart__table--body__list">
+                        <span class="cart__price end">&#x20BD;<%= product.quantity.to_f * product.price.to_f %></span>
+                      </td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <div class="continue__shopping d-flex justify-content-between">
+                  <a class="continue__shopping--link" href="<%= root_path %>">Продолжить покупки</a>
+                  <button class="continue__shopping--clear" type="submit">Очистить корзину</button>
+                </div>
+              </div>
+
+              <div class="totals">
+                <div class="totals-item totals-item-total">
+                  <label>Итого</label>
+                  <div class="totals-value" id="cart-total">
+                    <%= @cart.total %>
+                  </div>
+                </div>
+                <div class="buttons">
+                  <button class="checkout" onClick="window.location.reload();">Офрмить заказ</button>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <center>Корзина пуста.</center>
+            <a class="continue__shopping--link" href="<%= root_path %>">Продолжить покупки</a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!--  <div id="shopping">-->
+<!--    <br>-->
+<!--    <h1>Shopping Cart</h1>-->
+
+<!--    <div class="shopping-cart">-->
+
+<!--      <div class="column-labels">-->
+<!--        <label class="product-image">Image</label>-->
+<!--        <label class="product-details">Product</label>-->
+<!--        <label class="product-price">Price</label>-->
+<!--        <label class="product-quantity">Quantity</label>-->
+<!--        <label class="product-removal">Remove</label>-->
+<!--        <label class="product-line-price">Total</label>-->
+<!--      </div>-->
+
+<%# if @cart.orderables.count > 0 %>
+<%# @cart.orderables.each do |orderable| %>
+<%# product = orderable.product %>
+<!--          <div id="<%#= "cart-#{product.id}" %>">-->
+<!--            <div class="product">-->
+<!--              <div class="product-image">-->
+<%# count = 0 %>
+<%# product.photos.each do |photo| %>
+<%#= image_tag photo %>
+<%# count += 1 %>
+<%# break if count == 1 %>
+<%# end %>
+<!--              </div>-->
+<!--              <div class="product-details">-->
+<!--                <div class="product-title"><%#= product.name %></div>-->
+<!--                <p class="product-description"><%#= truncate(product.description, length: 140, separator: ' ', omission: '...') %></p>-->
+<!--              </div>-->
+<!--              <div class="product-price"><%#= product.price %></div>-->
+<!--              <div class="panier">-->
+<!--                <div class="product-quantity">-->
+<%#= form_with(url: cart_add_path) do |f| %>
+<%#= f.hidden_field :id, value: product.id %>
+<%#= f.number_field :quantity, value: orderable.quantity, min: 0, id: "input" %>
+<%#= f.submit "Modify", class: "modify-product", id: "modify-button" %>
+<%# end %>
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="product-removal">-->
+<%#= form_with(url: cart_remove_path) do |f| %>
+<%#= f.hidden_field :id, value: orderable.id %>
+<%#= f.submit "Delete", class: "remove-product", id: "delete-button" %>
+<!--                  <div class="product-line-price"> <%#= orderable.total %></div>-->
+<%# end %>
+<!--              </div>-->
+<%# end %>
+<%# else %>
+<!--        <p>Your cart is empty</p>-->
+<%# end %>
+<%# end %>
+
+<!--<div class="totals">-->
+<!--  <div class="totals-item">-->
+<!--    <label>Subtotal</label>-->
+<!--    <div class="totals-value" id="cart-subtotal"><%#= @cart.total %></div>-->
+<!--  </div>-->
+<!--  <div class="totals-item">-->
+<!--    <label>Shipping</label>-->
+<!--    <div class="totals-value" id="cart-shipping">-->
+<%# if @cart.orderables.count == 0 %>
+<!--        0.00-->
+<%# elsif @cart.orderables.count <= 3 %>
+<!--        3.00-->
+<%# else %>
+<!--        6.00-->
+<%# end %>
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="totals-item totals-item-total">-->
+<!--    <label>Total</label>-->
+<!--    <div class="totals-value" id="cart-total">-->
+<%#= @cart.total %>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="buttons">-->
+
+<!--  <button class="checkout" onClick="window.location.reload();">Confirm your order</button>-->
+<!--  <br>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+<!--<script>-->
+<!--    let orderValue = <%#= 1500 %>;-->
+
+<!--    function initPayPalButton() {-->
+<!--        paypal.Buttons({-->
+<!--            style: {-->
+<!--                shape: 'pill',-->
+<!--                color: 'blue',-->
+<!--                layout: 'horizontal',-->
+<!--                label: 'paypal',-->
+
+<!--            },-->
+
+<!--            createOrder: function (data, actions) {-->
+<!--                return actions.order.create({-->
+<!--                    purchase_units: [{"description": "", "amount": {"currency_code": "EUR", "value": orderValue}}]-->
+<!--                });-->
+<!--            },-->
+
+<!--            onApprove: function (data, actions) {-->
+<!--                return actions.order.capture().then(function (orderData) {-->
+
+<!--                    // Full available details-->
+<!--                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));-->
+
+<!--                    // Show a success message within this page, e.g.-->
+<!--                    const element = document.getElementById('paypal-button-container');-->
+<!--                    element.innerHTML = '';-->
+<!--                    element.innerHTML = '<h3>Thank you for your payment!</h3>';-->
+<!--                    setTimeout(function () {-->
+<!--                        window.location.href = '/recap_path';-->
+<!--                    }, 2000);-->
+<!--                    // Or go to another URL:  actions.redirect('thank_you.html');-->
+
+<!--                });-->
+<!--            },-->
+
+<!--            onError: function (err) {-->
+<!--                console.log(err);-->
+<!--            }-->
+<!--        }).render('#paypal-button-container');-->
+<!--    }-->
+
+<!--    initPayPalButton();-->
+<!--</script>-->

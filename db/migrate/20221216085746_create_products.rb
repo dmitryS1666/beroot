@@ -9,6 +9,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.integer :price
       t.integer :sale, default: 0, null: false
       t.string :qty_type
+      # t.string :category_id
       t.integer :quantity
       t.references :user, null: false, foreign_key: true
       t.references :category, null: false, foreign_key: true
