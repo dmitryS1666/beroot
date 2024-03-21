@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   #search
   get 'results', to: 'results#index'
+  get 'filters', to: 'results#filter'
 
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"

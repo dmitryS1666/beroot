@@ -619,30 +619,66 @@ document.addEventListener("turbo:load", function () {
         quantityWrapper.forEach(function (singleItem) {
             let increaseButton = singleItem.querySelector(".increase");
             let decreaseButton = singleItem.querySelector(".decrease");
+            let increaseButton2 = singleItem.querySelector(".increase2");
+            let decreaseButton2 = singleItem.querySelector(".decrease2");
             let maxCounter = singleItem.querySelector(".quantity__number");
             let maxCounterValue = maxCounter.getAttribute('max');
 
-            increaseButton.addEventListener("click", function (e) {
-                let input = e.target.previousElementSibling.children[0];
-                if (input.dataset.counter != undefined) {
-                    let value = parseInt(input.value, 10);
-                    value = isNaN(value) ? 0 : value;
-                    value++;
-                    value > maxCounterValue ? (value = maxCounterValue) : "";
-                    input.value = value;
-                }
-            });
+            if (increaseButton) {
+                increaseButton.addEventListener("click", function (e) {
+                    let input = e.target.previousElementSibling.children[0];
+                    if (input.dataset.counter != undefined) {
+                        let value = parseInt(input.value, 10);
+                        value = isNaN(value) ? 0 : value;
+                        value++;
+                        value > maxCounterValue ? (value = maxCounterValue) : "";
+                        input.value = value;
+                    }
+                });
+            }
 
-            decreaseButton.addEventListener("click", function (e) {
-                let input = e.target.nextElementSibling.children[0];
-                if (input.dataset.counter != undefined) {
-                    let value = parseInt(input.value, 10);
-                    value = isNaN(value) ? 0 : value;
-                    value < 1 ? (value = 1) : "";
-                    value--;
-                    input.value = value;
-                }
-            });
+            if (decreaseButton) {
+                decreaseButton.addEventListener("click", function (e) {
+                    let input = e.target.nextElementSibling.children[0];
+                    if (input.dataset.counter != undefined) {
+                        let value = parseInt(input.value, 10);
+                        value = isNaN(value) ? 0 : value;
+                        value < 1 ? (value = 1) : "";
+                        value--;
+                        input.value = value;
+                    }
+                });
+            }
+
+            if (increaseButton2) {
+                increaseButton2.addEventListener("click", function (e) {
+                    let input = document.getElementById('cart_counter');
+                    console.log('increaseButton2 previous');
+                    console.log(input);
+                    if (input.dataset.counter != undefined) {
+                        let value = parseInt(input.value, 10);
+                        value = isNaN(value) ? 0 : value;
+                        value++;
+                        value > maxCounterValue ? (value = maxCounterValue) : "";
+                        input.value = value;
+                    }
+                });
+            }
+
+            if (decreaseButton2) {
+                decreaseButton2.addEventListener("click", function (e) {
+                    let input = document.getElementById('cart_counter');
+                    console.log('decreaseButton2 next');
+                    console.log(input);
+                    if (input.dataset.counter != undefined) {
+                        let value = parseInt(input.value, 10);
+                        value = isNaN(value) ? 0 : value;
+                        value < 1 ? (value = 1) : "";
+                        value--;
+                        input.value = value;
+                    }
+                });
+            }
         });
     }
 

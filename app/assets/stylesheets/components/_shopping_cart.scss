@@ -35,12 +35,6 @@ $font-default:'Pontano Sans', sans-serif;
 }
 
 
-/* Apply euro signs */
-.product .product-price:before, .product .product-line-price:before, .totals-value:before {
-  content: '€';
-}
-
-
 /* Body/Header stuff */
 #shopping {
   padding: 0px 30px 30px 20px;
@@ -150,13 +144,13 @@ width: 50px;
     label {
       float: left;
       clear: both;
-      width: 79%;
+      width: 85%;
       text-align: right;
     }
 
     .totals-value {
       float: right;
-      width: 21%;
+      width: 15%;
       text-align: right;
     }
   }

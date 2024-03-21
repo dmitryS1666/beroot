@@ -20,4 +20,13 @@ class ResultsController < ApplicationController
 
     @search_results
   end
+
+  def filter
+    set_main_category
+    puts params
+
+    @provider = params[:provider]
+    @category = Category.find(params[:category])
+    @results = Product.where(category_id: params[:category], provider: params[:provider])
+  end
 end

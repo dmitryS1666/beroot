@@ -1,7 +1,7 @@
 <main class="main__content_wrapper">
 
   <!-- Start breadcrumb section -->
-<%#= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
+<%= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
   <!-- End breadcrumb section -->
 
   <!-- Start shop section -->
@@ -10,11 +10,7 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
           <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-            <%= render 'shared/category/category_filter', { category: @category } %>
-
             <%= render 'shared/category/price_filter', { product: @results } %>
-
-            <%= render 'shared/category/brand_filter', { product: @products } %>
 
             <%= render 'shared/top_rated_product' %>
           </div>
@@ -24,7 +20,7 @@
             <!-- Start categories section -->
             <div class="categories__shop mb-50">
               <div class="section__heading border-bottom mb-30">
-                <h2 class="section__heading--maintitle">Результаты <span>поиска</span></h2>
+                <h2 class="section__heading--maintitle">Поставщик: <span><%= @provider %></span></h2>
               </div>
             </div>
             <!-- End categories section -->
@@ -33,7 +29,7 @@
                 <div id="product_grid" class="tab_pane active show">
                   <div class="product__section--inner">
                     <div class="row mb--n30">
-                      <% @search_results.each do |product| %>
+                      <% @results.each do |product| %>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-6 custom-col mb-30">
                           <article class="product__card">
                             <div class="product__card--thumbnail">

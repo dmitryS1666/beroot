@@ -52,8 +52,10 @@ class CartController < ApplicationController
             'cart',
             partial: 'cart/cart', locals: { cart: @cart }
           ),
-          # turbo_stream.replace(@cart),
-          # turbo_stream.replace(@product)
+          turbo_stream.replace(
+            'cart_count',
+            partial: 'shared/cart_count', locals: { cart: @cart }
+          )
         ]
       end
     end
@@ -65,18 +67,16 @@ class CartController < ApplicationController
     respond_to do |f|
       f.html
       f.turbo_stream do
-        render turbo_stream:
-                 turbo_stream.replace(
-                   'cart',
-                   partial: 'cart/cart', locals: { cart: @cart }
-                 )
-      end
-      f.turbo_stream do
-        render turbo_stream:
-                 turbo_stream.replace(
-                   'cart-count',
-                   @cart
-                 )
+        render turbo_stream: [
+          turbo_stream.replace(
+            'cart',
+            partial: 'cart/cart', locals: { cart: @cart }
+          ),
+          turbo_stream.replace(
+            'cart_count',
+            partial: 'shared/cart_count', locals: { cart: @cart }
+          )
+        ]
       end
     end
   end
