@@ -28,14 +28,14 @@
                   <% end %>
                 </div>
                 <div class="cart__thumbnail">
-                  <a href="<%= product_path(product) %>">
+                  <a href="<%= product_path(product) %>" target="_top">
                     <%#= image_tag product.photos.first %>
                     <img class="border-radius-5" src="/assets/product/small-product/product9.webp" alt="cart-product">
                   </a>
                 </div>
                 <div class="cart__content">
                   <h3 class="cart__content--title h4">
-                    <a href="<%= product_path(product) %>"><%= product.name %></a>
+                    <a href="<%= product_path(product) %>" target="_top"><%= product.name %></a>
                   </h3>
                   <span class="cart__content--variant">ПОСТАВЩИК: <%= product.provider %></span>
                   <!-- <span class="cart__content--variant">ВЕС: <%#= product.weight %></span>-->
