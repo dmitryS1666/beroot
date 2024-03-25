@@ -1,10 +1,7 @@
 class ResultsController < ApplicationController
-  include MainCategoryHelper
   skip_before_action :authenticate_user!
 
   def index
-    set_main_category
-
     # simple search
     if params[:search] && params[:search][:category].blank?
       @search_results = Product.search_everywhere(params[:search][:query])
@@ -22,9 +19,6 @@ class ResultsController < ApplicationController
   end
 
   def filter
-    set_main_category
-    puts params
-
     @provider = params[:provider]
     @category = Category.find(params[:category])
     @results = Product.where(category_id: params[:category], provider: params[:provider])

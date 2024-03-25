@@ -1,0 +1,20 @@
+Новый заказ #<%= @order.id %>!
+===============================================
+
+Детали заказа:
+--------------------------
+
+Имя: <%= @order.name %>
+Фамилия: <%= @order.last_name %>
+Номер телефона: <%= @order.phone_number %>
+Сообщение: <%= @order.message %>
+Создано: <%= @order.created_at %>
+
+Продуктовые позиции:
+<% cart = Cart.find(@order.cart_id) %>
+<% cart.orderables.each do |orderable| %>
+  <% product = orderable.product %>
+  Название: <%= product.name %>
+  Кол-во: <%= orderable.quantity %>
+  ---------------------------------
+<% end %>

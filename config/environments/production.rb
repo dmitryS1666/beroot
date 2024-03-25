@@ -105,4 +105,26 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Use a real queuing backend for Active Art (and separate queues per environment)
+  # config.active_art.queue_adapter     = :resque
+  # config.active_art.queue_name_prefix = "art_board_#{Rails.env}"
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.default_url_options = { host: 'https://agromaster.dsml.ru' }
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.yandex.ru',
+    port: 465,
+    domain: 'https://agromaster.dsml.ru',
+    user_name: 'agromaster.info',
+    password: 'ubvyxqtsqqgjhoph',
+    authentication: :plain,
+    ssl: true
+  }
+
 end

@@ -70,7 +70,7 @@
               </div>
             </td>
             <td class="cart__table--body__list">
-              <span class="cart__price end">&#x20BD; <%= product.quantity.to_f * product.price.to_f %></span>
+              <span class="cart__price end">&#x20BD; <%= orderable.quantity.to_f * product.price.to_f %></span>
             </td>
           </tr>
         <% end %>
@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button class="checkout" onClick="window.location.reload();">Офрмить заказ</button>
+        <%= link_to 'Оформить заказ', checkout_path, class: 'checkout',  target: "_top" %>
       </div>
     </div>
   <% end %>

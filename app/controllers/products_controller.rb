@@ -14,12 +14,9 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @contact = Contact.new
     @products = Product.all
     @category = Category.new
     @product = Product.find(params[:id])
-    puts @product.inspect
-    @product
   end
 
   private

@@ -2,22 +2,7 @@
 
 <footer class="footer__section footer__bg">
   <div class="container">
-    <div class="newsletter__area">
-      <div class="newsletter__inner d-flex justify-content-between align-items-center">
-        <div class="newsletter__content">
-          <h2 class="newsletter__title">Подпишитесь на наши <span class="text__secondary">обновления</span></h2>
-          <p class="newsletter__desc">Чтобы быть в курсе носотей.</p>
-        </div>
-        <div class="newsletter__subscribe">
-          <form class="newsletter__subscribe--form" action="#">
-            <label>
-              <input class="newsletter__subscribe--input" placeholder="Введите свой Email" type="text">
-            </label>
-            <button class="newsletter__subscribe--button" type="submit">Подписаться</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <%= render 'newsletters/new' %>
     <div class="main__footer">
       <div class="row ">
         <div class="col-lg-4 col-md-10">

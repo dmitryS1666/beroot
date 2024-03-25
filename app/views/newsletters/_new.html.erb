@@ -1,0 +1,16 @@
+<div class="newsletter__area">
+  <div class="newsletter__inner d-flex justify-content-between align-items-center">
+    <div class="newsletter__content">
+      <h2 class="newsletter__title">Подпишитесь на наши <span class="text__secondary">обновления</span></h2>
+      <p class="newsletter__desc">Чтобы быть в курсе носотей.</p>
+    </div>
+    <div class="newsletter__subscribe">
+      <%= form_with scope: :newsletter, url: newsletters_path, method: :post, local: true, class: "newsletter__subscribe--form" do |form| %>
+        <label>
+          <input class="newsletter__subscribe--input" name="email" id="email" placeholder="Введите свой Email" type="text" required="true">
+        </label>
+        <%= form.submit "Подписаться", class: "newsletter__subscribe--button" %>
+    <% end %>
+    </div>
+  </div>
+</div>

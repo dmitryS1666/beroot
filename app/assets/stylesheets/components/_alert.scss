@@ -1,6 +1,23 @@
 .alert {
   position: fixed;
-  bottom: 16px;
+  top: 16px;
   right: 16px;
   z-index: 1000;
+  font-size: 18px;
+
+  --bs-alert-padding-x: 2rem;
+  --bs-alert-padding-y: 3rem;
+}
+
+.alert-info {
+  --bs-alert-color: #060606;
+  --bs-alert-bg: #69f297;
+}
+
+.alert-dismissible .btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1rem .8rem;
 }

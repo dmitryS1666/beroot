@@ -1,0 +1,54 @@
+<div class="contact__form">
+  <h3 class="contact__form--title mb-30">Свяжитесь со мной</h3>
+  <%= form_with scope: :feedback, url: feedbacks_path, method: :post, local: true, class: "contact__form--inner" do |form| %>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form--list mb-20">
+          <label class="contact__form--label" for="name">
+            Имя <span class="contact__form--label__star">*
+          </span>
+          </label>
+          <input class="contact__form--input" name="name" id="name" placeholder="Ваше имя" type="text" required="true">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form--list mb-20">
+          <label class="contact__form--label" for="last_name">
+            Фамилия <span class="contact__form--label__star">*</span>
+          </label>
+          <input class="contact__form--input" name="last_name" id="last_name"
+                 placeholder="Ваша фамилия" type="text">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form--list mb-20">
+          <label class="contact__form--label" for="phone">
+            Номер телефона <span class="contact__form--label__star">*</span>
+          </label>
+          <input class="contact__form--input" name="phone" id="phone"
+                 placeholder="Номер телефона" type="text">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form--list mb-20">
+          <label class="contact__form--label" for="email">
+            Email <span class="contact__form--label__star">*</span>
+          </label>
+          <input class="contact__form--input" name="email" id="email" placeholder="Email"
+                 type="text">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="contact__form--list mb-15">
+          <label class="contact__form--label" for="message">
+            Ваше сообщение <span class="contact__form--label__star">*</span>
+          </label>
+          <textarea class="contact__form--textarea" name="message" id="message"
+                    placeholder="Ваше сообщение">
+                </textarea>
+        </div>
+      </div>
+      <%= form.submit "Отправить", class: "contact__form--btn primary__btn" %>
+  <% end %>
+  </div>
+</div>

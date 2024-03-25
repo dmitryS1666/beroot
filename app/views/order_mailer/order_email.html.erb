@@ -1,0 +1,22 @@
+<center>
+  <h2>Новый заказ #<%= @order.id %></h2>
+  <hr>
+  <p>Имя: <%= @order.name %></p>
+  <p>Фамилия: <%= @order.last_name %></p>
+  <p>Номе телефона: <%= @order.phone_number %></p>
+  <p>Сообщение: <%= @order.message %></p>
+  <hr>
+  <p>Создано: <%= @order.created_at %></p>
+  <hr>
+  <p>Продуктовые позиции: </p>
+  <% cart = Cart.find(@order.cart_id) %>
+
+  <% cart.orderables.each do |orderable| %>
+    <% product = orderable.product %>
+    <p>
+      <a href="<%= product_url(product) %>"><%= product.name %></a>
+      Кол-во: <%= orderable.quantity %>шт
+    </p>
+  <% end %>
+  <hr>
+</center>

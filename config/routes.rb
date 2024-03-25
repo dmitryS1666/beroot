@@ -22,9 +22,15 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
 
   get 'cart', to: 'cart#show'
+  get '/checkout', to: 'cart#checkout'
+
   post 'cart/add'
   post 'cart/remove'
   post "/cart/add", to: "carts#add_to_cart"
 
   get '/recap_path', to: 'cart#recap'
+
+  resources :feedbacks, only: [:new, :create]
+  resources :newsletters, only: [:new, :create]
+  post 'orders/sent'
 end
