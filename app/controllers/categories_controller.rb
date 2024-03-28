@@ -1,15 +1,15 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, :only => [:new]
-  before_action :set_category, only: [:edit, :show, :update, :destroy]
+  skip_before_action :authenticate_user!
+  before_action :set_category, only: :show
 
   def index
-    @categories = Category.where.not(parent_id: '')
+    @categories = Category.where.not(parent_id: '', status: true)
   end
 
   def show
     @products = @category.products
 
-    child_categories = Category.where(parent_id: @category.category_id)
+    child_categories = Category.where(parent_id: @category.category_id, status: true)
     if child_categories.count > 0
       child_categories.each do |cat|
         @products = @products.merge(cat.products)
@@ -26,6 +26,6 @@ class CategoriesController < ApplicationController
   end
 
   def set_category
-    @category = Category.find(params[:id])
+    @category = Category.find_by(id: params[:id], status: true)
   end
 end

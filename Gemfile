@@ -57,3 +57,6 @@ group :development do
   gem 'capistrano-rbenv'
 end
 gem 'capistrano-rails-collection'
+
+gem 'net-ftp'
+gem 'rexml'

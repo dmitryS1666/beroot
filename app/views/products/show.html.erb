@@ -16,6 +16,8 @@
             <div class="single__product--preview  swiper mb-25">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
+                  <%# if product.photos.attached? %>
+                  <%# end %>
                   <div class="product__media--preview__items">
                     <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/main-product/product5.webp">
                       <img class="product__media--preview__items--img" src="/assets/product/main-product/product5.webp" alt="product-media-img">
@@ -80,12 +82,16 @@
               <%= @product.name %>
             </h2>
             <div class="product__details--info__price mb-12">
-              <span class="current__price">&#x20BD;<%= @product.price %></span>
+              <% if @product.sale > 0 %>
+                <span class="current__price">&#x20BD;<%= product.price - (product.price * product.sale / 100) %></span>
+              <% end %>
               <span class="old__price">&#x20BD;<%= @product.price %></span>
             </div>
-            <p class="product__details--info__desc mb-15">
-              <%= @product.description %>
-            </p>
+            <% unless @product.description.blank? %>
+              <p class="product__details--info__desc mb-15">
+                <%= @product.description %>
+              </p>
+            <% end %>
             <div class="product__variant">
               <div id="<%= dom_id @product %>" class="product__variant--list quantity d-flex align-items-center mb-20">
                 <%= form_for :cart, url: cart_add_path, method: :post do |f| %>
@@ -96,7 +102,9 @@
                       <input type="number" name="cart[quantity]" id="cart_quantity" class="quantity__number quickview__value--number" value="1" readonly data-counter="" max="<%= @product.quantity %>">
                     </label>
                     <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
-                    <button class="primary__btn quickview__cart--btn" id='add-to-cart-button' type="submit">Добавить в корзину</button>
+                    <button class="primary__btn quickview__cart--btn" id='add-to-cart-button' type="submit">Добавить в
+                      корзину
+                    </button>
                   </div>
                 <% end %>
               </div>
@@ -120,13 +128,12 @@
   <!-- End product details section -->
 
   <!-- Start product details tab section -->
-  <%= render 'shared/product/description' %>
+  <% unless @product.description.blank? %>
+    <%= render 'shared/product/description' %>
+  <% end %>
   <!-- End product details tab section -->
 
-  <%#= render 'shared/popular_products', products: popular_products %>
   <%= render 'shared/popular_products' %>
-
-  <%= render 'shared/shipping' %>
 </main>
 
 <!--<script>-->
@@ -141,13 +148,3 @@
 <!--        productImages.forEach(image => image.addEventListener("click", changeImage));-->
 <!--    })();-->
 <!--</script>-->
-
-<script>
-    (function () {
-        document.getElementById("add-to-cart-button").addEventListener("click", function () {
-            setTimeout(function () {
-                location.reload();
-            }, 1);
-        });
-    })();
-</script>

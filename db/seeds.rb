@@ -1,18 +1,41 @@
-require "open-uri"
 require 'json'
+require 'net/ftp'
+require "open-uri"
+require 'fileutils'
 
-file = File.read('db/base.json')
-data_hash = JSON.parse(file)
+def get_import_file(path, file)
+  ftp = Net::FTP.new
+  ftp.connect('agromaster.dsml.ru', 21)
+  ftp.login('sftp-user1', 'whacky-spiritism-24')
+  ftp.chdir(path)
+  ftp.passive = true
+  ftp.getbinaryfile(file, 'db/import/new_import.xml')
+  ftp.close
+end
+
+def get_image(path, file)
+  ftp = Net::FTP.new
+  ftp.connect('agromaster.dsml.ru', 21)
+  ftp.login('sftp-user1', 'whacky-spiritism-24')
+  ftp.chdir(path)
+  ftp.passive = true
+  # ftp.getbinaryfile(file, 'public' + path + '/' + file)
+  ftp.getbinaryfile(file, 'public/' + file)
+  ftp.close
+end
+
+get_import_file('/upload', '1cToSiteExport.xml')
+
+data_hash = Hash.from_xml(File.read('db/import/new_import.xml'))
 
 puts 'Seed: Deleting existing users...'
 
-# data_hash['root']['products']['product']
 hash = data_hash['root']['products']['product'].reject { |h| h['id'] == '' }
 puts hash.size
 
 User.destroy_all
 puts 'Seed: Creating users...'
-user = User.create(email: "admin@mail.ru", password: 'password', admin: true)
+user = User.create(email: 'admin@mail.ru', password: 'password', admin: true)
 puts 'Seed: Users created...'
 
 puts 'Seed: Deleting existing categories...'
@@ -20,12 +43,19 @@ Category.destroy_all
 puts 'Seed: Creating categories...'
 
 data_hash['root']['categories']['category'].each do |category|
-  # file_earrings = URI.open("https://res.cloudinary.com/dygywvyiq/image/upload/v1675418917/earrings_rzmjqk.png")
-  cat = Category.new(category_id: category['id'], name: category['name'], parent_id: category['parent_id'], description: 'desc')
-  # cat.photo.attach(io: file_earrings, filename: "earrings", content_type: "image/jpg")
+  status = true
+  status = false if category['name'] == 'Разное' || category['name'] == 'Сантехника'
+
+  cat = Category.new(
+    category_id: category['id'],
+    name: category['name'],
+    parent_id: category['parent_id'],
+    description: 'desc',
+    status: status
+  )
+
   cat.save!
 end
-
 puts 'Seed: Category created...'
 
 puts 'Seed: Creating products...'
@@ -39,24 +69,38 @@ hash.each_with_index do |product, index|
     article: product['article'],
     name: product['product_name'],
     provider: product['provider'],
-    description: product['description'].blank? ? 'desc' : product['description'],
-    price: product['prices']['price'].nil? ? 0 : product['prices']['price']['value'].to_i,
+    description: product['description'].blank? ? '' : product['description'],
+    price: (product['prices'].nil? || product['prices']['price'].nil?) ? 0 : product['prices']['price']['value'].to_i,
     quantity: product['qty']['qty_type'].nil? ? 0 : product['qty']['qty_type']['value'].to_i,
     qty_type: product['qty']['qty_type']['name'],
+    status: true,
     user: user,
     category: category
   )
 
-  if index < 5
-    pro.photos.attach(
-      io: File.open(File.join(Rails.root, "app/assets/images/product_#{index + 1}.jpg")),
-      filename: "product_#{index + 1}.jpg"
-    )
+  photos = product['photo'] unless product['photo'].nil?
+
+  if photos && photos.size > 0
+    # photos.each do |url|
+    #   puts url[1].class
+    #   if url[1].class == String
+    #     matches = url[1].match(/\/([^\/]+\.jpg|jpeg)$/)
+    #     file = matches[1]
+    #     path = url[1].gsub("/#{file}", '')
+
+        # get_image(path, file)
+
+        # pro.photos.attach(
+        #   io: File.open(File.join(Rails.root, "tmp#{url[1]}")),
+        #   filename: file
+        # )
+      # else
+      ## if url.class == Array
+      # end
+    # end
   end
 
   pro.save!
-
-  break if product['product_name'] == 'Болт 16х40х1,5'
 end
 
 puts 'Seed: Finished seeding!'

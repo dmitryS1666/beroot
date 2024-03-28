@@ -1,8 +1,14 @@
 <article class="product__card">
   <div class="product__card--thumbnail">
     <%= link_to product_path(product), class: "product__card--thumbnail__link display-block" do %>
-      <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product5.webp" alt="product-img">
-      <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product6.webp" alt="product-img">
+      <% if product.photos.attached? %>
+        <!-- product.photos.first -->
+        <img class="product__card--thumbnail__img product__primary--img" src="/assets/product/main-product/product5.webp" alt="product-img">
+        <img class="product__card--thumbnail__img product__secondary--img" src="/assets/product/main-product/product6.webp" alt="product-img">
+      <% else %>
+        <img class="product__card--thumbnail__img product__primary--img" src="/assets/empty_img.png" alt="product-img">
+        <img class="product__card--thumbnail__img product__secondary--img" src="/assets/empty_img.png" alt="product-img">
+      <% end %>
     <% end %>
     <% if product.sale > 0 %>
       <span class="product__badge"><%= product.sale %></span>
@@ -12,7 +18,9 @@
     <h3 class="product__card--title">
       <a href="<%= product_path(product) %>"><%= product.name %></a></h3>
     <div class="product__card--price">
-      <span class="current__price">&#x20BD;<%= product.price %></span>
+      <% if product.sale > 0 %>
+        <span class="current__price">&#x20BD;<%= product.price - (product.price * product.sale / 100) %></span>
+      <% end %>
       <span class="old__price">&#x20BD;<%= product.price %></span>
     </div>
     <!-- Добавить в корзину -->

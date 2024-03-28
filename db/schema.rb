@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_173258) do
     t.string "name"
     t.string "description"
     t.string "parent_id"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -111,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_173258) do
     t.integer "sale", default: 0, null: false
     t.string "qty_type"
     t.integer "quantity"
+    t.boolean "status"
     t.bigint "user_id", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
