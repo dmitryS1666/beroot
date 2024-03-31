@@ -19,9 +19,21 @@ def get_image(path, file)
   ftp.login('sftp-user1', 'whacky-spiritism-24')
   ftp.chdir(path)
   ftp.passive = true
-  # ftp.getbinaryfile(file, 'public' + path + '/' + file)
-  ftp.getbinaryfile(file, 'public/' + file)
+  ftp.getbinaryfile(file, 'db/import_images/' + file)
   ftp.close
+end
+
+def add_image_to_product(image_url, product)
+  matches = image_url.match(/\/([^\/]+\.(jpg|jpeg))$/)
+  file = matches[1]
+  path = image_url.gsub("/#{file}", '')
+
+  get_image(path, file)
+
+  product.photos.attach(
+    io: File.open(File.join(Rails.root, "db/import_images/#{file}")),
+    filename: file
+  )
 end
 
 get_import_file('/upload', '1cToSiteExport.xml')
@@ -62,6 +74,7 @@ puts 'Seed: Creating products...'
 
 hash.each_with_index do |product, index|
   category = Category.find_by(category_id: product['categories']['category_id'])
+  # puts product if category.nil? && !product['photo'].nil?
   next if category.nil?
 
   pro = Product.new(
@@ -81,23 +94,16 @@ hash.each_with_index do |product, index|
   photos = product['photo'] unless product['photo'].nil?
 
   if photos && photos.size > 0
-    # photos.each do |url|
-    #   puts url[1].class
-    #   if url[1].class == String
-    #     matches = url[1].match(/\/([^\/]+\.jpg|jpeg)$/)
-    #     file = matches[1]
-    #     path = url[1].gsub("/#{file}", '')
-
-        # get_image(path, file)
-
-        # pro.photos.attach(
-        #   io: File.open(File.join(Rails.root, "tmp#{url[1]}")),
-        #   filename: file
-        # )
-      # else
-      ## if url.class == Array
-      # end
-    # end
+    photos.each do |url|
+      if url[1].class == String
+        add_image_to_product(url[1], pro)
+      elsif url[1].class == Array
+        url[1].each_with_index do |image_url, index|
+          next if index == 0
+          add_image_to_product(image_url, pro)
+        end
+      end
+    end
   end
 
   pro.save!

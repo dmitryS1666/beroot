@@ -13,66 +13,74 @@
       <div class="row row-cols-lg-2 row-cols-md-2">
         <div class="col">
           <div class="product__details--media">
-            <div class="single__product--preview  swiper mb-25">
+            <div class="single__product--preview swiper mb-25 swiper-initialized swiper-horizontal swiper-pointer-events">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <%# if product.photos.attached? %>
-                  <%# end %>
-                  <div class="product__media--preview__items">
-                    <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/main-product/product5.webp">
-                      <img class="product__media--preview__items--img" src="/assets/product/main-product/product5.webp" alt="product-media-img">
-                    </a>
-                    <div class="product__media--view__icon">
-                      <%# @product.photos.each do |photo| %>
-                      <!-- <li class="image-item"><%#= image_tag photo, id: "other-picture" %></li>-->
-                      <%# end %>
-                      <!-- product/main-product/product5.webp-->
+                <% if @product.photos.attached? %>
+                  <% @product.photos.each do |photo| %>
+                    <div class="swiper-slide">
+                      <div class="product__media--preview__items">
+                        <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="<%= polymorphic_url(photo) %>">
+                          <%= image_tag photo, class: 'product__media--preview__items--img', alt: "product-media-img"%>
+                        </a>
+                        <div class="product__media--view__icon">
+                          <a class="product__media--view__icon--link glightbox" href="<%= polymorphic_url(photo) %>" data-gallery="product-media-preview">
+                            <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
+                              <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                            </svg>
+                            <span class="visually-hidden">просмотр</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="swiper-slide">
+                    <div class="product__media--preview__items">
+                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/empty_img.jpg">
+                        <img class="product__media--preview__items--img" src="/assets/empty_img.jpg" alt="product-media-img">
+                      </a>
+                      <div class="product__media--view__icon">
+                        <a class="product__media--view__icon--link glightbox" href="/assets/empty_img.jpg" data-gallery="product-media-preview">
+                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
+                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                          </svg>
+                          <span class="visually-hidden">product view</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product__media--preview__items">
-                    <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/main-product/product6.webp">
-                      <img class="product__media--preview__items--img" src="/assets/product/main-product/product6.webp" alt="product-media-img">
-                    </a>
+                  <div class="swiper-slide">
+                    <div class="product__media--preview__items">
+                      <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/empty_img.jpg">
+                        <img class="product__media--preview__items--img" src="/assets/empty_img.jpg" alt="product-media-img">
+                      </a>
+                      <div class="product__media--view__icon">
+                        <a class="product__media--view__icon--link glightbox" href="/assets/empty_img.jpg" data-gallery="product-media-preview">
+                          <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
+                            <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                          </svg>
+                          <span class="visually-hidden">product view</span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product__media--preview__items">
-                    <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="/assets/product/main-product/product5.webp">
-                      <img class="product__media--preview__items--img" src="/assets/product/main-product/product5.webp" alt="product-media-img">
-                    </a>
-                  </div>
-                </div>
+                <% end %>
               </div>
-            </div>
-            <!-- NAV SLIDER -->
-            <div class="single__product--nav swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="product__media--nav__items">
-                    <img class="product__media--nav__items--img" src="/assets/product/small-product/product1.webp" alt="product-nav-img">
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product__media--nav__items">
-                    <img class="product__media--nav__items--img" src="/assets/product/small-product/product2.webp" alt="product-nav-img">
-                  </div>
-                </div>
-              </div>
-              <div class="swiper__nav--btn swiper-button-next">
+              <div class="swiper__nav--btn swiper-button-next swiper-button-next_1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </div>
-              <div class="swiper__nav--btn swiper-button-prev">
+              <div class="swiper__nav--btn swiper-button-prev swiper-button-prev_1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-left">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </div>
+              <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
             </div>
-            <!-- END NAV SLIDER -->
-
           </div>
         </div>
 
@@ -87,12 +95,18 @@
               <% end %>
               <span class="old__price">&#x20BD;<%= @product.price %></span>
             </div>
-            <% unless @product.description.blank? %>
-              <p class="product__details--info__desc mb-15">
-                <%= @product.description %>
-              </p>
-            <% end %>
             <div class="product__variant">
+              <div class="product__variant--list mb-15">
+                <div class="product__details--info__meta">
+                  <p class="product__details--info__meta--list"><strong>Артикул:</strong>
+                    <span><%= @product.article %></span></p>
+                  <p class="product__details--info__meta--list"><strong>Поставщик:</strong>
+                    <span><%= @product.provider %></span></p>
+                  <p class="product__details--info__meta--list"><strong>Кол-во на складе:</strong>
+                    <span><%= @product.quantity %></span></p>
+                </div>
+              </div>
+
               <div id="<%= dom_id @product %>" class="product__variant--list quantity d-flex align-items-center mb-20">
                 <%= form_for :cart, url: cart_add_path, method: :post do |f| %>
                   <%= f.hidden_field :product_id, value: @product.id %>
@@ -109,16 +123,6 @@
                 <% end %>
               </div>
 
-              <div class="product__variant--list mb-15">
-                <div class="product__details--info__meta">
-                  <p class="product__details--info__meta--list"><strong>Артикул:</strong>
-                    <span><%= @product.article %></span></p>
-                  <p class="product__details--info__meta--list"><strong>Поставщик:</strong>
-                    <span><%= @product.provider %></span></p>
-                  <p class="product__details--info__meta--list"><strong>Кол-во на складе:</strong>
-                    <span><%= @product.quantity %></span></p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -129,22 +133,9 @@
 
   <!-- Start product details tab section -->
   <% unless @product.description.blank? %>
-    <%= render 'shared/product/description' %>
+    <%= render 'shared/product/description', { desc: @product.description } %>
   <% end %>
   <!-- End product details tab section -->
 
   <%= render 'shared/popular_products' %>
 </main>
-
-<!--<script>-->
-<!--    (function () {-->
-<!--        const activeImage = document.querySelector(".product-image-show .active");-->
-<!--        const productImages = document.querySelectorAll(".image-list img");-->
-
-<!--        function changeImage(e) {-->
-<!--            activeImage.src = e.target.src;-->
-<!--        }-->
-
-<!--        productImages.forEach(image => image.addEventListener("click", changeImage));-->
-<!--    })();-->
-<!--</script>-->

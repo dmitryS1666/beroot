@@ -2,7 +2,6 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
-import "./plugins/glightbox.min"
 import "jquery"
 
 //= require turbolinks
@@ -10,6 +9,8 @@ import "jquery"
 
 import {Swiper} from 'swiper'
 import {Navigation} from 'swiper/modules';
+
+import GLightbox from './plugins/glightbox.min';
 
 Swiper.use([Navigation])
 
@@ -153,7 +154,6 @@ document.addEventListener("turbo:load", function () {
     /*
       1. slider swiper activation
     */
-    // document.addEventListener('DOMContentLoaded', () => {
     new Swiper(".hero__slider--activation", {
         slidesPerView: 1,
         loop: true,
@@ -165,7 +165,6 @@ document.addEventListener("turbo:load", function () {
             prevEl: ".swiper-button-prev_1"
         }
     });
-    // });
 
     /*
       2. product swiper column4 activation
@@ -269,17 +268,22 @@ document.addEventListener("turbo:load", function () {
         },
     });
     let swiper41 = new Swiper(".single__product--preview", {
+        slidesPerView: 1,
         loop: true,
         spaceBetween: 10,
-        thumbs: {
-            swiper: swiper4,
-        },
+        // thumbs: {
+        //     swiper: swiper4,
+        // },
+        navigation: {
+            nextEl: ".swiper-button-next_1",
+            prevEl: ".swiper-button-prev_1"
+        }
     });
 
     /*
       5. product swiper column1 activation
     */
-    let swiper5 = new Swiper(".product__swiper--column1", {
+    let swiper5 = new Swiper(".swiper-container-products", {
         slidesPerView: 4,
         loop: false,
         clickable: true,
@@ -394,6 +398,10 @@ document.addEventListener("turbo:load", function () {
         thumbs: {
             swiper: swiper9,
         },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        }
     });
 
     /*
@@ -804,6 +812,22 @@ document.addEventListener("turbo:load", function () {
         }
     });
 
+    const customLightboxHTML = `<div id="glightbox-body" class="glightbox-container">
+    <div class="gloader visible"></div>
+    <div class="goverlay"></div>
+    <div class="gcontainer">
+    <div id="glightbox-slider" class="gslider"></div>
+    <button class="gnext gbtn" tabindex="0" aria-label="Next" data-customattribute="example">{nextSVG}</button>
+    <button class="gprev gbtn" tabindex="1" aria-label="Previous">{prevSVG}</button>
+    <button class="gclose gbtn" tabindex="2" aria-label="Close">{closeSVG}</button>
+    </div>
+    </div>`;
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        lightboxHTML: customLightboxHTML,
+        loop: true,
+    });
+
     /*
       20. CounterUp Activation
     */
@@ -1086,7 +1110,21 @@ document.addEventListener("turbo:load", function () {
         })
     }
 
+    function updateFilterLink() {
+        let priceFrom = document.getElementById('price_from');
+        let priceTo = document.getElementById('price_to');
 
+        let priceFromSet = priceFrom.value !== '' ? priceFrom.value : priceFrom.min;
+        let priceToSet = priceTo.value !== '' ? priceTo.value : priceTo.max;
 
+        let newUrl = '/filters?price_from=' + priceFromSet + '&price_to=' + priceToSet;
 
+        document.getElementById('filter_link').setAttribute('href', newUrl);
+    }
+
+    let price_from = document.querySelector("#price_from");
+    if (price_from) {
+        document.getElementById('price_from').addEventListener('change', updateFilterLink);
+        document.getElementById('price_to').addEventListener('change', updateFilterLink);
+    }
 });

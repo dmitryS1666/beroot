@@ -13,25 +13,16 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 
-gem 'active_storage-postgresql'
-
 gem 'mail_form'
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
-# Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Sass to process CSS
 gem "sassc-rails"
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'active_storage-postgresql'
 gem "image_processing", "~> 1.2"
-
 gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
@@ -40,6 +31,8 @@ gem 'will_paginate', '~> 4.0'
 gem 'trestle'
 gem 'pg_search'
 gem 'cookies_eu'
+gem 'friendly_id'
+gem 'babosa'
 
 group :development do
   gem "web-console"

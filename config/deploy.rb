@@ -63,7 +63,7 @@ namespace :deploy do
       within release_path do
         # execute :bundle, :exec, 'rails', 'db:schema:load', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
         # execute :bundle, :exec, 'rails', 'db:migrate', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
-        execute :bundle, :exec, 'rails', 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
+        # execute :bundle, :exec, 'rails', 'db:seed', 'RAILS_ENV=production', 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
       end
     end
   end

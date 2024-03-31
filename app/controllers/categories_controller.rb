@@ -16,7 +16,8 @@ class CategoriesController < ApplicationController
       end
     end
 
-    @products = @products.paginate(page: params[:page])
+    @all_category_products = @products.order('price::integer DESC')
+    @products = @products.order('price::integer DESC').paginate(page: params[:page])
   end
 
   private
@@ -26,6 +27,6 @@ class CategoriesController < ApplicationController
   end
 
   def set_category
-    @category = Category.find_by(id: params[:id], status: true)
+    @category = Category.friendly.find_by(slug: params[:id], status: true)
   end
 end

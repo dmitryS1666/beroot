@@ -1,7 +1,9 @@
 <main class="main__content_wrapper">
 
   <!-- Start breadcrumb section -->
-<%= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
+  <% if @category %>
+    <%= render 'shared/breadcrumb', category: @category, category_name: @category.name %>
+  <% end %>
   <!-- End breadcrumb section -->
 
   <!-- Start shop section -->
@@ -10,7 +12,7 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
           <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-            <%= render 'shared/category/price_filter', { product: @results } %>
+            <%= render 'shared/category/price_filter', { products: @results } %>
 
             <%= render 'shared/top_rated_product' %>
           </div>
@@ -18,11 +20,11 @@
         <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
           <div class="shop__right--sidebar">
             <!-- Start categories section -->
-            <div class="categories__shop mb-50">
-              <div class="section__heading border-bottom mb-30">
-                <h2 class="section__heading--maintitle">Поставщик: <span><%= @provider %></span></h2>
-              </div>
-            </div>
+<!--            <div class="categories__shop mb-50">-->
+<!--              <div class="section__heading border-bottom mb-30">-->
+<!--                <h2 class="section__heading--maintitle">Поставщик: <span><%#= @provider %></span></h2>-->
+<!--              </div>-->
+<!--            </div>-->
             <!-- End categories section -->
             <div class="shop__product--wrapper">
               <div class="tab_content">

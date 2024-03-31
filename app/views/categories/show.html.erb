@@ -14,7 +14,7 @@
 
             <%#= render 'shared/category/details_filter' %>
 
-            <%#= render 'shared/category/price_filter' %>
+            <%= render 'shared/category/price_filter', { products: @all_category_products } %>
 
             <%= render 'shared/category/brand_filter', { product: @products } %>
 
