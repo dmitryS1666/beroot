@@ -1,6 +1,7 @@
 Trestle.resource(:carts) do
   menu do
-    item :carts, icon: "fa fa-star"
+    item :carts, icon: "fa fa-star", header: 'Корзина
+'
   end
 
   scopes do
