@@ -3,12 +3,16 @@
   <div class="shop__sidebar--product">
     <% @top_rated_products.each do |product| %>
       <div class="small__product--card d-flex">
-        <div class="small__product--thumbnail">
+        <div class="small__product--thumbnail" style="width: 30%;">
           <a class="display-block" href="product-details.html">
-            <img src="/assets/product/small-product/product6.webp" alt="product-img">
+            <% if product.photos.attached? %>
+              <%= image_tag product.photos.first, class: 'product-img', alt: "product-img"%>
+            <% else %>
+              <img class="product-img" src="/assets/empty_img.jpg" alt="product-img">
+            <% end %>
           </a>
         </div>
-        <div class="small__product--content">
+        <div class="small__product--content" style="width: 70%;">
           <h3 class="small__product--card__title">
             <a href="<%= product_path(product) %>"><%= product.name %></a>
           </h3>

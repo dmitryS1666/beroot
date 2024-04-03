@@ -17,6 +17,13 @@ class CategoriesController < ApplicationController
     end
 
     @all_category_products = @products.order('price::integer DESC')
+
+    if params.has_key?(:price_from) || params.has_key?(:price_to)
+      price_from = params[:price_from].blank? ? params[:price_min] : params[:price_from]
+      price_to = params[:price_to].blank? ? params[:price_max] : params[:price_to]
+      @products = @products.where("price >= #{price_from} AND price <= #{price_to}")
+    end
+
     @products = @products.order('price::integer DESC').paginate(page: params[:page])
   end
 

@@ -29,8 +29,11 @@
                 </div>
                 <div class="cart__thumbnail">
                   <a href="<%= product_path(product) %>" target="_top">
-                    <%#= image_tag product.photos.first %>
-                    <img class="border-radius-5" src="/assets/product/small-product/product9.webp" alt="cart-product">
+                    <% if product.photos.attached? %>
+                      <%= image_tag product.photos.first, class: 'border-radius-5', alt: "product-img"%>
+                    <% else %>
+                      <img class="border-radius-5" src="/assets/empty_img.jpg" alt="product-img">
+                    <% end %>
                   </a>
                 </div>
                 <div class="cart__content">

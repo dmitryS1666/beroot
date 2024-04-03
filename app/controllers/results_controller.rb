@@ -15,7 +15,7 @@ class ResultsController < ApplicationController
       @search_results = Product.all
     end
 
-    @search_results
+    @search_results = @search_results.order('price::integer DESC').paginate(page: params[:page])
   end
 
   def filter

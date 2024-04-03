@@ -1,16 +1,16 @@
 <% price_to = products.first.price %>
 <% price_from = products.last.price %>
-<% category = @products ? @products.map(&:category).uniq : [] %>
+<% category = products ? products.map(&:category).uniq : [] %>
 
 <div class="single__widget price__filter widget__bg">
   <h2 class="widget__title h3">Фильтровать по цене</h2>
-  <form class="price__filter--form" action="#">
+  <%= form_for :category, url: category_path(category), method: :get do |f| %>
     <div class="price__filter--form__inner mb-15 d-flex align-items-center">
       <div class="price__filter--group">
         <label class="price__filter--label" for="Filter-Price-GTE2">От</label>
         <div class="price__filter--input border-radius-5 d-flex align-items-center">
           <span class="price__filter--currency">&#x20BD;</span>
-          <input class="price__filter--input__field border-0" name="filter.v.price.gte" id="price_from" type="number" placeholder="<%= price_from %>" min="<%= price_from %>" max="<%= price_to %>">
+          <input class="price__filter--input__field border-0" name="price_from" id="price_from" type="number" placeholder="<%= price_from %>" min="<%= price_from %>" max="<%= price_to %>">
         </div>
       </div>
       <div class="price__divider">
@@ -20,14 +20,16 @@
         <label class="price__filter--label" for="price_to">До</label>
         <div class="price__filter--input border-radius-5 d-flex align-items-center">
           <span class="price__filter--currency">&#x20BD;</span>
-          <input class="price__filter--input__field border-0" name="filter.v.price.lte" id="price_to" type="number" placeholder="<%= price_to %>" min="<%= price_from %>" max="<%= price_to %>">
+          <input class="price__filter--input__field border-0" name="price_to" id="price_to" type="number" placeholder="<%= price_to %>" min="<%= price_from %>" max="<%= price_to %>">
         </div>
       </div>
     </div>
-    <% if category.size == 1 %>
-      <a class="primary__btn price__filter--btn" id="filter_link" href="/filters?category=<%= category %>&price_from=<%= price_from %>&price_to=<%= price_to %>">Применить</a>
-    <% else %>
-      <a class="primary__btn price__filter--btn" id="filter_link" href="/filters?price_from=<%= price_from %>&price_to=<%= price_to %>">Применить</a>
-    <% end %>
-  </form>
+
+    <%= f.hidden_field :price_min, value: price_from %>
+    <%= f.hidden_field :price_max, value: price_to %>
+
+    <button class="product__card--btn primary__btn" id='add-to-cart-button' type="submit" style="width: 100%;">
+      Применить
+    </button>
+  <% end %>
 </div>
