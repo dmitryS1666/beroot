@@ -1,6 +1,7 @@
 class NewsletterMailer < ApplicationMailer
   def newsletter_email(newsletter)
     @newsletter = newsletter
-    mail(to: 'agromaster.info@yandex.ru', subject: 'Новая подписка')
+    mail_to = Config.find_by(name: 'mail_to').value
+    mail(to: mail_to, subject: 'Новая подписка')
   end
 end

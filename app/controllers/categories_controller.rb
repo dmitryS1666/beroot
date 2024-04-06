@@ -11,16 +11,15 @@ class CategoriesController < ApplicationController
 
     child_categories = Category.where(parent_id: @category.category_id, status: true)
     if child_categories.count > 0
-      child_categories.each do |cat|
-        @products = @products.merge(cat.products)
-      end
+      category_ids = child_categories.map(&:id) << @category.id
+      @products = Product.where('category_id IN (?)', category_ids)
     end
 
     @all_category_products = @products.order('price::integer DESC')
 
     if params.has_key?(:price_from) || params.has_key?(:price_to)
-      price_from = params[:price_from].blank? ? params[:price_min] : params[:price_from]
-      price_to = params[:price_to].blank? ? params[:price_max] : params[:price_to]
+      price_from = params[:price_from].blank? ? params[:category][:price_min] : params[:price_from]
+      price_to = params[:price_to].blank? ? params[:category][:price_max] : params[:price_to]
       @products = @products.where("price >= #{price_from} AND price <= #{price_to}")
     end
 

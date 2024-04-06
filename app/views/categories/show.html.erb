@@ -1,7 +1,7 @@
 <main class="main__content_wrapper">
 
   <!-- Start breadcrumb section -->
-  <%= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
+  <%= render 'shared/breadcrumb', category: @category, category_name: @category.name %>
   <!-- End breadcrumb section -->
 
   <!-- Start shop section -->
@@ -12,11 +12,11 @@
           <div class="shop__sidebar--widget widget__area d-none d-lg-block">
             <%= render 'shared/category/category_filter', { category: @category } %>
 
-            <%#= render 'shared/category/details_filter' %>
+            <% if @all_category_products.count > 0 %>
+              <%= render 'shared/category/price_filter', { products: @all_category_products, category: @category } %>
+            <% end %>
 
-            <%= render 'shared/category/price_filter', { products: @all_category_products } %>
-
-            <%= render 'shared/category/brand_filter', { product: @all_category_products } %>
+            <%= render 'shared/category/brand_filter', { products: @products } %>
 
             <%= render 'shared/top_rated_product' %>
           </div>
@@ -30,7 +30,7 @@
               </div>
             </div>
             <!-- End categories section -->
-            <div class="shop__product--wrapper">
+            <div class="shop__product--wrapper" id="products_list">
               <div class="tab_content">
                 <div id="product_grid" class="tab_pane active show">
                   <div class="product__section--inner">

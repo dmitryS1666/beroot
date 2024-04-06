@@ -17,6 +17,7 @@ gem 'mail_form'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
+gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 gem "sassc-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

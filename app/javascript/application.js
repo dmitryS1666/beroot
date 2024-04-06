@@ -1,6 +1,7 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
+import "@popperjs/core"
 import "bootstrap"
 import "jquery"
 
@@ -1126,5 +1127,32 @@ document.addEventListener("turbo:load", function () {
     if (price_from) {
         document.getElementById('price_from').addEventListener('change', updateFilterLink);
         document.getElementById('price_to').addEventListener('change', updateFilterLink);
+    }
+
+
+    // shop modal
+    let modal = document.getElementById("shop_modal");
+
+    if (modal) {
+        let btn = document.getElementById("one_click");
+        let span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.transition = "visibility 0s, opacity 0.3s linear";
+            modal.style.visibility = "visible";
+            modal.style.opacity = "1";
+        }
+
+        span.onclick = function() {
+            modal.style.transition = "visibility 0s, opacity 0.3s linear";
+            modal.style.visibility = "hidden";
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.transition = "visibility 0s, opacity 0.3s linear";
+                modal.style.visibility = "hidden";
+            }
+        }
     }
 });

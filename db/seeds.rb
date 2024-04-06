@@ -39,16 +39,17 @@ end
 get_import_file('/upload', '1cToSiteExport.xml')
 
 data_hash = Hash.from_xml(File.read('db/import/new_import.xml'))
-
-puts 'Seed: Deleting existing users...'
-
 hash = data_hash['root']['products']['product'].reject { |h| h['id'] == '' }
-puts hash.size
 
 User.destroy_all
 puts 'Seed: Creating users...'
 user = User.create(email: 'admin@mail.ru', password: 'password', admin: true)
 puts 'Seed: Users created...'
+
+Config.destroy_all
+puts 'Seed: Creating configs...'
+Config.create(name: 'mail_to', value: 'agromaster.info@yandex.ru')
+puts 'Seed: Config created...'
 
 puts 'Seed: Deleting existing categories...'
 Category.destroy_all
@@ -71,7 +72,6 @@ end
 puts 'Seed: Category created...'
 
 puts 'Seed: Creating products...'
-
 hash.each_with_index do |product, index|
   category = Category.find_by(category_id: product['categories']['category_id'])
   # puts product if category.nil? && !product['photo'].nil?

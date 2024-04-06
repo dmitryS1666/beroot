@@ -36,11 +36,12 @@
     }
 }
 .home1-slider1-bg{
-    background: url(../assets/slider/home1-slider1-bg.webp);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
+    border: 1px solid #96969659;
+    border-radius: 5px;
 }
 .hero__slider--ml{
     //@media only screen and (min-width: 992px) {
@@ -53,6 +54,8 @@
 .slider__content{
     position: relative;
     z-index: 9;
+    width: 505px;
+    padding-left: 100px;
     @media only screen and (max-width: 575px) {
         text-align: center;
     }

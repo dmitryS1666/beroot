@@ -8,10 +8,18 @@
 .banner__thumbnail{
     overflow: hidden;
     width: 100%;
-    border-radius: 5px;
+    background: #f6f6f6;
     &--img{
-        width: 100%;
+        width: 30%;
         border-radius: 5px;
+    }
+    &.right{
+        right: 3rem;
+        left: auto;
+        text-align: center;
+        @media only screen and (min-width: 480px) {
+            right: 5rem;
+        }
     }
     &:hover{
         & .banner__thumbnail--img{
@@ -55,7 +63,6 @@
         }
     }
     &--title{
-        color: var(--text-white-color);
         margin-bottom: 1rem;
         @media only screen and (min-width: 992px) {
             margin-bottom: 10px;
@@ -88,7 +95,6 @@
     }
     &--btn{
         font-weight: 700;
-        color: var(--text-white-color);
         margin-top: 0.5rem;
         font-size: 1.4rem;
         @media only screen and (min-width: 1200px) {
@@ -221,7 +227,6 @@
     & .banner__content--btn{
         font-weight: 600;
         line-height: 2rem;
-        color: var(--secondary-color);
         text-decoration: underline;
     }
 }

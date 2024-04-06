@@ -1,12 +1,12 @@
-<% providers = @products ? @products.map(&:provider).uniq : [] %>
+<% providers = products ? products.map(&:provider).uniq : [] %>
 <% if providers.size > 0 %>
   <div class="single__widget widget__bg">
     <h2 class="widget__title h3">Поставщики</h2>
     <ul class="widget__tagcloud">
       <% providers.each do |provider| %>
         <li class="widget__tagcloud--list">
-          <% @products.map(&:category).first[:name] %>
-          <% category = @products.map(&:category).first[:id] %>
+          <% products.map(&:category).first[:name] %>
+          <% category = products.map(&:category).first[:id] %>
           <a class="widget__tagcloud--link" href="/filters?category=<%= category %>&provider=<%= provider %>"> <%= provider %></a>
         </li>
       <% end %>
