@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.where.not(parent_id: '', status: true)
+    @main_page_categories = Category.where.not(parent_id: '', status: true, main_page: true)
   end
 
   def show

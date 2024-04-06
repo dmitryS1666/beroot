@@ -59,12 +59,21 @@ data_hash['root']['categories']['category'].each do |category|
   status = true
   status = false if category['name'] == 'Разное' || category['name'] == 'Сантехника'
 
+  main_page = false
+  main_page = true if category['name'] == 'Запчасти для коммунальной техники' ||
+                      category['name'] == 'Запчасти для с/х техники' ||
+                      category['name'] == 'Запчасти ЗиЛ' ||
+                      category['name'] == 'Запчасти для тракторов' ||
+                      category['name'] == 'Двигатель' ||
+                      category['name'] == 'Сцепление'
+
   cat = Category.new(
     category_id: category['id'],
     name: category['name'],
     parent_id: category['parent_id'],
     description: 'desc',
-    status: status
+    status: status,
+    main_page: main_page
   )
 
   cat.save!
@@ -89,6 +98,7 @@ hash.each_with_index do |product, index|
     status: true,
     user: user,
     category: category
+    # slug: Product.normalize_friendly_id(product['product_name'])
   )
 
   photos = product['photo'] unless product['photo'].nil?
@@ -107,6 +117,11 @@ hash.each_with_index do |product, index|
   end
 
   pro.save!
+end
+
+Product.find_each do |product|
+  product.normalize_friendly_id(product.name)
+  product.save
 end
 
 puts 'Seed: Finished seeding!'

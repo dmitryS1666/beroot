@@ -9,16 +9,8 @@ class Category < ApplicationRecord
   validates_associated :products
   has_one_attached :photo
 
-  def to_param
-    slug
-  end
-
   def normalize_friendly_id(input)
-    input.to_s.to_slug.normalize(transliterations: :russian).to_s
-  end
-
-  def should_generate_new_friendly_id?
-    name_changed?
+    input.to_slug.transliterate(:russian).normalize.to_s
   end
 
   def count_products

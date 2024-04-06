@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_085219) do
     t.string "description"
     t.string "parent_id"
     t.boolean "status"
+    t.boolean "main_page", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"

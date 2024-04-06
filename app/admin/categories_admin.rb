@@ -30,6 +30,7 @@ Trestle.resource(:categories) do
       # col(sm: 3) { select [Category.all.category_id] }
     end
     row do
+      col(sm: 3) { text_field :slug }
       col(sm: 3) { datetime_field :created_at }
     end
     # row do

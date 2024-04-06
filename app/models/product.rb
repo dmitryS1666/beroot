@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders, :babosa]
+
   include PgSearch::Model
   pg_search_scope :search_everywhere, against: [
     :name,
@@ -8,7 +10,6 @@ class Product < ApplicationRecord
     :description
   ], using: { tsearch: { prefix: true } }
 
-  friendly_id :name, use: :slugged
 
   validates :category_id, presence: true
   validates :name, presence: true
@@ -21,15 +22,7 @@ class Product < ApplicationRecord
 
   self.per_page = 12
 
-  def to_param
-    slug
-  end
-
   def normalize_friendly_id(input)
-    input.to_s.to_slug.normalize(transliterations: :russian).to_s
-  end
-
-  def should_generate_new_friendly_id?
-    name_changed?
+    input.to_slug.transliterate(:russian).normalize.to_s
   end
 end

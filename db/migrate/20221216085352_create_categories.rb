@@ -6,6 +6,7 @@ class CreateCategories < ActiveRecord::Migration[7.0]
       t.string :description
       t.string :parent_id
       t.boolean :status
+      t.boolean :main_page, default: false
       t.timestamps
     end
   end

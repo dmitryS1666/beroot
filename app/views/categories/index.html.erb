@@ -10,7 +10,7 @@
                 <h2 class="slider__maintitle h1">Шины <br>
                   <span class="slider__maintitle--inner__text"> грузовые и с/х</span>
                 </h2>
-                <a class="primary__btn slider__btn" href="/categories/шины-грузовые-и-сх">
+                <a class="primary__btn slider__btn" href="/categories/shiny-gruzovye-i-sh">
                   Перейти
                   <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.8335 3.6178L8.26381 0.157332C8.21395 0.107774 8.1532 0.0681771 8.08544 0.0410843C8.01768 0.0139915 7.94441 0 7.87032 0C7.79624 0 7.72297 0.0139915 7.65521 0.0410843C7.58745 0.0681771 7.5267 0.107774 7.47684 0.157332C7.37199 0.262044 7.31393 0.39827 7.31393 0.539537C7.31393 0.680805 7.37199 0.817024 7.47684 0.921736L10.0943 3.45837H0.55625C0.405122 3.46829 0.26375 3.52959 0.160556 3.62994C0.057363 3.73029 0 3.86225 0 3.99929C0 4.13633 0.057363 4.26829 0.160556 4.36864C0.26375 4.46899 0.405122 4.53029 0.55625 4.54021H10.0927L7.47527 7.07826C7.37042 7.18298 7.31235 7.3192 7.31235 7.46047C7.31235 7.60174 7.37042 7.73796 7.47527 7.84267C7.52513 7.89223 7.58588 7.93182 7.65364 7.95892C7.7214 7.98601 7.79467 8 7.86875 8C7.94284 8 8.0161 7.98601 8.08386 7.95892C8.15162 7.93182 8.21238 7.89223 8.26223 7.84267L11.8335 4.38932C11.9406 4.28419 12 4.14649 12 4.00356C12 3.86063 11.9406 3.72293 11.8335 3.6178V3.6178Z" fill="currentColor"/>
@@ -30,7 +30,7 @@
                   <span class="slider__maintitle--inner__text">Масла</span>
                 </h2>
 <!--                <span class="slider__price--text text__secondary"></span>-->
-                <a class="primary__btn slider__btn" href="/categories/масла">
+                <a class="primary__btn slider__btn" href="/categories/masla">
                   Перейти
                   <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.8335 3.6178L8.26381 0.157332C8.21395 0.107774 8.1532 0.0681771 8.08544 0.0410843C8.01768 0.0139915 7.94441 0 7.87032 0C7.79624 0 7.72297 0.0139915 7.65521 0.0410843C7.58745 0.0681771 7.5267 0.107774 7.47684 0.157332C7.37199 0.262044 7.31393 0.39827 7.31393 0.539537C7.31393 0.680805 7.37199 0.817024 7.47684 0.921736L10.0943 3.45837H0.55625C0.405122 3.46829 0.26375 3.52959 0.160556 3.62994C0.057363 3.73029 0 3.86225 0 3.99929C0 4.13633 0.057363 4.26829 0.160556 4.36864C0.26375 4.46899 0.405122 4.53029 0.55625 4.54021H10.0927L7.47527 7.07826C7.37042 7.18298 7.31235 7.3192 7.31235 7.46047C7.31235 7.60174 7.37042 7.73796 7.47527 7.84267C7.52513 7.89223 7.58588 7.93182 7.65364 7.95892C7.7214 7.98601 7.79467 8 7.86875 8C7.94284 8 8.0161 7.98601 8.08386 7.95892C8.15162 7.93182 8.21238 7.89223 8.26223 7.84267L11.8335 4.38932C11.9406 4.28419 12 4.14649 12 4.00356C12 3.86063 11.9406 3.72293 11.8335 3.6178V3.6178Z" fill="currentColor"/>
@@ -64,72 +64,72 @@
       <div class="row mb--n25">
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/запчасти-для-коммунальной-техники">
+            <a class="categories__card--link" href="/categories/zapchasti-dlya-kommunalnoi-tehniki">
               <span class="categories__icon">
                 <img src="/assets/icon/comm.png">
               </span>
               <h2 class="categories__title">запчасти для коммунальной техники</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'запчасти-для-коммунальной-техники').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-kommunalnoi-tehniki').count_products %>
                 позиций)</span>
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/запчасти-для-сх-техники">
+            <a class="categories__card--link" href="/categories/zapchasti-dlya-sh-tehniki">
               <span class="categories__icon">
                 <img src="/assets/icon/sh.png">
               </span>
               <h2 class="categories__title">запчасти для с/х техники</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'запчасти-для-сх-техники').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-sh-tehniki').count_products %>
                 позиций)</span>
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/запчасти-зил">
+            <a class="categories__card--link" href="/categories/zapchasti-zil">
               <span class="categories__icon">
                 <img src="/assets/icon/zil.png">
               </span>
               <h2 class="categories__title">запчасти ЗиЛ</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'запчасти-зил').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-zil').count_products %>
                 позиций)</span>
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/запчасти-для-тракторов">
+            <a class="categories__card--link" href="/categories/zapchasti-dlya-traktorov">
               <span class="categories__icon">
                 <img src="/assets/icon/tractor.png">
               </span>
               <h2 class="categories__title">запчасти для тракторов</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'запчасти-для-тракторов').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-traktorov').count_products %>
                 позиций)</span>
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/двигатель">
+            <a class="categories__card--link" href="/categories/dvigatel">
               <span class="categories__icon">
                 <img src="/assets/icon/engin.png">
               </span>
               <h2 class="categories__title">двигатель</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'двигатель').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'dvigatel').count_products %>
                 позиций)</span>
             </a>
           </div>
         </div>
         <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
           <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/сцепление">
+            <a class="categories__card--link" href="/categories/stseplenie">
               <span class="categories__icon">
                 <img src="/assets/icon/scep.png">
               </span>
               <h2 class="categories__title">сцепление</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'сцепление').count_products %>
+              <span class="categories__subtitle">(<%= Category.find_by(slug: 'stseplenie').count_products %>
                 позиций)</span>
             </a>
           </div>
@@ -145,7 +145,7 @@
       <div class="row  mb--n30">
         <div class="col-lg-6 col-md-6 mb-30">
           <div class="banner__items position__relative">
-            <a class="banner__thumbnail display-block" href="/categories/топливопроводы">
+            <a class="banner__thumbnail display-block" href="/categories/toplivoprovody">
               <img class="banner__thumbnail--img banner__max--height" style="float: right;" src="/assets/agromaster images smalls 1.png">
               <div class="banner__content">
                 <h2 class="banner__content--title">
@@ -164,7 +164,7 @@
         </div>
         <div class="col-lg-6 col-md-6 mb-30">
           <div class="banner__items position__relative">
-            <a class="banner__thumbnail display-block" href="/categories/сцепление">
+            <a class="banner__thumbnail display-block" href="/categories/stseplenie">
               <img class="banner__thumbnail--img banner__max--height" src="/assets/agromaster images smalls 2.png">
               <div class="banner__content right">
                 <!--                <span class="banner__badge--style2">20% Off</span>-->
