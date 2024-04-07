@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   resources :feedbacks, only: [:new, :create]
   resources :newsletters, only: [:new, :create]
   post 'orders/sent'
+
+  # mount Trestle::Engine => '/admin', as: 'trestle'
 end
