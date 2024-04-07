@@ -35,6 +35,7 @@ gem 'babosa'
 gem 'trestle'
 gem 'trestle-search'
 gem 'trestle-auth'
+gem "base64", "0.1.1"
 
 group :development do
   gem "web-console"
