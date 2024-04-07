@@ -1,52 +1,80 @@
 Trestle.resource(:orders) do
   menu do
-    item :orders, icon: "fa fa-star"
+    item 'Заказы', '/admin/orders', icon: "fa fa-first-order", group: :clients
   end
 
   scopes do
     scope :all, -> { Order.all.order(created_at: :desc) }, default: true
-    # Category.all.each do |category|
-    #   next if Product.where(category_id: category).count == 0
-    #   scope category.name, -> { Product.where(category_id: category).order(created_at: :desc) }, default: true
-    # end
   end
 
   table do
-    column :name
-    column :last_name
-    column :phone_number, header: "Номер телефона", align: :right
-    column :address, header: "Поставщик", align: :center
-    column :city, header: "Цена, &#8381;".html_safe, align: :center
-    column :message, header: "Цена, &#8381;".html_safe, align: :center
-    column :cart_id, header: "Скидка", align: :center do |order|
-      Cart.find(order.cart_id)
+    column :name, header: "Имя", align: :center
+    column :last_name, header: "Фамилия", align: :center
+    column :phone_number, header: "Номер телефона", align: :center
+    column :address, header: "Адрес", align: :center
+    column :city, header: "Город".html_safe, align: :center
+    column :message, header: "Сообщение".html_safe, align: :center
+    column :items, header: "Позиций", align: :center do |order|
+      Orderable.where(cart_id: order.cart_id).count
+    end
+    column :status, header: "Статус", align: :center do |item|
+      case Cart.find(item.cart_id).status
+      when 'active'
+        "<span style='color: green;'>активный<span>".html_safe
+      when 'pending'
+        "<span style='color: orange;'>в обработке<span>".html_safe
+      else
+        "<span style='color: red;'>обработан<span>".html_safe
+      end
     end
     column :created_at, header: "Дата создания", align: :center do |order|
-      order.created_at.strftime("%Y-%m-%d")
+      order.created_at.strftime("%Y-%m-%d %H:%M")
     end
     column :updated_at, header: "Дата редактирования", align: :center do |order|
-      order.updated_at.strftime("%Y-%m-%d")
+      order.updated_at.strftime("%Y-%m-%d %H:%M")
     end
-    actions
   end
 
   form do |order|
     row do
-      col(sm: 3) { text_field :name }
-      col(sm: 3) { select :category_id, Category.all.map { |cat| [cat.name, cat.id] } }
-      # col(sm: 3) { select [Category.all.category_id] }
+      case Cart.find(order.cart_id).status
+      when 'active'
+        "<span style='color: green; padding-left: 10px; font-size: 18px;'>активный<span>".html_safe
+      when 'pending'
+        "<span style='color: orange; padding-left: 10px; font-size: 18px;'>в обработке<span>".html_safe
+      else
+        "<span style='color: red; padding-left: 10px; font-size: 18px;'>обработан<span>".html_safe
+      end
+    end
+
+    row do
+      col(sm: 3) { text_field :name, disabled: true }
+      col(sm: 3) { text_field :last_name, disabled: true }
     end
     row do
-      col(sm: 3) { text_field :price }
-      col(sm: 3) { text_field :sale }
+      col(sm: 3) { text_field :phone_number, disabled: true }
+      col(sm: 3) { text_field :address, disabled: true }
     end
     row do
-      col(sm: 3) { text_field :article }
-      col(sm: 3) { text_field :provider }
+      col(sm: 3) { text_field :city, disabled: true }
+      col(sm: 3) { text_field :message, disabled: true }
+    end
+
+    row do
+      "<h2>Позици:</h2>".html_safe
+    end
+    Orderable.where(cart_id: order.cart_id).each do |item|
+      row do
+        col(sm: 1) { 'Кол-во: ' + item.quantity.to_s }
+        col(sm: 5) { Product.find(item.product_id).name }
+      end
+    end
+
+    row do
+      "<h2 style='margin-top: 20px;'>Изменить Статус заказа:</h2>".html_safe
     end
     row do
-      col(sm: 3) { text_field :qty_type }
-      col(sm: 3) { text_field :quantity }
+      col(sm: 3) { "<a href='/admin/carts/#{order.cart_id}'>Статус заказа можно изменить в корзине покупателя</a>".html_safe }
     end
   end
 end

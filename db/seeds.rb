@@ -43,7 +43,8 @@ hash = data_hash['root']['products']['product'].reject { |h| h['id'] == '' }
 
 User.destroy_all
 puts 'Seed: Creating users...'
-user = User.create(email: 'admin@mail.ru', password: 'password', admin: true)
+User.destroy_all
+user = User.create!(email: "admin@mail.ru", password: "password", first_name: "Admin", last_name: "User")
 puts 'Seed: Users created...'
 
 Config.destroy_all

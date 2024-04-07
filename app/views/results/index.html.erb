@@ -1,28 +1,41 @@
 <main class="main__content_wrapper">
 
   <!-- Start breadcrumb section -->
-<%#= render 'shared/breadcrumb', category: @category, category_name: @category.name  %>
+  <section class="breadcrumb__section breadcrumb__bg">
+    <div class="container">
+      <div class="row row-cols-1">
+        <div class="col">
+          <div class="breadcrumb__content text-center">
+            <ul class="breadcrumb__content--menu d-flex justify-content-center">
+              <li class="breadcrumb__content--menu__items"><a href="<%= root_path %>">Главная</a></li>
+              <li class="breadcrumb__content--menu__items">Результат поиска</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- End breadcrumb section -->
 
   <!-- Start shop section -->
   <div class="shop__section section--padding">
     <div class="container">
       <div class="row">
-        <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
-          <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-            <%= render 'shared/category/category_filter', { category: @category } %>
+<!--        <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">-->
+<!--          <div class="shop__sidebar--widget widget__area d-none d-lg-block">-->
+            <%#= render 'shared/category/category_filter', { category: @category } %>
 
-            <%= render 'shared/category/brand_filter', { product: @products } %>
+            <%#= render 'shared/category/brand_filter', { products: @products } %>
 
-            <%= render 'shared/top_rated_product' %>
-          </div>
-        </div>
-        <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
+            <%#= render 'shared/top_rated_product' %>
+<!--          </div>-->
+<!--        </div>-->
+        <div class="col-xl-12 col-lg-12 shop-col-width-lg-12">
           <div class="shop__right--sidebar">
             <!-- Start categories section -->
             <div class="categories__shop mb-50">
               <div class="section__heading border-bottom mb-30">
-                <h2 class="section__heading--maintitle">Результаты <span>поиска</span></h2>
+                <h2 class="section__heading--maintitle">Результаты <span>поиска: </span><i>" <%= params[:search][:query] %> "</i></h2>
               </div>
             </div>
             <!-- End categories section -->
@@ -32,7 +45,7 @@
                   <div class="product__section--inner">
                     <div class="row mb--n30">
                       <% @search_results.each do |product| %>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-6 custom-col mb-30">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-4 custom-col mb-30">
                           <article class="product__card">
                             <div class="product__card--thumbnail">
                               <%= link_to product_path(product), class: "product__card--thumbnail__link display-block" do %>

@@ -1,15 +1,23 @@
 Trestle.resource(:products) do
   menu do
-    item :products, icon: "fa fa-star"
+    item 'Продукты', '/admin/products', icon: "fa fa-shopping-bag", group: :configuration, priority: :first
   end
 
-  scopes do
-    scope :all, -> { Product.all.order(created_at: :desc) }, default: true
-    # Category.all.each do |category|
-    #   next if Product.where(category_id: category).count == 0
-    #   scope category.name, -> { Product.where(category_id: category).order(created_at: :desc) }, default: true
-    # end
+  search do |query|
+    if query
+      Product.where("name ILIKE ?", "%#{query}%")
+    else
+      Product.all
+    end
   end
+
+  # scopes do
+  #   scope :all, -> { Product.all.order(created_at: :desc) }, default: true
+  #   # Category.all.each do |category|
+  #   #   next if Product.where(category_id: category).count == 0
+  #   #   scope category.name, -> { Product.where(category_id: category).order(created_at: :desc) }, default: true
+  #   # end
+  # end
 
   table do
     column :name
@@ -23,10 +31,10 @@ Trestle.resource(:products) do
       Category.find(product.category_id)
     end
     column :created_at, header: "Дата создания", align: :center do |product|
-      product.created_at.strftime("%Y-%m-%d")
+      product.created_at.strftime("%Y-%m-%d %H:%M")
     end
     column :updated_at, header: "Дата редактирования", align: :center do |product|
-      product.updated_at.strftime("%Y-%m-%d")
+      product.updated_at.strftime("%Y-%m-%d %H:%M")
     end
     actions
   end
@@ -35,7 +43,6 @@ Trestle.resource(:products) do
     row do
       col(sm: 3) { text_field :name }
       col(sm: 3) { select :category_id, Category.all.map { |cat| [cat.name, cat.id] } }
-      # col(sm: 3) { select [Category.all.category_id] }
     end
     row do
       col(sm: 3) { text_field :price }

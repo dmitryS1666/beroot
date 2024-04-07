@@ -1,15 +1,18 @@
 Trestle.resource(:categories) do
   menu do
-    item :categories, icon: "fa fa-star"
+    item 'Категории', '/admin/categories', icon: "fa fa-object-group", group: :configuration, priority: :first
   end
 
-  #  scopes do
-  #     scope :all, -> { Category.all.order(created_at: :desc) }, default: true
-  #     scope :ru, -> { Category.where(language: "ru") }
-  #   end
+  search do |query|
+    if query
+      Category.where("name ILIKE ?", "%#{query}%")
+    else
+      Category.all
+    end
+  end
 
   table do
-    column :name, header: "Имя"
+    column :name, header: "Имя", sort: :name
     column :category_id, header: "Артикул", align: :center
     column :description, header: "Описание"
     column :parent_id, header: "Родительский артикул", align: :center
@@ -25,9 +28,7 @@ Trestle.resource(:categories) do
   form do |category|
     row do
       col(sm: 3) { text_field :name }
-      # col(sm: 3) { select :parent_id, Category.all.map { |cat| [cat.name, cat.id, { selected: (cat.id == item.cat_grade_id) }] } }
       col(sm: 3) { select :parent_id, Category.all.map { |cat| [cat.name, cat.id] } }
-      # col(sm: 3) { select [Category.all.category_id] }
     end
     row do
       col(sm: 3) { text_field :slug }
@@ -47,10 +48,6 @@ Trestle.resource(:categories) do
     #   if category.image.attached?
     #     col(sm: 3) { check_box :delete_file, class: 'dangerous-area' }
     #   end
-    # end
-
-    # row do
-    #   col(sm: 9) { text_area :content }
     # end
   end
 end

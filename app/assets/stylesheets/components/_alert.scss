@@ -4,6 +4,7 @@
   right: 16px;
   z-index: 1000;
   font-size: 18px;
+  border-radius: 5px;
 
   --bs-alert-padding-x: 2rem;
   --bs-alert-padding-y: 3rem;
@@ -11,7 +12,7 @@
 
 .alert-info {
   --bs-alert-color: #060606;
-  --bs-alert-bg: #69f297;
+  --bs-alert-bg: #69f297e6;
 }
 
 .alert-dismissible .btn-close {

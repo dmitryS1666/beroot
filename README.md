@@ -1,29 +1,29 @@
-# Online AgroMaster store
+# АгроМастер
 
+### Вход в Административную Консоль
+* логин: admin
+* пароль: admin123
 
-## Visit the website
+## Требования
+* Rails 7
+* PostgreSQL
+* Ruby 3.1.2
 
-Explore online store by visiting [https://www.agromaster.ru/](https://www.agromaster.ru/).
+## Некоторые особенности
+* При старте на чистой БД необходимо проверить подключение по ftp к серверу
+  * host: `agromaster.dsml.ru`, port: `21`
+  * login: `sftp-user1`, password: `whacky-spiritism-24`
+* На данном ftp находится *xml-файл со структурой магазина (категории + продукты)
+* На данном ftp так же находятся фотографии к продуктам
+* Если все ОК, то выполняем `rails db:seed`
 
+***********************************************
 
-## Getting started
-1. Create, migrathe, seed your db
-
-```bash
-  rails db:create db:seed db:migrate
-```
-
-2. Start the server
-
-```bash
-  rails server 
-```
-
-3. Start yarn
-   
- ```bash
-  yarn build --watch
-```
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/) ☺
+## Функционал
+* Настроена Административная консоль - АК
+  * Создание/редактирование/просмотр и удаление КАТЕГОРИЙ
+  * Создание/редактирование/просмотр и удаление ПРОДУКТОВ
+* Работа с КОРЗИНОЙ (добавление/изменение/удаление ПРОДУКТОВ)
+* Оформление заказа и последующая отправка заказа на почтовый ящик КЛИЕНТА
+* Подписка на обновления
+* Форма обратной связи

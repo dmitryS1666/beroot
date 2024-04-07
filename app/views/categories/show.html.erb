@@ -13,7 +13,7 @@
             <%= render 'shared/category/category_filter', { category: @category } %>
 
             <% if @all_category_products.count > 0 %>
-              <%= render 'shared/category/price_filter', { products: @all_category_products, category: @category } %>
+              <%= render 'shared/category/price_filter', { products: @products, category: @category } %>
             <% end %>
 
             <%= render 'shared/category/brand_filter', { products: @products } %>

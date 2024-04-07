@@ -1,51 +1,42 @@
 Trestle.resource(:carts) do
   menu do
-    item :carts, icon: "fa fa-star", header: 'Корзина
-'
+    item 'Корзина', '/admin/carts', icon: "fa fa-shopping-cart", group: :clients
   end
 
   scopes do
     scope :all, -> { Cart.all.order(created_at: :desc) }, default: true
-    # Category.all.each do |category|
-    #   next if Product.where(category_id: category).count == 0
-    #   scope category.name, -> { Product.where(category_id: category).order(created_at: :desc) }, default: true
-    # end
   end
 
   table do
-    column :status
-    # column :product_id
-    # column :cart_id
-    # column :quantity, header: "Цена, &#8381;".html_safe, align: :center
-    # column :cart_id, header: "Скидка", align: :center do |cart|
-    #   Cart.find(cart.cart_id)
-    # end
-    column :created_at, header: "Дата создания", align: :center do |cart|
-      cart.created_at.strftime("%Y-%m-%d")
+    column :id, header: "ID", align: :center
+    column :status, header: "Статус", align: :center do |item|
+      case item.status
+      when 'active'
+        "<span style='color: green;'>активный<span>".html_safe
+      when 'pending'
+        "<span style='color: orange;'>в обработке<span>".html_safe
+      else
+        "<span style='color: red;'>обработан<span>".html_safe
+      end
     end
-    column :updated_at, header: "Дата редактирования", align: :center do |cart|
-      cart.updated_at.strftime("%Y-%m-%d")
+    column :created_at, header: "Дата создания", align: :center do |order|
+      order.created_at.strftime("%Y-%m-%d %H:%M")
     end
-    actions
+    column :updated_at, header: "Дата редактирования", align: :center do |order|
+      order.updated_at.strftime("%Y-%m-%d %H:%M")
+    end
   end
 
-  form do |order|
+  form do |cart|
     row do
-      col(sm: 3) { text_field :name }
-      col(sm: 3) { select :category_id, Category.all.map { |cat| [cat.name, cat.id] } }
-      # col(sm: 3) { select [Category.all.category_id] }
+      col(sm: 4) { select :status, [['в обработке', 'pending'], %w[обработан done]] }
     end
-    row do
-      col(sm: 3) { text_field :price }
-      col(sm: 3) { text_field :sale }
-    end
-    row do
-      col(sm: 3) { text_field :article }
-      col(sm: 3) { text_field :provider }
-    end
-    row do
-      col(sm: 3) { text_field :qty_type }
-      col(sm: 3) { text_field :quantity }
+
+    Orderable.where(cart_id: cart.id).each do |item|
+      row do
+        col(sm: 1) { 'Кол-во: ' + item.quantity.to_s }
+        col(sm: 5) { Product.find(item.product_id).name }
+      end
     end
   end
 end

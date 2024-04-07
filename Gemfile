@@ -24,16 +24,17 @@ gem 'jquery-ui-rails'
 
 gem 'active_storage-postgresql'
 gem "image_processing", "~> 1.2"
-gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem 'will_paginate', '~> 4.0'
-gem 'trestle'
 gem 'pg_search'
 gem 'cookies_eu'
 gem 'friendly_id'
 gem 'babosa'
+gem 'trestle'
+gem 'trestle-search'
+gem 'trestle-auth'
 
 group :development do
   gem "web-console"

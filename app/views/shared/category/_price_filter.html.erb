@@ -9,7 +9,7 @@
         <label class="price__filter--label" for="Filter-Price-GTE2">От</label>
         <div class="price__filter--input border-radius-5 d-flex align-items-center">
           <span class="price__filter--currency">&#x20BD;</span>
-          <input class="price__filter--input__field border-0" name="price_from" id="price_from" type="number" placeholder="<%= price_from %>" min="<%= price_from %>" max="<%= price_to %>">
+          <input class="price__filter--input__field border-0" name="price_from" id="price_from" type="number" placeholder="<%= price_from %>" min="0" max="<%= price_to %>">
         </div>
       </div>
       <div class="price__divider">
@@ -19,7 +19,7 @@
         <label class="price__filter--label" for="price_to">До</label>
         <div class="price__filter--input border-radius-5 d-flex align-items-center">
           <span class="price__filter--currency">&#x20BD;</span>
-          <input class="price__filter--input__field border-0" name="price_to" id="price_to" type="number" placeholder="<%= price_to %>" min="<%= price_from %>" max="<%= price_to %>">
+          <input class="price__filter--input__field border-0" name="price_to" id="price_to" type="number" placeholder="<%= price_to %>" min="<%= price_from %>" style="width: 100%;">
         </div>
       </div>
     </div>

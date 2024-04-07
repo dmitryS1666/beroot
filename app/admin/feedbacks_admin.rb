@@ -1,6 +1,6 @@
 Trestle.resource(:feedbacks) do
   menu do
-    item :feedbacks, icon: "fa fa-star"
+    item 'Обратная связь', '/admin/feedbacks', icon: "fa fa-comments", group: :clients
   end
 
   scopes do
@@ -14,31 +14,29 @@ Trestle.resource(:feedbacks) do
     column :phone, header: "Номер телефона".html_safe, align: :center
     column :message, header: "Сообщение".html_safe, align: :center
     column :created_at, header: "Дата создания", align: :center do |cart|
-      cart.created_at.strftime("%Y-%m-%d")
+      cart.created_at.strftime("%Y-%m-%d %H:%M")
     end
     column :updated_at, header: "Дата редактирования", align: :center do |cart|
-      cart.updated_at.strftime("%Y-%m-%d")
+      cart.updated_at.strftime("%Y-%m-%d %H:%M")
     end
     actions
   end
 
   form do |feedback|
     row do
-      col(sm: 3) { text_field :name }
-      col(sm: 3) { select :category_id, Category.all.map { |cat| [cat.name, cat.id] } }
-      # col(sm: 3) { select [Category.all.category_id] }
+      col(sm: 3) { text_field :name, disabled: true }
+      col(sm: 3) { text_field :last_name, disabled: true }
     end
     row do
-      col(sm: 3) { text_field :price }
-      col(sm: 3) { text_field :sale }
+      col(sm: 3) { text_field :email, disabled: true }
+      col(sm: 3) { text_field :phone, disabled: true }
     end
     row do
-      col(sm: 3) { text_field :article }
-      col(sm: 3) { text_field :provider }
+      col(sm: 3) { text_area :message, disabled: true }
     end
     row do
-      col(sm: 3) { text_field :qty_type }
-      col(sm: 3) { text_field :quantity }
+      col(sm: 3) { date_field :created_at, disabled: true }
+      col(sm: 3) { date_field :updated_at, disabled: true }
     end
   end
 end
