@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   get 'contacts/sent'
 
   resources :categories, only: [:index, :show]
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] #do
+    # member do
+    #   delete 'delete_photo/:photo_id', action: :delete_photo, as: :delete_photo
+    # end
+  # end
 
   get 'cart', to: 'cart#show'
   get '/checkout', to: 'cart#checkout'
@@ -34,5 +38,4 @@ Rails.application.routes.draw do
   resources :newsletters, only: [:new, :create]
   post 'orders/sent'
 
-  # mount Trestle::Engine => '/admin', as: 'trestle'
 end

@@ -3,6 +3,7 @@ class Category < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_many :products
+  before_save :remove_attach_img_by_flag
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
@@ -21,5 +22,10 @@ class Category < ApplicationRecord
       products = Product.where('category_id IN (?)', category_ids)
     end
     products.count
+  end
+
+  def remove_attach_img_by_flag
+    photo.purge if delete_file? && photo.attached?
+    self.delete_file = false
   end
 end

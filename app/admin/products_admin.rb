@@ -11,14 +11,6 @@ Trestle.resource(:products) do
     end
   end
 
-  # scopes do
-  #   scope :all, -> { Product.all.order(created_at: :desc) }, default: true
-  #   # Category.all.each do |category|
-  #   #   next if Product.where(category_id: category).count == 0
-  #   #   scope category.name, -> { Product.where(category_id: category).order(created_at: :desc) }, default: true
-  #   # end
-  # end
-
   table do
     column :name
     column :article, header: "Артикул", align: :right
@@ -55,6 +47,38 @@ Trestle.resource(:products) do
     row do
       col(sm: 3) { text_field :qty_type }
       col(sm: 3) { text_field :quantity }
+    end
+
+    row do
+      col(sm: 3) { file_field :photos, multiple: true, input_html: { direct_upload: true } }
+    end
+
+    if product.photos.attached?
+      product.photos.each do |photo|
+        row do
+          col(sm: 3) { link_to "Удалить", products_admin_path(action: :update_photo, id: product.id, photo_id: photo.id), method: :put, data: { confirm: "Вы уверены?" } }
+          col(sm: 3) { image_tag main_app.rails_blob_path(photo),
+                                 style: 'max-width: 100%; height: auto;'
+          }
+        end
+      end
+    end
+  end
+
+  controller do
+    def update
+      @product = Product.find(params[:id])
+      if params[:photo_id]
+        photo = @product.photos.find_by_id(params[:photo_id])
+        photo.purge if photo.present?
+      else
+        @product.update(product_params)
+      end
+      redirect_to products_admin_path(@product), notice: "Изображение успешно удалено."
+    end
+
+    def product_params
+      params.require(:product).permit(:name, :category_id, :price, :sale, :article, :provider, :qty_type, :quantity, photos: [])
     end
   end
 end

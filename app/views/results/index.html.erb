@@ -54,8 +54,8 @@
                                   <%= image_tag product.photos.first, class: 'product__card--thumbnail__img product__primary--img', alt: "product-img"%>
                                   <%= image_tag product.photos.first, class: 'product__card--thumbnail__img product__secondary--img', alt: "product-img"%>
                                 <% else %>
-                                  <img class="product__card--thumbnail__img product__primary--img" src="/assets/empty_img.jpg" alt="product-img">
-                                  <img class="product__card--thumbnail__img product__secondary--img" src="/assets/empty_img.jpg" alt="product-img">
+                                  <img class="product__card--thumbnail__img product__primary--img" src="/assets/empty_img.png" alt="product-img">
+                                  <img class="product__card--thumbnail__img product__secondary--img" src="/assets/empty_img.png" alt="product-img">
                                 <% end %>
                               <% end %>
                               <% if product.sale > 0 %>

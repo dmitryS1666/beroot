@@ -14,6 +14,14 @@ Trestle.resource(:categories) do
   table do
     column :name, header: "Имя", sort: :name
     column :category_id, header: "Артикул", align: :center
+    column :photo, header: "Иконка" do |img|
+      if img.photo.attached?
+        image_tag main_app.rails_blob_path(img.photo),
+                  style: 'max-width: 250px; height: auto;'
+      else
+        'пусто'
+      end
+    end
     column :description, header: "Описание"
     column :parent_id, header: "Родительский артикул", align: :center
     column :created_at, header: "Дата создания", align: :center do |category|
@@ -34,20 +42,20 @@ Trestle.resource(:categories) do
       col(sm: 3) { text_field :slug }
       col(sm: 3) { datetime_field :created_at }
     end
-    # row do
-    #   col(sm: 3) { file_field :image, as: :file, input_html: { direct_upload: true } }
-    #
-    #   if category.image.attached?
-    #     col(sm: 3) { image_tag main_app.rails_blob_path(category.image),
-    #                            style: 'max-width: 100%; height: auto;'
-    #     }
-    #   end
-    # end
-    # row do
-    #   col(sm: 3) {}
-    #   if category.image.attached?
-    #     col(sm: 3) { check_box :delete_file, class: 'dangerous-area' }
-    #   end
-    # end
+    row do
+      col(sm: 3) { file_field :photo, as: :file, input_html: { direct_upload: true } }
+
+      if category.photo.attached?
+        col(sm: 3) { image_tag main_app.rails_blob_path(category.photo),
+                               style: 'max-width: 100%; height: auto;'
+        }
+      end
+    end
+    row do
+      col(sm: 3) {}
+      if category.photo.attached?
+        col(sm: 3) { check_box :delete_file, class: 'dangerous-area' }
+      end
+    end
   end
 end
