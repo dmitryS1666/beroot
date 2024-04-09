@@ -23,8 +23,14 @@
       <% end %>
       <span class="old__price">&#x20BD;<%= product.price %></span>
     </div>
+    <div class="product__card--price">
+      <span class="old__price">Артикул код товара: <b><%= product.article %></b></span>
+    </div>
+    <div class="product__card--price">
+      <span class="old__price">Доступно: <b><%= product.quantity %>шт</b></span>
+    </div>
     <!-- Добавить в корзину -->
-    <div class="product__card--footer">
+<!--    <div class="product__card--footer">-->
       <%= form_for :cart, url: cart_add_path, method: :post do |f| %>
         <%= f.hidden_field :product_id, value: product.id %>
         <%= f.hidden_field :quantity, value: 1 %>
@@ -35,7 +41,7 @@
           Добавить в корзину
         </button>
       <% end %>
-    </div>
+<!--    </div>-->
     <!-- Добавить в корзину -->
   </div>
 </article>
