@@ -64,10 +64,18 @@
                             </div>
                             <div class="product__card--content">
                               <h3 class="product__card--title">
-                                <a href="product-details.html"><%= product.name %></a></h3>
+                                <a href="<%= product_path(product) %>"><%= product.name %></a></h3>
                               <div class="product__card--price">
-                                <span class="current__price">&#x20BD;<%= product.price %></span>
+                                <% if product.sale > 0 %>
+                                  <span class="current__price">&#x20BD;<%= product.price - (product.price * product.sale / 100) %></span>
+                                <% end %>
                                 <span class="old__price">&#x20BD;<%= product.price %></span>
+                              </div>
+                              <div class="product__card--price">
+                                <span class="old__price">Артикул код товара: <b><%= product.article %></b></span>
+                              </div>
+                              <div class="product__card--price">
+                                <span class="old__price">Доступно: <b><%= product.quantity %>шт</b></span>
                               </div>
                               <!-- Добавить в корзину -->
                               <div class="product__card--footer">
