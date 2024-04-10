@@ -39,6 +39,7 @@ Trestle.resource(:products) do
     row do
       col(sm: 3) { text_field :price }
       col(sm: 3) { text_field :sale }
+      col(sm: 3) { text_field :promo }
     end
     row do
       col(sm: 3) { text_field :article }
@@ -78,7 +79,7 @@ Trestle.resource(:products) do
     end
 
     def product_params
-      params.require(:product).permit(:name, :category_id, :price, :sale, :article, :provider, :qty_type, :quantity, photos: [])
+      params.require(:product).permit(:name, :category_id, :price, :sale, :article, :provider, :qty_type, :quantity, :promo, photos: [])
     end
   end
 end
