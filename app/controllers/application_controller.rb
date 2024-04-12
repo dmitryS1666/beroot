@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   before_action :set_main_category
   before_action :set_popular_product
   before_action :set_top_rated_product
+  before_action do
+    ActiveStorage::Current.host = ENV["DOMAIN"] || "localhost:3000"
+  end
 
   def set_render_cart
     @render_cart = true
