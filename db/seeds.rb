@@ -118,6 +118,12 @@ hash.each_with_index do |product, index|
   end
 
   pro.save!
+
+  if photos && photos.size > 0
+    puts pro.inspect
+    puts pro.photos.inspect
+    puts pro.photos.first.inspect
+  end
 end
 
 Product.find_each do |product|
