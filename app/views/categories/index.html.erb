@@ -6,14 +6,15 @@
         <div class="hero__slider--inner hero__slider--ml hero__slider--activation swiper">
           <div class="hero__slider--wrapper swiper-wrapper">
             <% @promo_products.each_with_index do |promo, index| %>
+              <% product = Product.find(promo.product_id) %>
               <div class="swiper-slide ">
                 <div class="hero__slider--items home1-slider1-bg">
                   <div class="slider__content">
-                    <h2 class="slider__maintitle h1"><%= promo.name %><br>
-                      <span class="slider__maintitle--inner__text"> <%= promo.provider %></span>
+                    <h2 class="slider__maintitle h1"><%= product.name %><br>
+                      <span class="slider__maintitle--inner__text"> <%= product.provider %></span>
                     </h2>
-                    <span class="slider__price--text text__secondary">&#8381;<%= promo.price %></span>
-                    <a class="primary__btn slider__btn" href="/categories/<%= promo.slug %>">
+                    <span class="slider__price--text text__secondary">&#8381;<%= product.price %></span>
+                    <a class="primary__btn slider__btn" href="/products/<%= product.slug %>">
                       Перейти
                       <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.8335 3.6178L8.26381 0.157332C8.21395 0.107774 8.1532 0.0681771 8.08544 0.0410843C8.01768 0.0139915 7.94441 0 7.87032 0C7.79624 0 7.72297 0.0139915 7.65521 0.0410843C7.58745 0.0681771 7.5267 0.107774 7.47684 0.157332C7.37199 0.262044 7.31393 0.39827 7.31393 0.539537C7.31393 0.680805 7.37199 0.817024 7.47684 0.921736L10.0943 3.45837H0.55625C0.405122 3.46829 0.26375 3.52959 0.160556 3.62994C0.057363 3.73029 0 3.86225 0 3.99929C0 4.13633 0.057363 4.26829 0.160556 4.36864C0.26375 4.46899 0.405122 4.53029 0.55625 4.54021H10.0927L7.47527 7.07826C7.37042 7.18298 7.31235 7.3192 7.31235 7.46047C7.31235 7.60174 7.37042 7.73796 7.47527 7.84267C7.52513 7.89223 7.58588 7.93182 7.65364 7.95892C7.7214 7.98601 7.79467 8 7.86875 8C7.94284 8 8.0161 7.98601 8.08386 7.95892C8.15162 7.93182 8.21238 7.89223 8.26223 7.84267L11.8335 4.38932C11.9406 4.28419 12 4.14649 12 4.00356C12 3.86063 11.9406 3.72293 11.8335 3.6178V3.6178Z" fill="currentColor"/>
@@ -47,79 +48,21 @@
   <section class="categories__section section--padding">
     <div class="container">
       <div class="row mb--n25">
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/stseplenie">
+        <% @promo_categories.each_with_index do |promo, index| %>
+          <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
+            <div class="categories__card text-center">
+              <a class="categories__card--link" href="/categories/<%= promo.slug %>">
               <span class="categories__icon">
                 <img src="/assets/agro_icon_1.png">
               </span>
-              <h2 class="categories__title">сцепление</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'stseplenie').count_products %>
-                позиций)</span>
-            </a>
+                <h2 class="categories__title"><%= promo.name %></h2>
+                <span class="categories__subtitle">(<%= Category.find_by(slug: promo.slug).count_products %>
+                  позиций)</span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/zapchasti-zil">
-              <span class="categories__icon">
-                <img src="/assets/agro_icon_2.png">
-              </span>
-              <h2 class="categories__title">запчасти ЗиЛ</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-zil').count_products %>
-                позиций)</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/zapchasti-dlya-kommunalnoi-tehniki">
-              <span class="categories__icon">
-                <img src="/assets/agro_icon_3.png">
-              </span>
-              <h2 class="categories__title">запчасти для коммунальной техники</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-kommunalnoi-tehniki').count_products %>
-                позиций)</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/zapchasti-dlya-traktorov">
-              <span class="categories__icon">
-                <img src="/assets/agro_icon_4.png">
-              </span>
-              <h2 class="categories__title">запчасти для тракторов</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-traktorov').count_products %>
-                позиций)</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/zapchasti-dlya-sh-tehniki">
-              <span class="categories__icon">
-                <img src="/assets/agro_icon_5.png">
-              </span>
-              <h2 class="categories__title">запчасти для с/х техники</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'zapchasti-dlya-sh-tehniki').count_products %>
-                позиций)</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-4 col-6 mb-25">
-          <div class="categories__card text-center">
-            <a class="categories__card--link" href="/categories/dvigatel">
-              <span class="categories__icon">
-                <img src="/assets/agro_icon_6.png">
-              </span>
-              <h2 class="categories__title">двигатель</h2>
-              <span class="categories__subtitle">(<%= Category.find_by(slug: 'dvigatel').count_products %>
-                позиций)</span>
-            </a>
-          </div>
-        </div>
-
+          <% break if index == 5 %>
+        <% end %>
       </div>
     </div>
   </section>

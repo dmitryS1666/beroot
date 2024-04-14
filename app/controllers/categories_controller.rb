@@ -5,7 +5,8 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.where.not(parent_id: '', status: true)
     @main_page_categories = Category.where.not(parent_id: '', status: true, main_page: true)
-    @promo_products = Product.where(promo: true)
+    @promo_products = Promo.all
+    @promo_categories = Category.where(promo: true)
   end
 
   def show
@@ -31,7 +32,7 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :photo)
+    params.require(:category).permit(:name, :description, :photo, :promo)
   end
 
   def set_category

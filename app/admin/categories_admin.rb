@@ -23,6 +23,7 @@ Trestle.resource(:categories) do
       end
     end
     column :description, header: "Описание"
+    column :promo, header: "Вывести на главную"
     column :parent_id, header: "Родительский артикул", align: :center
     column :created_at, header: "Дата создания", align: :center do |category|
       category.created_at.strftime("%Y-%m-%d")
@@ -37,10 +38,12 @@ Trestle.resource(:categories) do
     row do
       col(sm: 3) { text_field :name }
       col(sm: 3) { select :parent_id, Category.all.map { |cat| [cat.name, cat.id] } }
+      col(sm: 3) { select :status, [true, false] }
     end
     row do
       col(sm: 3) { text_field :slug }
       col(sm: 3) { datetime_field :created_at }
+      col(sm: 3) { select :promo, [true, false] }
     end
     row do
       col(sm: 3) { file_field :photo, as: :file, input_html: { direct_upload: true } }
