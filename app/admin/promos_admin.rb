@@ -30,8 +30,10 @@ Trestle.resource(:promos) do
       col(sm: 3) { select :product_id, Product.all.map { |pr| [pr.name, pr.id] } }
     end
     row do
+      col(sm: 3) { '<span><i>Необходимый размер слайда 1200 * 550px</i></span>'.html_safe }
+    end
+    row do
       col(sm: 3) { file_field :photo, as: :file, input_html: { direct_upload: true } }
-
       if promo.photo.attached?
         col(sm: 3) { image_tag main_app.rails_blob_path(promo.photo),
                                style: 'max-width: 100%; height: auto;'
