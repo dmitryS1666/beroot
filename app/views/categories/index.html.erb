@@ -22,7 +22,11 @@
                     </a>
                   </div>
                   <div class="hero__slider--layer">
-                    <img class="slider__layer--img " src="/assets/promo_<%= index + 1 %>.png">
+                    <% if promo.photo.attached? %>
+                      <%= image_tag promo.photo, class: 'slider__layer--img' %>
+                    <% else %>
+                      <img class="slider__layer--img" src="/assets/empty_img_2.png">
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -53,7 +57,11 @@
             <div class="categories__card text-center">
               <a class="categories__card--link" href="/categories/<%= promo.slug %>">
               <span class="categories__icon">
-                <img src="/assets/agro_icon_1.png">
+                <% if promo.photo.attached? %>
+                  <%= image_tag promo.photo %>
+                <% else %>
+                  <img src="/assets/empty_img_2.png">
+                <% end %>
               </span>
                 <h2 class="categories__title"><%= promo.name %></h2>
                 <span class="categories__subtitle">(<%= Category.find_by(slug: promo.slug).count_products %>
