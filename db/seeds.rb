@@ -60,21 +60,12 @@ data_hash['root']['categories']['category'].each do |category|
   status = true
   status = false if category['name'] == 'Разное' || category['name'] == 'Сантехника'
 
-  main_page = false
-  main_page = true if category['name'] == 'Запчасти для коммунальной техники' ||
-                      category['name'] == 'Запчасти для с/х техники' ||
-                      category['name'] == 'Запчасти ЗиЛ' ||
-                      category['name'] == 'Запчасти для тракторов' ||
-                      category['name'] == 'Двигатель' ||
-                      category['name'] == 'Сцепление'
-
   cat = Category.new(
     category_id: category['id'],
     name: category['name'],
     parent_id: category['parent_id'],
     description: 'desc',
-    status: status,
-    main_page: main_page
+    status: status
   )
 
   cat.save!
