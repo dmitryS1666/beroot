@@ -37,7 +37,7 @@ Trestle.resource(:categories) do
   form do |category|
     row do
       col(sm: 3) { text_field :name }
-      col(sm: 3) { select :parent_id, Category.all.map { |cat| [cat.name, cat.id] } }
+      col(sm: 3) { select :parent_id, Category.all.map { |cat| [cat.name, cat.category_id] } }
       col(sm: 3) { select :status, [true, false] }
     end
     row do
