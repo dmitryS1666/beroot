@@ -5,7 +5,7 @@ require 'fileutils'
 
 def get_import_file(path, file)
   ftp = Net::FTP.new
-  ftp.connect('agromaster.dsml.ru', 21)
+  ftp.connect('agromastertver.ru', 21)
   ftp.login('sftp-user1', 'whacky-spiritism-24')
   ftp.chdir(path)
   ftp.passive = true
@@ -15,7 +15,7 @@ end
 
 def get_image(path, file)
   ftp = Net::FTP.new
-  ftp.connect('agromaster.dsml.ru', 21)
+  ftp.connect('agromastertver.ru', 21)
   ftp.login('sftp-user1', 'whacky-spiritism-24')
   ftp.chdir(path)
   ftp.passive = true

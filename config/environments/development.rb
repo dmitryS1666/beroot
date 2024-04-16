@@ -80,7 +80,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.yandex.ru',
     port: 465,
-    domain: 'https://agromaster.dsml.ru',
+    domain: 'https://agromastertver.ru',
     user_name: 'agromaster.info',
     password: 'ubvyxqtsqqgjhoph',
     authentication: :plain,

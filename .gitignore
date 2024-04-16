@@ -42,3 +42,4 @@
 .env*
 /db/sphinx
 /config/*.sphinx.conf
+.idea/
