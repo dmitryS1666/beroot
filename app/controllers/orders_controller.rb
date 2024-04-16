@@ -21,6 +21,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:phone_number, :name, :last_name, :address, :city, :message, :orderables)
+    params.permit(:phone_number, :name, :orderables)
   end
 end

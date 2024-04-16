@@ -9,11 +9,7 @@ Trestle.resource(:orders) do
 
   table do
     column :name, header: "Имя", align: :center
-    column :last_name, header: "Фамилия", align: :center
     column :phone_number, header: "Номер телефона", align: :center
-    column :address, header: "Адрес", align: :center
-    column :city, header: "Город".html_safe, align: :center
-    column :message, header: "Сообщение".html_safe, align: :center
     column :items, header: "Позиций", align: :center do |order|
       Orderable.where(cart_id: order.cart_id).count
     end
@@ -49,15 +45,7 @@ Trestle.resource(:orders) do
 
     row do
       col(sm: 3) { text_field :name, disabled: true }
-      col(sm: 3) { text_field :last_name, disabled: true }
-    end
-    row do
       col(sm: 3) { text_field :phone_number, disabled: true }
-      col(sm: 3) { text_field :address, disabled: true }
-    end
-    row do
-      col(sm: 3) { text_field :city, disabled: true }
-      col(sm: 3) { text_field :message, disabled: true }
     end
 
     row do
