@@ -13,6 +13,14 @@ class ResultsController < ApplicationController
       @search_results = Product.all
     end
 
+    save_search_query if params[:search]
+
     @search_results = @search_results.order('price::integer DESC').paginate(page: params[:page])
+  end
+
+  private
+
+  def save_search_query
+    SearchQuery.create!(query: params[:search][:query], desc: "результат поиска: #{@search_results.count}")
   end
 end

@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def about; end
+  def about
+    @about_slider = AboutSlider.all
+  end
 
   def contact; end
 

@@ -19,16 +19,63 @@
 <section class="about__section section--padding mb-95">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6">
-        <div class="about__thumb d-flex">
-          <div class="about__thumb--items">
-            <img class="about__thumb--img border-radius-5" src="/assets/logo_AgroMaster_black.png"  style="width: 435px; float: left;">
+      <% if @about_slider.count > 0 %>
+        <div class="col-6">
+          <div class="product__details--media">
+            <div class="single__product--preview swiper mb-25 swiper-initialized swiper-horizontal swiper-pointer-events">
+              <div class="swiper-wrapper">
+                <% @about_slider.each do |slide| %>
+                  <% unless slide.video_link.blank? %>
+                    <div class="swiper-slide" style="height: 550px;">
+                      <div class="product__media--preview__items" style="height: 550px;">
+                        <iframe style="position: relative; height: 100%; width: 100%;" src="<%= slide.video_link %>">
+                        </iframe>
+                      </div>
+                    </div>
+                  <% else %>
+                    <div class="swiper-slide">
+                      <div class="product__media--preview__items">
+                        <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="<%= polymorphic_url(slide.photo) %>">
+                          <%= image_tag slide.photo, class: 'product__media--preview__items--img', alt: "product-media-img"%>
+                        </a>
+                        <div class="product__media--view__icon">
+                          <a class="product__media--view__icon--link glightbox" href="<%= polymorphic_url(slide.photo) %>" data-gallery="product-media-preview">
+                            <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512">
+                              <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
+                              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                            </svg>
+                            <span class="visually-hidden">просмотр</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+
+              </div>
+              <div class="swiper__nav--btn swiper-button-next swiper-button-next_1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+              <div class="swiper__nav--btn swiper-button-prev swiper-button-prev_1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-left">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </div>
+              <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
           </div>
-<!--          <div class="about__thumb--items position__relative">-->
-<!--            <span style="line-height: 5; font-size: 64px; padding-left: 10px; margin-top: -8px;">АгроМастер</span>-->
-<!--          </div>-->
         </div>
-      </div>
+      <% else %>
+        <div class="col-lg-6">
+          <div class="about__thumb d-flex">
+            <div class="about__thumb--items">
+              <img class="about__thumb--img border-radius-5" src="/assets/logo_AgroMaster_black.png" style="width: 435px; float: left;">
+            </div>
+          </div>
+        </div>
+      <% end %>
       <div class="col-lg-6">
         <div class="about__content">
           <span class="about__content--subtitle text__secondary mb-20">Почему выбирают нас</span>
@@ -73,7 +120,7 @@
             <span class="counterup__number js-counter" data-count="15">0</span>
           </div>
           <div class="counterup__items text-center">
-            <h2 class="counterup__title">КВАЛИФИЦИРОВАННАЯ КОМАНДА <br><br> </h2>
+            <h2 class="counterup__title">КВАЛИФИЦИРОВАННАЯ КОМАНДА <br><br></h2>
             <span class="counterup__number js-counter" data-count="100">0</span>
           </div>
           <div class="counterup__items text-center">

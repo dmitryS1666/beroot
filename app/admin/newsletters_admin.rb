@@ -15,7 +15,7 @@ Trestle.resource(:newsletters) do
     # actions
   end
 
-  form do |newsletter|
+  form do
     row do
       col(sm: 3) { text_field :email, disabled: true }
     end
