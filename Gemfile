@@ -36,6 +36,7 @@ gem 'trestle'
 gem 'trestle-search'
 gem 'trestle-auth'
 gem "base64", "0.1.1"
+gem 'whenever', require: false
 
 group :development do
   gem "web-console"

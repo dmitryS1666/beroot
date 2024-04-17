@@ -39,7 +39,7 @@ Trestle.resource(:products) do
     row do
       col(sm: 3) { text_field :price }
       col(sm: 3) { text_field :sale }
-      col(sm: 3) { text_field :promo }
+      col(sm: 3) { select :promo, [true, false] }
     end
     row do
       col(sm: 3) { text_field :article }
@@ -57,7 +57,7 @@ Trestle.resource(:products) do
     if product.photos.attached?
       product.photos.each do |photo|
         row do
-          col(sm: 3) { link_to "Удалить", products_admin_path(action: :update_photo, id: product.id, photo_id: photo.id), method: :put, data: { confirm: "Вы уверены?" } }
+          col(sm: 3) { link_to "Удалить", products_admin_path(action: :update_photo, id: product.id, delete_photo_id: photo.id), method: :put, data: { confirm: "Вы уверены?" } }
           col(sm: 3) { image_tag main_app.rails_blob_path(photo),
                                  style: 'max-width: 100%; height: auto;'
           }
@@ -69,9 +69,14 @@ Trestle.resource(:products) do
   controller do
     def update
       @product = Product.find(params[:id])
-      if params[:photo_id]
-        photo = @product.photos.find_by_id(params[:photo_id])
+      if params[:delete_photo_id]
+        photo = @product.photos.find_by_id(params[:delete_photo_id])
         photo.purge if photo.present?
+      elsif params[:photos]
+        params[:photos].each do |image|
+          @product.photos.attach(image)
+        end
+        @product.save!
       else
         @product.update(product_params)
       end
