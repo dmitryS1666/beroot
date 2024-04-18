@@ -253,6 +253,11 @@ input.quickview__value--number{
     margin-left: 15px;
 
 }
+
+.disabled_btn {
+  background: gray !important;
+}
+
 .quickview__social{
     &--title{
         font-size: 1.5rem;
