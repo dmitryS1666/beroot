@@ -36,84 +36,127 @@ def add_image_to_product(image_url, product)
   )
 end
 
-get_import_file('/upload', '1cToSiteExport.xml')
+# get_import_file('/upload', '1cToSiteExport.xml')
 
 data_hash = Hash.from_xml(File.read('db/import/new_import.xml'))
 hash = data_hash['root']['products']['product'].reject { |h| h['id'] == '' }
 
-User.destroy_all
-puts 'Seed: Creating users...'
-User.destroy_all
-user = User.create!(email: "admin@mail.ru", password: "password", first_name: "Admin", last_name: "User")
-puts 'Seed: Users created...'
+# User.destroy_all
+# puts 'Seed: Creating users...'
+# User.destroy_all
+user = User.find_or_create_by(email: "admin@mail.ru", first_name: "Admin", last_name: "User")
+# puts 'Seed: Users created...'
 
-Config.destroy_all
-puts 'Seed: Creating configs...'
-Config.create(name: 'mail_to', value: 'agromaster.info@yandex.ru')
-puts 'Seed: Config created...'
+# Config.destroy_all
+# puts 'Seed: Creating configs...'
+# Config.find_or_create_by!(name: 'mail_to', value: 'agromaster.info@yandex.ru')
+# puts 'Seed: Config created...'
 
-puts 'Seed: Deleting existing categories...'
-Category.destroy_all
+# puts 'Seed: Deleting existing categories...'
+# Category.destroy_all
 puts 'Seed: Creating categories...'
 
 data_hash['root']['categories']['category'].each do |category|
   status = true
   status = false if category['name'] == 'Разное' || category['name'] == 'Сантехника'
 
-  cat = Category.new(
+  cat = Category.find_by(
     category_id: category['id'],
     name: category['name'],
-    parent_id: category['parent_id'],
-    description: 'desc',
-    status: status
+    parent_id: category['parent_id']
   )
 
-  cat.save!
+  if cat
+    cat.update!(
+      category_id: category['id'],
+      name: category['name'],
+      parent_id: category['parent_id'],
+      description: 'desc',
+      status: status
+    )
+  else
+    Category.create!(
+      category_id: category['id'],
+      name: category['name'],
+      parent_id: category['parent_id'],
+      description: 'desc',
+      status: status
+    )
+  end
+
 end
 puts 'Seed: Category created...'
 
 puts 'Seed: Creating products...'
-hash.each_with_index do |product, index|
+hash.each do |product|
   category = Category.find_by(category_id: product['categories']['category_id'])
-  # puts product if category.nil? && !product['photo'].nil?
   next if category.nil?
 
-  pro = Product.new(
+  pro = Product.find_by(
     product_id: product['id'],
     article: product['article'],
     name: product['product_name'],
-    provider: product['provider'],
-    description: product['description'].blank? ? '' : product['description'],
-    price: (product['prices'].nil? || product['prices']['price'].nil?) ? 0 : product['prices']['price']['value'].to_i,
-    quantity: product['qty']['qty_type'].nil? ? 0 : product['qty']['qty_type']['value'].to_i,
-    qty_type: product['qty']['qty_type']['name'],
-    status: true,
-    user: user,
-    category: category
-    # slug: Product.normalize_friendly_id(product['product_name'])
+    provider: product['provider']
   )
 
-  photos = product['photo'] unless product['photo'].nil?
+  if pro
+    pro.update!(
+      product_id: product['id'],
+      article: product['article'],
+      name: product['product_name'],
+      provider: product['provider'],
+      description: product['description'].blank? ? '' : product['description'],
+      price: (product['prices'].nil? || product['prices']['price'].nil?) ? 0 : product['prices']['price']['value'].to_i,
+      quantity: product['qty']['qty_type'].nil? ? 0 : product['qty']['qty_type']['value'].to_i,
+      qty_type: product['qty']['qty_type']['name'],
+      status: true,
+      user: user,
+      category: category
+    )
 
-  if photos && photos.size > 0
-    photos.each do |url|
-      if url[1].class == String
-        add_image_to_product(url[1], pro)
-      elsif url[1].class == Array
-        url[1].each_with_index do |image_url, index|
-          next if index == 0
-          add_image_to_product(image_url, pro)
+    photos = product['photo'] unless product['photo'].nil?
+
+    if photos && photos.size > 0
+      photos.each do |url|
+        if url[1].class == String
+          add_image_to_product(url[1], pro)
+        elsif url[1].class == Array
+          url[1].each_with_index do |image_url, index|
+            next if index == 0
+            add_image_to_product(image_url, pro)
+          end
         end
       end
     end
-  end
+  else
+    new_pro = Product.create!(
+      product_id: product['id'],
+      article: product['article'],
+      name: product['product_name'],
+      provider: product['provider'],
+      description: product['description'].blank? ? '' : product['description'],
+      price: (product['prices'].nil? || product['prices']['price'].nil?) ? 0 : product['prices']['price']['value'].to_i,
+      quantity: product['qty']['qty_type'].nil? ? 0 : product['qty']['qty_type']['value'].to_i,
+      qty_type: product['qty']['qty_type']['name'],
+      status: true,
+      user: user,
+      category: category
+    )
 
-  pro.save!
+    photos = product['photo'] unless product['photo'].nil?
 
-  if photos && photos.size > 0
-    puts pro.inspect
-    puts pro.photos.inspect
-    puts pro.photos.first.inspect
+    if photos && photos.size > 0
+      photos.each do |url|
+        if url[1].class == String
+          add_image_to_product(url[1], new_pro)
+        elsif url[1].class == Array
+          url[1].each_with_index do |image_url, index|
+            next if index == 0
+            add_image_to_product(image_url, new_pro)
+          end
+        end
+      end
+    end
   end
 end
 
@@ -122,4 +165,5 @@ Product.find_each do |product|
   product.save
 end
 
-puts 'Seed: Finished seeding!'
+puts "Seed: Finished seeding! #{Time.now}"
+puts "********************************************************************************"

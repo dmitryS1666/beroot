@@ -12,11 +12,6 @@
 			<name>Метизы</name>
 		</category>
 		<category>
-			<id>00-00001051</id>
-			<parent_id>00-00000644</parent_id>
-			<name>Подшипники</name>
-		</category>
-		<category>
 			<id>00-00006616</id>
 			<parent_id>00-00000644</parent_id>
 			<name>АКБ</name>
@@ -2630,7 +2625,7 @@
 			<qty>
 				<qty_type>
 					<name>в наличии</name>
-					<value>9</value>
+					<value>900</value>
 				</qty_type>
 			</qty>
 			<photo/>
