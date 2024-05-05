@@ -47,7 +47,7 @@ class Product < ApplicationRecord
     # Создаем новый объект ActiveStorage::Blob с измененным изображением
     new_image_blob = ActiveStorage::Blob.create_and_upload!(
       io: StringIO.new(image.to_blob),
-      filename: "watermarked_#{image_blob.filename}",
+      filename: "#{image_blob.filename}",
       content_type: image_blob.content_type
     )
 
