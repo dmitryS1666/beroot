@@ -14,8 +14,6 @@ module OnlineStore
       generate.test_framework :test_unit, fixture: false
     end
 
-    config.autoload_paths += Dir["#{config.root}/lib/**/"]
-
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
