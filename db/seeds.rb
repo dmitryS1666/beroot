@@ -178,7 +178,7 @@ Product.find_each do |product|
   product.save
 end
 
-old_products = Product.where("updated_at < ?", 1.days.ago).count
+old_products = Product.where("updated_at < ?", 1.days.ago)
 
 puts "Count old product: #{old_products.count}"
 puts "Seed: Finished seeding! #{Time.now}"
