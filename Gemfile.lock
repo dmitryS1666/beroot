@@ -352,6 +352,7 @@ DEPENDENCIES
   json
   letter_opener
   mail_form
+  mini_magick
   net-ftp
   pg (~> 1.1)
   pg_search
