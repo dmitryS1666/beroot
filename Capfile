@@ -15,7 +15,7 @@ require 'capistrano-db-tasks'
 require 'capistrano/passenger'
 # require 'capistrano/sitemap_generator'
 require 'capistrano/nvm'
-# require 'whenever/capistrano'
+require 'whenever/capistrano'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
