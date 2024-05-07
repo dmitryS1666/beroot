@@ -30,18 +30,27 @@ class Product < ApplicationRecord
   end
 
   def apply_watermark(image_blob)
-    # Путь к водяному знаку
-    watermark_path = Rails.root.join('public', 'watermark.png').to_s
-
-    # Открываем входное изображение
     image = MiniMagick::Image.read(image_blob.download)
 
-    # Открываем водяной знак
-    watermark = MiniMagick::Image.open(watermark_path)
+    # Находим ширину и высоту изображения
+    width = image.width
+    height = image.height
 
-    # Налагаем водяной знак на изображение
-    image = image.composite(watermark) do |c|
-      c.gravity "center"
+    # Создаем временное изображение с повторяющимся текстом и поворотом
+    watermark_text_image = image.combine_options do |b|
+      %w[south north center].each do |position|
+        b.size "#{width}x#{height}"
+        b.gravity position
+        b.fill "rgba(128, 128, 128, 0.3)"
+        b.pointsize 50
+        b.draw "rotate -45 text 0,0 'АгроМастер Тверь АгроМастер Тверь АгроМастер Тверь'"
+      end
+    end
+
+    # Налагаем текст водяного знака на изображение
+    image = image.composite(watermark_text_image) do |c|
+      c.compose "Over"
+      c.geometry "+0+0"
     end
 
     # Создаем новый объект ActiveStorage::Blob с измененным изображением
@@ -51,9 +60,13 @@ class Product < ApplicationRecord
       content_type: image_blob.content_type
     )
 
-    image_blob.purge if image_blob.present?
-
     # Заменяем прикрепленное изображение новым
     self.photos.attach(new_image_blob)
+
+    # Удаляем временное изображение
+    watermark_text_image.destroy!
+
+    # Удаляем старое изображение, если оно было
+    image_blob.purge if image_blob.present?
   end
 end

@@ -180,11 +180,12 @@ end
 
 old_products = Product.where("updated_at < ?", 1.days.ago)
 
-puts "Count old product: #{old_products.count}"
-puts "Seed: Finished seeding! #{Time.now}"
-puts "********************************************************************************"
+puts "*****************************************************************************************"
+puts "                    Count old product: #{old_products.count}"
+puts "                    Seed: Finished seeding! #{Time.now}"
+puts "*****************************************************************************************"
 
-# ADD WaterMark for IMAGES
+## ADD WaterMark for IMAGES
 products = Product.all
 products.each do |product|
   photos = product.photos unless product.photos.nil?
@@ -195,3 +196,13 @@ products.each do |product|
     end
   end
 end
+
+# ADD WaterMark for IMAGES
+# product = Product.find_by(name: 'Фара круглая, рассеив. 14 диодов, 42W')
+# photos = product.photos unless product.photos.nil?
+# if photos && photos.size > 0
+#   photos.each do |photo|
+#     product.apply_watermark(photo)
+#     break
+#   end
+# end
