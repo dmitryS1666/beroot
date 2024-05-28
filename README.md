@@ -1,8 +1,8 @@
 # BerootCMS
 
 ### Вход в Административную Консоль
-* логин: admin
-* пароль: admin123
+* логин: admin@mail.ru
+* пароль: password
 
 ## Требования
 * Rails 7
