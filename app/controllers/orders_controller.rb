@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     cart.save
 
     if @order.save
-      OrderMailer.order_email(@order).deliver_now
+      # OrderMailer.order_email(@order).deliver_now
       redirect_to root_path, notice: 'Спасибо! Ваше заказ принят! Ожидайте, наш менеджер свяжется с Вами.'
     else
       redirect_to cart_path, notice: 'Что-то пошло не так...'
