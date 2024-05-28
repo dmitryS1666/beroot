@@ -32,8 +32,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.friendly.find_by(slug: params[:id])
   end
-
-  def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity,:category_id, :photos, photos: [])
-  end
 end

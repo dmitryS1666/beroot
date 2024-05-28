@@ -49,6 +49,9 @@ Trestle.resource(:products) do
       col(sm: 3) { text_field :qty_type }
       col(sm: 3) { text_field :quantity }
     end
+    row do
+      col(sm: 3) { hidden_field :user_id, value: User.all.first.id }
+    end
 
     row do
       col(sm: 3) { file_field :photos, multiple: true, input_html: { direct_upload: true } }
@@ -67,6 +70,18 @@ Trestle.resource(:products) do
   end
 
   controller do
+
+    def create
+      @product = Product.new(product_params)
+      @product.user = User.find(product_params[:user_id]) # установить пользователя
+      @product[:created_at] = Time.zone.now
+      if @product.save
+        redirect_to products_admin_path(@product), notice: "Продукт успешно создан."
+      else
+        render :new
+      end
+    end
+
     def update
       @product = Product.find(params[:id])
       if params[:delete_photo_id]
@@ -84,7 +99,19 @@ Trestle.resource(:products) do
     end
 
     def product_params
-      params.require(:product).permit(:name, :category_id, :price, :sale, :article, :provider, :qty_type, :quantity, :promo, photos: [])
+      params.require(:product).permit(
+        :name,
+        :category_id,
+        :price,
+        :sale,
+        :article,
+        :provider,
+        :qty_type,
+        :quantity,
+        :promo,
+        :user_id,
+        photos: []
+      )
     end
   end
 end
