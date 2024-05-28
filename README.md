@@ -9,6 +9,13 @@
 * PostgreSQL
 * Ruby 3.1.2
 
+
+* `bundle install`
+* `rails db:create`
+* `rails db:migrate`
+* `rails db:seed`
+* `rails s`
+
 ***********************************************
 
 ## Функционал
