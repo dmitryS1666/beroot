@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'agromaster.info@yandex.ru'
+  default from: 'beroot.info@yandex.ru'
   layout 'mailer'
 end

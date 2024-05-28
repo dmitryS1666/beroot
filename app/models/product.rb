@@ -43,7 +43,7 @@ class Product < ApplicationRecord
         b.gravity position
         b.fill "rgba(128, 128, 128, 0.3)"
         b.pointsize 50
-        b.draw "rotate -45 text 0,0 'АгроМастер Тверь АгроМастер Тверь АгроМастер Тверь'"
+        b.draw "rotate -45 text 0,0 'BEROOT BEROOT BEROOT'"
       end
     end
 

@@ -493,7 +493,7 @@
 .main__logo {
   &--link {
     display: block;
-    width: 230px;
+    width: 110px;
   }
 
   &--img {
@@ -572,6 +572,7 @@
 .header__search {
   &--form {
     border: 1px solid var(--border-color);
+    border-radius: 5px;
   }
 
   &--box {
@@ -1134,7 +1135,7 @@
 
     &:hover {
       & .header__menu--link {
-        color: var(--secondary-color) !important;
+        //color: var(--secondary-color) !important;
         border-color: var(--secondary-color);
       }
 
@@ -1158,7 +1159,7 @@
     padding: 0 0.8rem;
     font-weight: 600;
     border: 1px solid transparent;
-    border-radius: 2rem;
+    border-radius: 5px;
     position: relative;
 
     &::before {
@@ -1174,7 +1175,7 @@
     }
 
     &.active {
-      color: var(--secondary-color) !important;
+      //color: var(--secondary-color) !important;
       border-color: var(--secondary-color);
     }
 
@@ -1216,6 +1217,7 @@
 
 .mega__menu--items {
   position: static;
+  line-height: 4;
 }
 
 .header__mega--menu {

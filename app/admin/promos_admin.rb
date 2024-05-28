@@ -5,7 +5,7 @@ Trestle.resource(:promos) do
 
   table do
     column :product_id, header: "Имя", align: :center do |promo|
-      Product.find(promo.product_id).name
+      Product.find(promo.product_id).name if promo.product_id
     end
     column :photo, header: "Слайд", align: :center do |promo|
       if promo.photo.attached?
@@ -27,7 +27,7 @@ Trestle.resource(:promos) do
 
   form do |promo|
     row do
-      col(sm: 3) { select :product_id, Product.all.map { |pr| [pr.name, pr.id] } }
+      col(sm: 3) { select :product_id, Product.all.map { |pr| [pr.name, pr.id] }, :include_blank => true }
     end
     row do
       col(sm: 3) { '<span><i>Необходимый размер слайда 1200 * 550px</i></span>'.html_safe }

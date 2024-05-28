@@ -5,8 +5,8 @@ class Newsletter < ApplicationRecord
   # in ActionMailer accepts.
   def headers
     {
-      :subject => "АгроМастер: Новая подписка",
-      :to => "agromaster.info@yandex.ru",
+      :subject => "BEROOT: Новая подписка",
+      :to => "beroot.info@yandex.ru",
       :from => %("#{email}")
     }
   end

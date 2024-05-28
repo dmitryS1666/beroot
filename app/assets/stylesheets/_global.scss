@@ -744,6 +744,14 @@ select {
   background: var(--primary-color);
 }
 
+.bg__red {
+  background: #D31E44;
+}
+
+.bg__green {
+  background: #8ACB3B;
+}
+
 .bg__secondary {
   background: var(--secondary-color);
 }
@@ -762,7 +770,7 @@ select {
   position: relative;
 }
 .border-bottom {
-  border-bottom: 1px solid var(--border-color) !important;
+  border-bottom: 1px solid #D31E44 !important;
 }
 .border {
   border: 1px solid var(--border-color) !important;

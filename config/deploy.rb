@@ -3,11 +3,11 @@
 # config valid only for current version of Capistrano
 require 'capistrano-db-tasks'
 
-set :application, "agromaster"
-set :repo_url, "git@git.dsml.ru:dsml/agromaster.git"
+set :application, "beroot"
+set :repo_url, "git@git.ru:/beroot.git"
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/deploy/projects/agromaster'
+set :deploy_to, '/home/deploy/projects/beroot'
 
 # Default value for :linked_files is []
 # append

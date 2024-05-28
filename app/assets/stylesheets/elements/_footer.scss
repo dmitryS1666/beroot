@@ -6,6 +6,7 @@
     @media only screen and (max-width: 991px) {
         padding-bottom: 70px;
     }
+    color: #0b0b0b;
 }
 .footer__bg{
    background: var(--bg-black-color);
@@ -140,7 +141,8 @@
 }
 
 .footer__bottom{
-    border-top: 1px solid var(--bg-light-dark-color);
+    background: #D31E44;
+    //border-top: 1px solid var(--bg-light-dark-color);
     &--inenr{
         padding: 1.8rem 0;
         @media only screen and (max-width: 991px) {

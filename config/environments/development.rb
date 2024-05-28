@@ -81,8 +81,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.yandex.ru',
     port: 465,
-    domain: 'https://agromastertver.ru',
-    user_name: 'agromaster.info',
+    domain: 'https://beroot.ru',
+    user_name: 'beroot.info',
     password: 'ubvyxqtsqqgjhoph',
     authentication: :plain,
     ssl: true

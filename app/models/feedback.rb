@@ -9,8 +9,8 @@ class Feedback < ApplicationRecord
   # in ActionMailer accepts.
   def headers
     {
-      :subject => "АгроМастер: Новый запрос",
-      :to => "agromaster.info@yandex.ru",
+      :subject => "BEROOT: Новый запрос",
+      :to => "beroot.info@yandex.ru",
       :from => %("#{name}" <#{email}>)
     }
   end

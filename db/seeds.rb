@@ -3,59 +3,66 @@ require 'net/ftp'
 require "open-uri"
 require 'fileutils'
 
-def get_import_file(path, file)
-  ftp = Net::FTP.new
-  ftp.connect('agromastertver.ru', 21)
-  ftp.login('sftp-user1', 'whacky-spiritism-24')
-  ftp.chdir(path)
-  ftp.passive = true
-  ftp.getbinaryfile(file, 'db/import/new_import.xml')
-  ftp.close
-end
+# def get_import_file(path, file)
+#   ftp = Net::FTP.new
+#   ftp.connect('beroot.ru', 21)
+#   ftp.login('sftp-user1', 'whacky-spiritism-24')
+#   ftp.chdir(path)
+#   ftp.passive = true
+#   ftp.getbinaryfile(file, 'db/import/new_import.xml')
+#   ftp.close
+# end
 
-def get_image(path, file)
-  ftp = Net::FTP.new
-  ftp.connect('agromastertver.ru', 21)
-  ftp.login('sftp-user1', 'whacky-spiritism-24')
-  ftp.chdir(path)
-  ftp.passive = true
-  ftp.getbinaryfile(file, 'db/import_images/' + file)
-  ftp.close
-end
+# def get_image(path, file)
+#   ftp = Net::FTP.new
+#   ftp.connect('beroot.ru', 21)
+#   ftp.login('sftp-user1', 'whacky-spiritism-24')
+#   ftp.chdir(path)
+#   ftp.passive = true
+#   ftp.getbinaryfile(file, 'db/import_images/' + file)
+#   ftp.close
+# end
 
 def add_image_to_product(image_url, product)
-  matches = image_url.match(/\/([^\/]+\.(jpg|jpeg))$/)
+  matches = image_url.match(/\/([^\/]+\.(jpg|jpeg|png))$/)
   file = matches[1]
   path = image_url.gsub("/#{file}", '')
 
-  get_image(path, file)
+  # get_image(path, file)
 
   product.photos.attach(
-    io: File.open(File.join(Rails.root, "db/import_images/#{file}")),
+    io: File.open(File.join(Rails.root, "db#{path}/#{file}")),
     filename: file
   )
 end
 
-get_import_file('/upload', '1cToSiteExport.xml')
-
 data_hash = Hash.from_xml(File.read('db/import/new_import.xml'))
 hash = data_hash['root']['products']['product'].reject { |h| h['id'] == '' }
 
-# User.destroy_all
+User.destroy_all
 puts 'Seed: Creating users...'
-# user = User.create!(email: "admin@mail.ru", password: "password", first_name: "Admin", last_name: "User")
-user = User.find_or_create_by!(email: "admin@mail.ru", first_name: "Admin", last_name: "User")
-puts user.inspect
+user = User.create!(email: "admin@mail.ru", password: "password", first_name: "Admin", last_name: "User")
 puts 'Seed: Users created...'
 
-# Config.destroy_all
-# puts 'Seed: Creating configs...'
-# Config.find_or_create_by!(name: 'mail_to', value: 'agromaster.info@yandex.ru')
-# puts 'Seed: Config created...'
+Config.destroy_all
+puts 'Seed: Creating configs...'
+Config.find_or_create_by!(name: 'mail_to', value: 'beroot.info@yandex.ru')
+puts 'Seed: Config created...'
 
-# puts 'Seed: Deleting existing categories...'
-# Category.destroy_all
-# puts 'Seed: Creating categories...'
+puts 'Seed: Deleting existing promos...'
+Promo.destroy_all
+puts 'Seed: Creating promos...'
+# promo = Promo.new
+# promo.photo.attach(
+#   io: File.open(File.join(Rails.root, "db/import_images/slider_1.png")),
+#   filename: file
+# )
+# promo.save!
+
+
+puts 'Seed: Deleting existing categories...'
+Category.destroy_all
+puts 'Seed: Creating categories...'
 
 data_hash['root']['categories']['category'].each do |category|
   status = true
@@ -178,24 +185,24 @@ Product.find_each do |product|
   product.save
 end
 
-old_products = Product.where("updated_at < ?", 1.days.ago)
-
-puts "*****************************************************************************************"
-puts "                    Count old product: #{old_products.count}"
-puts "                    Seed: Finished seeding! #{Time.now}"
-puts "*****************************************************************************************"
-
-## ADD WaterMark for IMAGES
-products = Product.all
-products.each do |product|
-  photos = product.photos unless product.photos.nil?
-
-  if photos && photos.size > 0
-    photos.each do |photo|
-      product.apply_watermark(photo)
-    end
-  end
-end
+# old_products = Product.where("updated_at < ?", 1.days.ago)
+#
+# puts "*****************************************************************************************"
+# puts "                    Count old product: #{old_products.count}"
+# puts "                    Seed: Finished seeding! #{Time.now}"
+# puts "*****************************************************************************************"
+#
+# ## ADD WaterMark for IMAGES
+# products = Product.all
+# products.each do |product|
+#   photos = product.photos unless product.photos.nil?
+#
+#   if photos && photos.size > 0
+#     photos.each do |photo|
+#       product.apply_watermark(photo)
+#     end
+#   end
+# end
 
 # ADD WaterMark for IMAGES
 # product = Product.find_by(name: 'Фара круглая, рассеив. 14 диодов, 42W')
