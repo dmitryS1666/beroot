@@ -12,6 +12,6 @@ development:
 
 production:
   <<: *default
-  database: agro_master_dev
+  database: beroot
   username: deploy
   password: password
